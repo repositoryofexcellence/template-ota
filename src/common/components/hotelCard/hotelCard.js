@@ -1,7 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-
-
 
 class HotelCard extends Component {
     constructor(props) {
