@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider'
 import SearchForm from '../../components/searchForm/SearchForm'
 import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
+import {Grid, Row, Col} from 'react-flexbox-grid';
 
 class Home extends Component {
     constructor(props){
@@ -22,12 +23,20 @@ class Home extends Component {
             <div>
                 <Header/>
                 <div className="jumbotron main-head">
-                    <div className="container">
+
+                        <Grid>
+                            <Row>
+                                <Col md={12}>
                         <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
                         <SearchForm className="search-form"/>
-                    </div>
+                                </Col>
+                            </Row>
+                        </Grid>
+
                 </div>
-                <div className="container">
+                <Grid>
+                    <Row>
+                        <Col md={12}>
                     <h2>Sahil Otelleri</h2>
                     <Divider/>
                     <HotelCarousel className="carousel-main"
@@ -41,7 +50,9 @@ class Home extends Component {
                     <ThermalCarousel className="carousel-main"
 
                     />
-                </div>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }

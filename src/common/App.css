@@ -59,7 +59,7 @@ width: 100%;
     float: left;
     background-color: white;
     border-radius: 4px;
-    padding: 5px;
+
 }
 
 .search-form-main {
@@ -365,7 +365,7 @@ color: #333;
     position: absolute;
     top: 1px;
     z-index: 99;
-    right: 1px;
+    right: 9px;
 }
 .room-pension {
 
@@ -373,6 +373,8 @@ color: #333;
     letter-spacing: 0px;
     float: right;
 }
-
+.room-grid {
+    margin-top: 20px;
+}
 
 

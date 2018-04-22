@@ -6,6 +6,8 @@ import Toolbar from 'material-ui/Toolbar';
 import SwipeableDrawer from 'material-ui/SwipeableDrawer';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import {Grid, Row, Col} from 'react-flexbox-grid';
+
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -18,6 +20,7 @@ const styles = {
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
+        display:'none'
     },
     list: {
         width: 250,
@@ -52,7 +55,9 @@ class Header extends React.Component {
             <div>
                 <div className={classes.root}>
                     <AppBar position="static" color="white">
-                        <div className="container">
+                       <Grid>
+                           <Row>
+                               <Col md={12}>
                             <Toolbar >
                                 <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton}
                                             color="inherit" aria-label="Menu">
@@ -65,7 +70,10 @@ class Header extends React.Component {
                                     </Link>
                                 </Typography>
                             </Toolbar>
-                        </div>
+                               </Col>
+                           </Row>
+                    </Grid>
+
                     </AppBar>
                 </div>
 

@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import Tabs, {Tab} from 'material-ui/Tabs';
 import classnames from 'classnames';
 import {Swiper, Slide} from 'react-dynamic-swiper'
-import {Grid, Row, Col, Container} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-flexbox-grid';
 import Divider from 'material-ui/Divider';
 import * as actions from "../../redux/actions";
 import {bindActionCreators} from "redux";
@@ -163,7 +163,7 @@ class HotelDetail extends Component {
                 <Grid>
                     <Row>
 
-                        <div className="col-md-4 detail-side-bar">
+                        <Col md={4}>
                             {this.props.avail ?
                                 <div>
                                     <div>
@@ -171,8 +171,8 @@ class HotelDetail extends Component {
 
 
                                     <h2>{Description}</h2></div> : ''}
-                        </div>
-                        <div className="col-md-8">
+                        </Col>
+                        <Col md={8}>
                             <Slider
                                 ref={slider => (this.slider1 = slider)}
                                 asNavFor={this.state.nav2}
@@ -211,7 +211,7 @@ class HotelDetail extends Component {
                             })}
                             </Slider>
 
-                        </div>
+                        </Col>
 
                         <Col xs={12} md={12}>
                             <h2>Odalar</h2>
@@ -224,8 +224,8 @@ class HotelDetail extends Component {
                                 this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
                                     return (
 
-                                        <Col xs={12} md={4}>
-                                            <div className="room-grid">
+                                        <Col className="room-grid" xs={12} md={4}>
+
                                                 <div className="hotel-card">
 
                                                     <Swiper
@@ -287,7 +287,7 @@ class HotelDetail extends Component {
                                                     </div>
                                                 </div>
 
-                                            </div>
+
                                         </Col>
 
                                     )
@@ -303,7 +303,7 @@ class HotelDetail extends Component {
 
                         <Col xs={12} md={12}>
                             <h2>Tesisin Konumu</h2>
-
+                            <Divider/>
                             <MiniMap
                                 googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1zi-3_-hEhcE_BaC4dezdsAEKZ9LGZKY&v=3.exp&libraries=geometry,drawing,places"
                                 loadingElement={<div style={{height: `100%`}}/>}
