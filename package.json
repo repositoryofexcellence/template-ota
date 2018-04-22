@@ -55,7 +55,7 @@
     "reactstrap": "^4.8.0",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "redux-form": "^7.3.0",
+    "redux-form": "6.8.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "removeduplicates": "^1.1.0",

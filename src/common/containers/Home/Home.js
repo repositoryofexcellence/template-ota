@@ -18,7 +18,10 @@ class Home extends Component {
         }
     }
 
-
+    submit = (values) => {
+        // Do something with the form values
+        this.props.availHotelsForm(values.start,values.end);
+    }
     render() {
         return (
             <div>
@@ -29,7 +32,7 @@ class Home extends Component {
                             <Row>
                                 <Col md={12}>
                         <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
-                        <SearchForm className="search-form"/>
+                                    <SearchForm onSubmit={this.submit} className="search-form"/>
                                 </Col>
                             </Row>
                         </Grid>
