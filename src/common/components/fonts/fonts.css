@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorStd-Bold.eot");
+    src: url("./CamphorStd-Bold.eot?#iefix") format("embedded-opentype"), url("./CamphorStd-Bold.woff") format("woff"), url("./CamphorStd-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-LightItalic.eot");
+    src: url("./CamphorPro-LightItalic.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-LightItalic.woff") format("woff"), url("./CamphorPro-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-HeavyItalic.eot");
+    src: url("./CamphorPro-HeavyItalic.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-HeavyItalic.woff") format("woff"), url("./CamphorPro-HeavyItalic.ttf") format("truetype");
+    font-weight: 900;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorStd-Light.eot");
+    src: url("./CamphorStd-Light.eot?#iefix") format("embedded-opentype"), url("./CamphorStd-Light.woff") format("woff"), url("./CamphorStd-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-MediumItalic.eot");
+    src: url("./CamphorPro-MediumItalic.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-MediumItalic.woff") format("woff"), url("./CamphorPro-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-Regular.eot");
+    src: url("./CamphorPro-Regular.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-Regular.woff") format("woff"), url("./CamphorPro-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorStd-BoldItalic.eot");
+    src: url("./CamphorStd-BoldItalic.eot?#iefix") format("embedded-opentype"), url("./CamphorStd-BoldItalic.woff") format("woff"), url("./CamphorStd-BoldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-Light.eot");
+    src: url("./CamphorPro-Light.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-Light.woff") format("woff"), url("./CamphorPro-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-Heavy.eot");
+    src: url("./CamphorPro-Heavy.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-Heavy.woff") format("woff"), url("./CamphorPro-Heavy.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CamphorStd';
+    src: url("./CamphorPro-Italic.eot");
+    src: url("./CamphorPro-Italic.eot?#iefix") format("embedded-opentype"), url("./CamphorPro-Italic.woff") format("woff"), url("./CamphorPro-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
