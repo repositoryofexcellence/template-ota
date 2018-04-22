@@ -6,7 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import SwipeableDrawer from 'material-ui/SwipeableDrawer';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -17,6 +17,7 @@ const styles = {
     root: {
         flexGrow: 1
     },
+
     menuButton: {
         marginLeft: -12,
         marginRight: 20,

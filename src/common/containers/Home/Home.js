@@ -8,7 +8,7 @@ import SearchForm from '../../components/searchForm/SearchForm'
 import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
 
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 
 class Home extends Component {
     constructor(props){

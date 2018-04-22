@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import Tabs, {Tab} from 'material-ui/Tabs';
 import classnames from 'classnames';
 import {Swiper, Slide} from 'react-dynamic-swiper'
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import Divider from 'material-ui/Divider';
 import * as actions from "../../redux/actions";
 import {bindActionCreators} from "redux";

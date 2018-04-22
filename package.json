@@ -37,7 +37,6 @@
     "react-dom": "^16.3.1",
     "react-dom-animated": "^1.0.5",
     "react-dynamic-swiper": "^1.1.2",
-    "react-flexbox-grid": "^2.0.0",
     "react-gmaps": "^1.9.0",
     "react-google-maps": "^9.4.5",
     "react-loader-advanced": "^1.7.1",
@@ -51,6 +50,7 @@
     "react-slick": "^0.23.1",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^1.4.1",
+    "react-styled-flexboxgrid": "^2.2.0",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
     "recompose": "^0.26.0",
@@ -61,6 +61,7 @@
     "removeduplicates": "^1.1.0",
     "slug": "^0.9.1",
     "soap": "^0.23.0",
-    "stripe": "^5.4.0"
+    "stripe": "^5.4.0",
+    "styled-components": "^3.2.6"
   }
 }
