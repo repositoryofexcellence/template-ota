@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Field,Fields, reduxForm } from 'redux-form'
 import NameSearch from './nameSearch'
 import {connect} from 'react-redux'
@@ -9,7 +8,9 @@ import '../../datepicker.css'
 import moment from 'moment'
 import * as actionCreators from "../../redux/actions";
 import {bindActionCreators} from "redux";
+import TypeAheadField from "./TypeAheadField";
 moment.locale('tr-TR')
+
 
 class DateRangePickerWrapper extends React.Component {
     constructor(props) {
@@ -60,6 +61,10 @@ class DateRangePickerWrapper extends React.Component {
 
 
 
+
+const items = ["apple", "pear", "orange", "grape", "banana"];
+
+
 class SearchForm extends React.Component {
     constructor(props){
         super(props)
@@ -69,6 +74,7 @@ class SearchForm extends React.Component {
         }
 
     }
+
     renderDates = fields => (
         <DateRangePickerWrapper
             startDateFieldName="start"
@@ -84,21 +90,21 @@ class SearchForm extends React.Component {
     };
     render(){
         const { handleSubmit } = this.props;
-
         return(
             <form onSubmit={handleSubmit}>
-                <div className="search-form" >
+            <div className="search-form" >
 
-                    <Field placeholder="Otel Adı" name="dsadas" component={NameSearch} type="text" />
-                    <Fields
-                        names={['start', 'end']}
-                        component={this.renderDates}
-                        normalize={this.normalizeDates}
-                        format={this.formatDates}
-                    />
-                    <Field className="search-form-main" placeholder="2 Yetişkin" disabled name="email" component="input" type="email" />
-                    <button className="search-form-button" type="submit">Ara</button>
-                </div>
+                <TypeAheadField name="fruit" label="Enter fruit name" items={items} />
+
+                <Fields
+                    names={['start', 'end']}
+                    component={this.renderDates}
+                    normalize={this.normalizeDates}
+                    format={this.formatDates}
+                />
+                <Field className="search-form-main" placeholder="2 Yetişkin" disabled name="email" component="input" type="email" />
+                <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>
+            </div>
             </form>
         )
     }
@@ -107,13 +113,12 @@ class SearchForm extends React.Component {
 SearchForm = reduxForm({
     // a unique name for the form
     form: 'searchForm',
+
 })(SearchForm)
 function mapStateToProps(state) {
     return {value: state.value,
         availHotel:state.availHotel,
-        startDate:state.startDate,
-
-    }
+    startDate:state.startDate}
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch)

@@ -2064,6 +2064,10 @@ detective@^4.3.1:
     acorn "^5.2.1"
     defined "^1.0.0"
 
+diacritic@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/diacritic/-/diacritic-0.0.2.tgz#fc2a887b5a5bc0a0a854fb614c7c2f209061ee04"
+
 diff@^3.2.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
@@ -2121,6 +2125,10 @@ domain-browser@^1.1.1:
 dotenv@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
+downshift@^1.31.11:
+  version "1.31.11"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.11.tgz#182d94c79daa9be0f6544def694f7d8bfa3359d4"
 
 duplexer@^0.1.1:
   version "0.1.1"
@@ -4508,6 +4516,12 @@ marker-clusterer-plus@^2.1.4:
 markerwithlabel@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/markerwithlabel/-/markerwithlabel-2.0.1.tgz#822f4eb68c488c2509c5ebdb75982eb84a856096"
+
+match-sorter@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-2.2.1.tgz#899a5b900f4855204bc2d3aa8cb23ba16fc528dc"
+  dependencies:
+    diacritic "0.0.2"
 
 material-ui-icons@^1.0.0-beta.17:
   version "1.0.0-beta.17"
