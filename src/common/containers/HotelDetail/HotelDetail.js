@@ -10,6 +10,8 @@ import {Grid, Row, Col} from 'react-flexbox-grid';
 import Divider from 'material-ui/Divider';
 import * as actions from "../../redux/actions";
 import {bindActionCreators} from "redux";
+import {Star} from 'material-ui-icons';
+
 import {connect} from "react-redux";
 import Card, {CardContent, CardMedia, CardActions} from 'material-ui/Card';
 import Collapse from 'material-ui/transitions/Collapse';
@@ -137,20 +139,24 @@ class HotelDetail extends Component {
     componentDidMount() {
         this.setState({
             nav1: this.slider1,
-            nav2: this.slider2
+            nav2: this.slider2,
+
         });
     }
 
     render() {
         const {classes} = this.props;
         const {value} = this.state;
-        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes} = this.props.hotel
-
-
+        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating} = this.props.hotel
+        var ratings = []
+        let i = 0
+        for (i; i < Rating; i++) {
+            ratings.push(<Star/>)
+        }
         return (
             <div>
                 <Header/>
-                <div className="jumbotron topJumbo">
+                <div className="jumbotron">
                     <Grid>
                         <Row>
                             <Col md={12}>
@@ -163,15 +169,7 @@ class HotelDetail extends Component {
                 <Grid>
                     <Row>
 
-                        <Col md={4}>
-                            {this.props.avail ?
-                                <div>
-                                    <div>
-                                        {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + '€' : ''}</div>
 
-
-                                    <h2>{Description}</h2></div> : ''}
-                        </Col>
                         <Col md={8}>
                             <Slider
                                 ref={slider => (this.slider1 = slider)}
@@ -212,7 +210,22 @@ class HotelDetail extends Component {
                             </Slider>
 
                         </Col>
+                        <Col md={4}>
+                            {this.props.avail ?
+                                <div>
 
+
+                                    <h2>{Description}</h2>
+                                    <div className="hotel-rating-detail">{ratings}</div>
+                                    <div>
+                                        {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + '€' : ''}
+                                    </div>
+
+                                </div>
+                                : ''}
+
+
+                        </Col>
                         <Col xs={12} md={12}>
                             <h2>Odalar</h2>
                             <Divider/>

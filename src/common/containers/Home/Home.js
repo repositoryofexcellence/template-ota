@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider'
 import SearchForm from '../../components/searchForm/SearchForm'
 import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
+
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
 class Home extends Component {
