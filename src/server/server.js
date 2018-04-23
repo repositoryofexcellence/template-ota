@@ -51,9 +51,9 @@ server.get(`/api/search-results`, async (req, res) => {
                 ChildAges:{ int:req.query.childAges},
                 ChildBirthDates:{sys:req.query.childBirthDates},
                 EndDate: req.query.endDate,
-                LocationName: '',
-                NumberOfAdults:2,
-                NumberOfChildren: 0,
+                LocationName: req.query.location,
+                NumberOfAdults:req.query.adultNum,
+                NumberOfChildren: req.query.childNum,
                 StartDate: req.query.startDate
             },
             UserIdentifier: 'e4d412a7-eeae-458e-94d1-c90d898c4915',

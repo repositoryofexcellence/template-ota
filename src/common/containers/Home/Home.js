@@ -20,7 +20,7 @@ class Home extends Component {
 
     submit = (values) => {
         // Do something with the form values
-        this.props.availHotelsForm(values.start,values.end,values.adultNumber,values.childNumber);
+        this.props.availHotelsForm(values.start,values.end,values.adultNumber,values.childNumber,values.hotelName);
     }
     render() {
         return (
