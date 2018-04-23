@@ -33,7 +33,7 @@ class App extends Component {
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.availHotels(startDate,endDate,adultNum,childNum,location)
     }
 

@@ -9,6 +9,7 @@ import {adultNum} from "./reducers/adultNumber";
 import reducerData from "../components/searchForm/account";
 
 export default combineReducers({
+    form:formReducer,
     reducerData,
     adultNum,
     autoSuggest,
@@ -16,5 +17,5 @@ export default combineReducers({
     hotel,
     staticState,
     routing: routerReducer,
-    form:formReducer
+
 });

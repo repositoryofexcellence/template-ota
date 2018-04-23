@@ -84,11 +84,12 @@ width: 28%;
     float: right;
     border-radius: 4px;
     margin-right: 15px;
-    margin-top: 9px;
+    margin-top: 13px;
     color: white;
     font-size: 24px;
     font-weight: 600;
     background-color: #24a8de;
+    position: relative;
 
 }
 
@@ -439,21 +440,69 @@ color: #333;
 
 
 .popover {
-    background: #fff;
-    border-radius: 4px;
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
-    padding: 15px;
+    display: block;
     position: relative;
+    top: 0px;
+    width: 100%;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+float: left;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+}
+.guest-container {
+    padding: 16px;
+}
+
+.guest {
     float: left;
-background-color: white;
-z-index: 10;
 }
 
 .popover-container {
-    width: 200px;
+
     position: relative;
+
+}
+
+.childages {
+    float: left;
+    width: 500px;
+}
+.popover-open {
+    display: block;
+    position: absolute;
+    top: 92px;
+    width: 100%;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+}
+.childagesfloat {
     float: left;
 }
+
+ul {
+    -webkit-margin-before: 0em !important;
+    -webkit-margin-after: 0em !important;
+    -webkit-margin-start: 0px !important;
+    -webkit-margin-end: 0px !important;
+    -webkit-padding-start: 16px !important;
+}
+
+h4 {
+    -webkit-margin-before: 0em !important;
+    -webkit-margin-after: 0em !important;
+    -webkit-margin-start: 0px !important;
+    -webkit-margin-end: 0px !important;
+    -webkit-padding-start: 16px !important;
+}
+
 

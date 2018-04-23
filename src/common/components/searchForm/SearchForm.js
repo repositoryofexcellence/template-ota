@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import 'react-datepicker/dist/react-datepicker.css'
 import { load as loadAccount } from './account'
 import {withRouter} from 'react-router'
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
+
 import {DateRangePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -127,6 +129,7 @@ class renderDateTimePicker extends React.Component {
                     dateFormat="YYYY-MM-DD"
                     selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
                     onChange={this.handleChange}
+
                 />
                 {touched && error && <span>{error}</span>}
             </div>
@@ -136,17 +139,18 @@ class renderDateTimePicker extends React.Component {
 
 const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
     <ul>
-        <li>
+        <h4>Çocukların Doğum Tarihleri</h4>
+        <li >
             <button type="button" onClick={() => fields.push({})}>Add Member</button>
             {submitFailed && error && <span>{error}</span>}
         </li>
         {fields.map((child, index) => (
-            <li key={index}>
+            <li className="childagesfloat" key={index}>
                 <button
                     type="button"
                     title="Remove Member"
                     onClick={() => fields.remove(index)}/>
-                <h4>Child #{index + 1}</h4>
+                <h4>{index + 1}. Çocuk</h4>
                 <Field
                     name={`${child}.birth`}
                     showTime={false}
@@ -235,7 +239,7 @@ class SearchForm extends React.Component {
                     />
 
 
-                    <div
+                    <div className="popover-container"
                         ref={node => {
                             this.node = node;
                         }}>
@@ -243,16 +247,19 @@ class SearchForm extends React.Component {
 
                         >
                             <Field name="adultNumber" className="search-form-main" disabled component="input"
-                                   type="text" placeHolder="2 Yetişkin" value={this.value + "Yetişkin"}/>
+                                   type="text"  value={`${"childNumber".value} Yetişkin` }/>
 
                         </div>
 
                         {this.state.popupVisible && (
+
                             <div
-                                className="popover"
+                                className="popover-open"
                             >
+                                <div className="guest-container">
+                                    <div className="adultnum guest">
                                 <Field name="adultNumber" component="select">
-                                    <option defaultValue="2"/>
+
                                     <option value="1">1 Yetişkin</option>
                                     <option placeholder="2 Yetişkin" selected value="2">2 Yetişkin</option>
                                     <option value="3">3 Yetişkin</option>
@@ -260,15 +267,21 @@ class SearchForm extends React.Component {
                                     <option value="5">5 Yetişkin</option>
                                     <option value="6">6 Yetişkin</option>
                                 </Field>
+                                    </div>
+                                    <div className="childnum guest">
                                 <Field name="childNumber" component="select">
-                                    <option></option>
+
                                     <option selected aria-selected value="0">0 Çocuk</option>
                                     <option value="1">1 Çocuk</option>
                                     <option value="2">2 Çocuk</option>
                                     <option value="3">3 Çocuk</option>
                                     <option value="4">4 Çocuk</option>
                                 </Field>
+                                </div>
+                                <div className="childages guest">
                                 <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
+                                </div>
+                                </div>
                             </div>
                         )}
                     </div>

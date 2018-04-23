@@ -34,7 +34,7 @@ class Home extends Component {
 
         console.log(cbds)
         // Do something with the form values
-        this.props.availHotelsForm(values.hotelName,values.start,values.end,values.adultNumber,values.childNumber,cbds);
+        this.props.availHotelsForm(cbds,values.end,values.hotelName,values.adultNumber,values.childNumber,values.start);
     }
     render() {
         return (
