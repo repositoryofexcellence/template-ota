@@ -18,19 +18,24 @@ import hotelListTR from '../data/hotelsTur.json'
 import {withRouter} from 'react-router'
 import * as actionCreators from "./redux/actions";
 
+const startDate = moment().format('YYYY-MM-DD')
+const endDate = moment().add(1, 'day').format('YYYY-MM-DD')
+const adultNum = 2
+const childNum = 0
+const location = ''
+
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
             hotels: hotelListTR.Hotels,
             availhotel: this.props.availHotel,
-            startDate: moment(),
-            endDate: moment().add(1, 'day')
+
         }
     }
 
     componentWillMount(){
-        this.props.availHotels()
+        this.props.availHotels(startDate,endDate,adultNum,childNum,location)
     }
 
     render() {
