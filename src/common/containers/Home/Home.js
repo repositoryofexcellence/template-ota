@@ -9,6 +9,7 @@ import Divider from 'material-ui/Divider'
 import SearchForm from '../../components/searchForm/SearchForm'
 import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
+import { Redirect } from 'react-router'
 
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 
@@ -16,6 +17,7 @@ class Home extends Component {
     constructor(props){
         super(props)
         this.state = {
+            redirect: false
 
         }
     }
@@ -32,13 +34,19 @@ class Home extends Component {
             } else if(values.childBirthDates == null ){
                 cbds = " "
             }
+        this.setState({ redirect: true })
 
-        this.props.history.push('/search-results')
         console.log(cbds)
         // Do something with the form values
         this.props.availHotelsForm(cbds,values.end,values.hotelName,values.adultNumber,values.childNumber,values.start);
     }
     render() {
+        const { redirect } = this.state;
+
+        if (redirect) {
+            return <Redirect to='/search-results'/>;
+        }
+
         return (
             <div>
                 <Header/>

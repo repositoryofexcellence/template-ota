@@ -71,14 +71,14 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         backgroundColor: "blue",
     },
-        fab: {
-            margin: theme.spacing.unit * 2,
-        },
-        absolute: {
-            position: 'absolute',
-            bottom: theme.spacing.unit * 2,
-            right: theme.spacing.unit * 3,
-        },
+    fab: {
+        margin: theme.spacing.unit * 2,
+    },
+    absolute: {
+        position: 'absolute',
+        bottom: theme.spacing.unit * 2,
+        right: theme.spacing.unit * 3,
+    },
     card: {
         marginTop: 20,
         marginBottom: 20
@@ -122,8 +122,8 @@ const styles = theme => ({
 });
 const HotelIcon = (props) => (
     <Tooltip id="tooltip-fab" title={props.iconTitle}>
-        <IconButton style={{backgroundColor:"#2a98d8"}} aria-label={props.iconTitle}>
-            <i  title="" className={`icon-hotel-icon-${props.iconName} circle`}></i>
+        <IconButton style={{backgroundColor: "#2a98d8"}} aria-label={props.iconTitle}>
+            <i title="" className={`icon-hotel-icon-${props.iconName} circle`}></i>
         </IconButton>
     </Tooltip>
 
@@ -164,7 +164,7 @@ class HotelDetail extends Component {
     render() {
         const {classes} = this.props;
         const {value} = this.state;
-        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating,HotelFacilities} = this.props.hotel
+        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
         var ratings = []
         let i = 0
         for (i; i < Rating; i++) {
@@ -229,95 +229,96 @@ class HotelDetail extends Component {
                         </Col>
                         <Col md={4}>
 
-                                <div>
+                            <div>
 
-                                    <div className="detail-left">
+                                <div className="detail-left">
                                     <h2 className="detail-title">{Description}</h2>
-                                    <div className="hotel-rating-detail">{ratings}  {this.props.avail ?<div className="detail-price">
-                                        {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''}
-                                    </div> : ''}</div>
+                                    <div className="hotel-rating-detail">{ratings} {this.props.avail ?
+                                        <div className="detail-price">
+                                            {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''}
+                                        </div> : ''}</div>
 
-                                    </div>
-                                    <div className="detail-left-bottom">
-                                        <h3 className="detail-title">Otel Özellikleri</h3>
-                                        <div className="hotelFac">{HotelFacilities != null ? HotelFacilities["string"].map(facility =>{
-                                            let fac = ''
-                                            if (facility === "Televiziyon"){
-                                               fac = <HotelIcon iconTitle={facility} iconName="television"/>
-                                            }
-                                            else if (facility === "Yuzme Havuzu"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="swimmingPool"/>
-                                            }
-                                            else if (facility === "WI-FI Internet"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="wifi"/>
-                                            }
-                                            else if (facility === "Klima"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="airConditioning"/>
-                                            }
-                                            else if (facility === "Deniz"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="beach"/>
-                                            }
-                                            else if (facility === "Oda Servisi"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="breakfast"/>
-                                            }
-                                            else if (facility === "Animasyon"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="entertainment"/>
-                                            }
-                                            else if (facility === "Kafeterya"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="coffee"/>
-                                            }
-                                            else if (facility === "Fotograf Servisi"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="camera2"/>
-                                            }
-                                            else if (facility === "Mescid"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="mosque"/>
-                                            }
-                                            else if (facility === "Spa"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="spa"/>
-                                            }
-                                            else if (facility === "Ottopark"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="parking"/>
-                                            }
-                                            else if (facility === "Otopark"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="parking"/>
-                                            }
-                                            else if (facility === "Fitness Salonu"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="fitness"/>
-                                            }
-                                            else if (facility === "Su Sporlari"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="sailing"/>
-                                            }
-                                            else if (facility === "Transfer Servisi"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="airplane"/>
-                                            }
-                                            else if (facility === "Çamaşır Servisi"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="washingMachine"/>
-                                            }
-                                            else if (facility === "tenis kortu"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="tennis"/>
-                                            }
-                                            else if (facility === "Halı Saha"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="football"/>
-                                            }
-                                            else if (facility === "Alışveriş İmkanı"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="package"/>
-                                            }
-                                            else if (facility === "Oyun Salonu"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="video"/>
-                                            }
-                                            else if (facility === "Uyandırma Servisi"){
-                                                fac = <HotelIcon iconTitle={facility} iconName="wakeupService"/>
-                                            }
-                                            else {
-                                                return ''
-                                            }
-                                            return(
-                                                <div className="hotelFacDet">{fac}</div>
-                                            )
-                                        }):<p>Otel özellikleri henüz sisteme yüklenmemiştir</p>}</div>
-                                    </div>
                                 </div>
-
+                                <div className="detail-left-bottom">
+                                    <h3 className="detail-title">Otel Özellikleri</h3>
+                                    <div
+                                        className="hotelFac">{HotelFacilities != null ? HotelFacilities["string"].map(facility => {
+                                        let fac = ''
+                                        if (facility === "Televiziyon") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="television"/>
+                                        }
+                                        else if (facility === "Yuzme Havuzu") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="swimmingPool"/>
+                                        }
+                                        else if (facility === "WI-FI Internet") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="wifi"/>
+                                        }
+                                        else if (facility === "Klima") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="airConditioning"/>
+                                        }
+                                        else if (facility === "Deniz") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="beach"/>
+                                        }
+                                        else if (facility === "Oda Servisi") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="breakfast"/>
+                                        }
+                                        else if (facility === "Animasyon") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="entertainment"/>
+                                        }
+                                        else if (facility === "Kafeterya") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="coffee"/>
+                                        }
+                                        else if (facility === "Fotograf Servisi") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="camera2"/>
+                                        }
+                                        else if (facility === "Mescid") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="mosque"/>
+                                        }
+                                        else if (facility === "Spa") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="spa"/>
+                                        }
+                                        else if (facility === "Ottopark") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="parking"/>
+                                        }
+                                        else if (facility === "Otopark") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="parking"/>
+                                        }
+                                        else if (facility === "Fitness Salonu") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="fitness"/>
+                                        }
+                                        else if (facility === "Su Sporlari") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="sailing"/>
+                                        }
+                                        else if (facility === "Transfer Servisi") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="airplane"/>
+                                        }
+                                        else if (facility === "Çamaşır Servisi") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="washingMachine"/>
+                                        }
+                                        else if (facility === "tenis kortu") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="tennis"/>
+                                        }
+                                        else if (facility === "Halı Saha") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="football"/>
+                                        }
+                                        else if (facility === "Alışveriş İmkanı") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="package"/>
+                                        }
+                                        else if (facility === "Oyun Salonu") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="video"/>
+                                        }
+                                        else if (facility === "Uyandırma Servisi") {
+                                            fac = <HotelIcon iconTitle={facility} iconName="wakeupService"/>
+                                        }
+                                        else {
+                                            return ''
+                                        }
+                                        return (
+                                            <div className="hotelFacDet">{fac}</div>
+                                        )
+                                    }) : <p>Otel özellikleri henüz sisteme yüklenmemiştir</p>}</div>
+                                </div>
+                            </div>
 
 
                         </Col>
@@ -328,78 +329,148 @@ class HotelDetail extends Component {
 
 
                         {
-                            this.props.avail ?
+                            this.props.avail && Array.isArray(this.props.avail) ?
                                 this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
                                     return (
 
                                         <Col className="room-grid" xs={12} md={4}>
 
-                                                <div className="hotel-card">
+                                            <div className="hotel-card">
 
-                                                    <Swiper
-                                                        swiperOptions={{
-                                                            slidesPerView: 1,
-                                                            spaceBetween: 15,
-                                                            freeMode: false,
+                                                <Swiper
+                                                    swiperOptions={{
+                                                        slidesPerView: 1,
+                                                        spaceBetween: 15,
+                                                        freeMode: false,
 
 
-                                                        }}
-                                                        pagination={false}
+                                                    }}
+                                                    pagination={false}
 
-                                                    >
-                                                        {room.ImageURL && Array.isArray(room.ImageURL["string"]) ? room.ImageURL["string"].map(r => {
+                                                >
+                                                    {room.ImageURL && Array.isArray(room.ImageURL["string"]) ? room.ImageURL["string"].map(r => {
 
-                                                            return (
-                                                                <Slide>
-                                                                    <div className="hotel-card-media" style={{
-
-                                                                        height: 250,
-                                                                        backgroundImage: `url(${r}.jpg)`,
-                                                                        backgroundSize: "cover"
-                                                                    }}>
-
-                                                                    </div>
-                                                                </Slide>
-                                                            )
-                                                        }) : room.ImageURL && !Array.isArray(room.ImageURL["string"]) ?
+                                                        return (
                                                             <Slide>
                                                                 <div className="hotel-card-media" style={{
 
                                                                     height: 250,
-                                                                    backgroundImage: `url(${room.ImageURL["string"]}.jpg)`,
+                                                                    backgroundImage: `url(${r}.jpg)`,
                                                                     backgroundSize: "cover"
                                                                 }}>
 
                                                                 </div>
                                                             </Slide>
-                                                            : ''}
+                                                        )
+                                                    }) : room.ImageURL && !Array.isArray(room.ImageURL["string"]) ?
+                                                        <Slide>
+                                                            <div className="hotel-card-media" style={{
 
-                                                    </Swiper>
-                                                    <div className="room-card-top-content">
-                                                        <div className="room-pension">
-                                                            {PensionTypes["string"] + " - "}
-                                                        </div>
-                                                        <div
-                                                            className="room-price">{room.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
-                                                        </div>
+                                                                height: 250,
+                                                                backgroundImage: `url(${room.ImageURL["string"]}.jpg)`,
+                                                                backgroundSize: "cover"
+                                                            }}>
+
+                                                            </div>
+                                                        </Slide>
+                                                        : ''}
+
+                                                </Swiper>
+                                                <div className="room-card-top-content">
+                                                    <div className="room-pension">
+                                                        {PensionTypes["string"] + " - "}
                                                     </div>
-
-                                                    <div className="hotel-card-content">
-                                                        <div className="hotel-title">
-                                                            {room.Name}
-                                                        </div>
-                                                        <div className="hotel-place">
-                                                            <p dangerouslySetInnerHTML={{__html: room.Description}}/>
-                                                        </div>
-
+                                                    <div
+                                                        className="room-price">{room.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
                                                     </div>
                                                 </div>
+
+                                                <div className="hotel-card-content">
+                                                    <div className="hotel-title">
+                                                        {room.Name}
+                                                    </div>
+                                                    <div className="hotel-place">
+                                                        <p dangerouslySetInnerHTML={{__html: room.Description}}/>
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
 
                                         </Col>
 
                                     )
-                                }) : ''}
+                                }) : this.props.avail && !Array.isArray(this.props.avail) ?
+                                this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
+                                    return (
+                                        <Col className="room-grid" xs={12} md={4}>
+
+                                            <div className="hotel-card">
+
+                                                <Swiper
+                                                    swiperOptions={{
+                                                        slidesPerView: 1,
+                                                        spaceBetween: 15,
+                                                        freeMode: false,
+
+
+                                                    }}
+                                                    pagination={false}
+
+                                                >
+                                                    {room.ImageURL && Array.isArray(room.ImageURL["string"]) ? room.ImageURL["string"].map(r => {
+
+                                                        return (
+                                                            <Slide>
+                                                                <div className="hotel-card-media" style={{
+
+                                                                    height: 250,
+                                                                    backgroundImage: `url(${r}.jpg)`,
+                                                                    backgroundSize: "cover"
+                                                                }}>
+
+                                                                </div>
+                                                            </Slide>
+                                                        )
+                                                    }) : room.ImageURL && !Array.isArray(room.ImageURL["string"]) ?
+                                                        <Slide>
+                                                            <div className="hotel-card-media" style={{
+
+                                                                height: 250,
+                                                                backgroundImage: `url(${room.ImageURL["string"]}.jpg)`,
+                                                                backgroundSize: "cover"
+                                                            }}>
+
+                                                            </div>
+                                                        </Slide>
+                                                        : ''}
+
+                                                </Swiper>
+                                                <div className="room-card-top-content">
+                                                    <div className="room-pension">
+                                                        {PensionTypes["string"] + " - "}
+                                                    </div>
+                                                    <div
+                                                        className="room-price">{room.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
+                                                    </div>
+                                                </div>
+
+                                                <div className="hotel-card-content">
+                                                    <div className="hotel-title">
+                                                        {room.Name}
+                                                    </div>
+                                                    <div className="hotel-place">
+                                                        <p dangerouslySetInnerHTML={{__html: room.Description}}/>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </Col>
+                                    )
+                                })
+                                : ''}
 
 
                     </Row>
@@ -439,12 +510,12 @@ class HotelDetail extends Component {
 
                                 <Col md={6}>
                                     <div className="info-panel">
-                                    <div className="info-content">
-                                        <h3 dangerouslySetInnerHTML={{__html: hotelInfo.Header}}/>
-                                        <Divider/>
-                                        <div className="hotelInfo" style={{paddingTop: 20, paddingBottom: 20}}
-                                             dangerouslySetInnerHTML={{__html: hotelInfo.Text}}/>
-                                    </div>
+                                        <div className="info-content">
+                                            <h3 dangerouslySetInnerHTML={{__html: hotelInfo.Header}}/>
+                                            <Divider/>
+                                            <div className="hotelInfo" style={{paddingTop: 20, paddingBottom: 20}}
+                                                 dangerouslySetInnerHTML={{__html: hotelInfo.Text}}/>
+                                        </div>
                                     </div>
                                 </Col>
 
@@ -468,6 +539,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+function mapStateToProps(state) {
+    return {
+        availHotel: state.availHotel,
+    }
+}
+
 export default withRouter(withStyles(styles, {withTheme: true})(connect(
-    mapDispatchToProps
+    mapDispatchToProps,mapStateToProps
 )(HotelDetail)));
