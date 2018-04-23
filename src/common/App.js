@@ -6,8 +6,10 @@ import SearchResults from './containers/SearchResults/SearchResults'
 import './bootstrap.css';
 
 
+
 import './App.css'
 import './components/fonts/fonts.css';
+import './components/fonts/hotelfonts.css';
 import 'react-dynamic-swiper/lib/styles.css'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';

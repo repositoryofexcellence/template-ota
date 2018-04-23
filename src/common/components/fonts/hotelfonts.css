@@ -1,0 +1,359 @@
+@font-face {
+    font-family: 'icons';
+    src:  url('./icons.eot');
+    src:  url('./icons.eot') format('embedded-opentype'),
+    url('./icons.ttf') format('truetype'),
+    url('./icons.woff') format('woff'),
+    url('./icons.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-hotel-icon"], [class*=" icon-hotel-icon"]{vertical-align:baseline;}
+[class^="icon-hotel-icon"]:before, [class*=" icon-hotel-icon"]:before{font-family:icons;font-style:normal;font-weight:normal;speak:none;display:inline-block;text-decoration:inherit;text-align:center;font-variant:normal;text-transform:none;}
+[class^="icon-hotel-icon"].circle, [class*=" icon-hotel-icon"].circle, .glyphicon.circle{color:white;border:0px solid;width:1.8em;height:1.8em;line-height:1.7333em;-webkit-border-radius:50% 50% 50% 50%;-moz-border-radius:50% 50% 50% 50%;-ms-border-radius:50% 50% 50% 50%;border-radius:50% 50% 50% 50%;display:inline-block;text-align:center;}
+[class^="icon-hotel-icon"].takeoff-effect:before, [class*=" icon-hotel-icon"].takeoff-effect:before, .glyphicon.takeoff-effect:before{-webkit-transform:rotate(-25deg);-moz-transform:rotate(-25deg);-ms-transform:rotate(-25deg);-o-transform:rotate(-25deg);transform:rotate(-25deg);}
+[class^="icon-hotel-icon"].takeoff-effect1:before, [class*=" icon-hotel-icon"].takeoff-effect1:before, .glyphicon.takeoff-effect1:before{-webkit-transform:rotate(25deg);-moz-transform:rotate(25deg);-ms-transform:rotate(25deg);-o-transform:rotate(25deg);transform:rotate(25deg);}
+[class^="icon-hotel-icon"].landing-effect:before, [class*=" icon-hotel-icon"].landing-effect:before, .glyphicon.landing-effect:before{-webkit-transform:rotate(-25deg);-moz-transform:rotate(-25deg);-ms-transform:rotate(-25deg);-o-transform:rotate(-25deg);transform:rotate(-25deg);}
+[class^="icon-hotel-icon"].flip-effect:before, [class*=" icon-hotel-icon"].flip-effect:before, .glyphicon.flip-effect:before{-webkit-transform:scaleX(-1);-moz-transform:scaleX(-1);-ms-transform:scaleX(-1);-o-transform:scaleX(-1);transform:scaleX(-1);filter:FlipH;}
+
+.listIcons.hotel .details [class^="icon-hotel-icon"].circle{margin-right:5px;margin-top:5px;}
+.listIcons [class^="icon-hotel-icon"].circle{color:#949494;cursor:default;font-size:20px;overflow:hidden;}
+.listIcons [class^="icon-hotel-icon"].circle:hover{color:#00a2e5;}
+.box-title small [class^="icon-hotel-icon"]{color:#FFCB08;font-size:1.3333em;}
+.time [class^="icon-hotel-icon"]{float:left;font-size:18px;color:#f7961c;margin-right:5px;}
+.tab-container.trans-style ul.tabs li a i[class^="icon-hotel-icon"]{font-size:20px;}
+.listing-style1.cruise .time [class^="icon-hotel-icon"]{float:left;font-size:20px;}
+.listing-style1.car .amenities ul li .glyphicon, .listing-style1.car .amenities ul li [class^="icon-hotel-icon"], .listing-style3.car .amenities ul li .glyphicon, .listing-style3.car .amenities ul li [class^="icon-hotel-icon"]{display:block;font-size:16px;color:#d9d9d9;overflow:hidden;}
+.listing-style1.car .amenities ul li:hover, .listing-style1.car .amenities ul li:hover .glyphicon, .listing-style1.car .amenities ul li:hover [class^="icon-hotel-icon"], .listing-style3.car .amenities ul li:hover, .listing-style3.car .amenities ul li:hover .glyphicon, .listing-style3.car .amenities ul li:hover [class^="icon-hotel-icon"]{color:#00A2E5;}
+.listing-style1.car .amenities ul li:hover [class^="icon-hotel-icon"]:before, .listing-style3.car .amenities ul li:hover [class^="icon-hotel-icon"]:before{-webkit-animation:toTopFromBottom 0.35s forwards;-moz-animation:toTopFromBottom 0.35s forwards;animation:toTopFromBottom 0.35s forwards;}
+.listing-style3 [class^="icon-hotel-icon"].circle{color:#949494;cursor:default;font-size:19px;overflow:hidden;}
+.listing-style3 [class^="icon-hotel-icon"].circle:hover{color:#00A2E5;}
+.listing-style3 [class^="icon-hotel-icon"].circle:hover:before{-webkit-animation:toTopFromBottom 0.35s forwards;-moz-animation:toTopFromBottom 0.35s forwards;animation:toTopFromBottom 0.35s forwards;}
+.listing-style3.hotel .details [class^="icon-hotel-icon"].circle{margin-right:5px;margin-top:5px;}
+.listing-style3.flight .details .details-wrapper [class^="icon-hotel-icon"].circle{margin-right:5px;}
+.listing-style3.cruise .details .character [class^="icon-hotel-icon"]{font-size:18px;float:left;}
+
+
+.icon-hotel-icon-person:before {
+    content: "\e900";
+}
+.icon-hotel-icon-wifi .path1:before {
+    content: "\e901";
+    color: rgb(0, 0, 0);
+    opacity: 0.5;
+}
+.icon-hotel-icon-wifi .path2:before {
+    content: "\e902";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-hotel-icon-wifi .path3:before {
+    content: "\e903";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-hotel-icon-wifi:before {
+    content: "\e902";
+
+}
+.icon-hotel-icon-drink:before {
+    content: "\e904";
+}
+.icon-hotel-icon-video:before {
+    content: "\e905";
+}
+.icon-hotel-icon-volleyball:before {
+    content: "\e906";
+}
+.icon-hotel-icon-wakeupService:before {
+    content: "\e907";
+}
+.icon-hotel-icon-washingMachine:before {
+    content: "\e908";
+}
+.icon-hotel-icon-tennis:before {
+    content: "\e909";
+}
+.icon-hotel-icon-tesbih:before {
+    content: "\e90a";
+}
+.icon-hotel-icon-tub:before {
+    content: "\e90b";
+}
+.icon-hotel-icon-unlimitedService:before {
+    content: "\e90c";
+}
+.icon-hotel-icon-swimWear:before {
+    content: "\e90d";
+}
+.icon-hotel-icon-taxi:before {
+    content: "\e90e";
+}
+.icon-hotel-icon-television:before {
+    content: "\e90f";
+}
+.icon-hotel-icon-television2:before {
+    content: "\e910";
+}
+.icon-hotel-icon-sun:before {
+    content: "\e911";
+}
+.icon-hotel-icon-sunCream:before {
+    content: "\e912";
+}
+.icon-hotel-icon-surf:before {
+    content: "\e913";
+}
+.icon-hotel-icon-swimmingPool:before {
+    content: "\e914";
+}
+.icon-hotel-icon-singleBed:before {
+    content: "\e915";
+}
+.icon-hotel-icon-spa:before {
+    content: "\e916";
+}
+.icon-hotel-icon-stroller:before {
+    content: "\e917";
+}
+.icon-hotel-icon-suitcase:before {
+    content: "\e918";
+}
+.icon-hotel-icon-sailing:before {
+    content: "\e919";
+}
+.icon-hotel-icon-service:before {
+    content: "\e91a";
+}
+.icon-hotel-icon-shower:before {
+    content: "\e91b";
+}
+.icon-hotel-icon-signs:before {
+    content: "\e91c";
+}
+.icon-hotel-icon-roomService:before {
+    content: "\e91d";
+}
+.icon-hotel-icon-roomService2:before {
+    content: "\e91e";
+}
+.icon-hotel-icon-safe:before {
+    content: "\e91f";
+}
+.icon-hotel-icon-sailboat:before {
+    content: "\e920";
+}
+.icon-hotel-icon-rent:before {
+    content: "\e921";
+}
+.icon-hotel-icon-rentacar:before {
+    content: "\e922";
+}
+.icon-hotel-icon-restaurant:before {
+    content: "\e923";
+}
+.icon-hotel-icon-ring:before {
+    content: "\e924";
+}
+.icon-hotel-icon-prayerHands:before {
+    content: "\e925";
+}
+.icon-hotel-icon-quran:before {
+    content: "\e926";
+}
+.icon-hotel-icon-quran2:before {
+    content: "\e927";
+}
+.icon-hotel-icon-reception:before {
+    content: "\e928";
+}
+.icon-hotel-icon-petFriendly:before {
+    content: "\e929";
+}
+.icon-hotel-icon-petNotAccept:before {
+    content: "\e92a";
+}
+.icon-hotel-icon-phone:before {
+    content: "\e92b";
+}
+.icon-hotel-icon-pin:before {
+    content: "\e92c";
+}
+.icon-hotel-icon-package:before {
+    content: "\e92d";
+}
+.icon-hotel-icon-palm:before {
+    content: "\e92e";
+}
+.icon-hotel-icon-parking:before {
+    content: "\e92f";
+}
+.icon-hotel-icon-pasaport:before {
+    content: "\e930";
+}
+.icon-hotel-icon-mosque2:before {
+    content: "\e931";
+}
+.icon-hotel-icon-mosque3:before {
+    content: "\e932";
+}
+.icon-hotel-icon-mosqueWindow:before {
+    content: "\e933";
+}
+.icon-hotel-icon-motorcycle:before {
+    content: "\e934";
+}
+.icon-hotel-icon-map:before {
+    content: "\e935";
+}
+.icon-hotel-icon-masterCard:before {
+    content: "\e936";
+}
+.icon-hotel-icon-minibar:before {
+    content: "\e937";
+}
+.icon-hotel-icon-mosque:before {
+    content: "\e938";
+}
+.icon-hotel-icon-kaaba:before {
+    content: "\e939";
+}
+.icon-hotel-icon-kaaba2:before {
+    content: "\e93a";
+}
+.icon-hotel-icon-kidsPark:before {
+    content: "\e93b";
+}
+.icon-hotel-icon-laundry:before {
+    content: "\e93c";
+}
+.icon-hotel-icon-icecream:before {
+    content: "\e93d";
+}
+.icon-hotel-icon-image:before {
+    content: "\e93e";
+}
+.icon-hotel-icon-images:before {
+    content: "\e93f";
+}
+.icon-hotel-icon-iron:before {
+    content: "\e940";
+}
+.icon-hotel-icon-hairdresser:before {
+    content: "\e941";
+}
+.icon-hotel-icon-hijab:before {
+    content: "\e942";
+}
+.icon-hotel-icon-honeymoon:before {
+    content: "\e943";
+}
+.icon-hotel-icon-hotel:before {
+    content: "\e944";
+}
+.icon-hotel-icon-football:before {
+    content: "\e945";
+}
+.icon-hotel-icon-gift:before {
+    content: "\e946";
+}
+.icon-hotel-icon-glasses:before {
+    content: "\e947";
+}
+.icon-hotel-icon-golf:before {
+    content: "\e948";
+}
+.icon-hotel-icon-fishing:before {
+    content: "\e949";
+}
+.icon-hotel-icon-fitness:before {
+    content: "\e94a";
+}
+.icon-hotel-icon-flightTicket:before {
+    content: "\e94b";
+}
+.icon-hotel-icon-flipFlop:before {
+    content: "\e94c";
+}
+.icon-hotel-icon-degree:before {
+    content: "\e94d";
+}
+.icon-hotel-icon-dontDisturb:before {
+    content: "\e94e";
+}
+.icon-hotel-icon-doubleBed:before {
+    content: "\e94f";
+}
+.icon-hotel-icon-entertainment:before {
+    content: "\e950";
+}
+.icon-hotel-icon-cocktail:before {
+    content: "\e951";
+}
+.icon-hotel-icon-compass:before {
+    content: "\e952";
+}
+.icon-hotel-icon-computer:before {
+    content: "\e953";
+}
+.icon-hotel-icon-cruise:before {
+    content: "\e954";
+}
+.icon-hotel-icon-camping:before {
+    content: "\e955";
+}
+.icon-hotel-icon-car:before {
+    content: "\e956";
+}
+.icon-hotel-icon-caravan:before {
+    content: "\e957";
+}
+.icon-hotel-icon-chef:before {
+    content: "\e958";
+}
+.icon-hotel-icon-bowling:before {
+    content: "\e959";
+}
+.icon-hotel-icon-breakfast:before {
+    content: "\e95a";
+}
+.icon-hotel-icon-camera:before {
+    content: "\e95b";
+}
+.icon-hotel-icon-camera2:before {
+    content: "\e95c";
+}
+.icon-hotel-icon-beachVolley:before {
+    content: "\e95d";
+}
+.icon-hotel-icon-bell:before {
+    content: "\e95e";
+}
+.icon-hotel-icon-bellboy:before {
+    content: "\e95f";
+}
+.icon-hotel-icon-bikini:before {
+    content: "\e960";
+}
+.icon-hotel-icon-airport:before {
+    content: "\e961";
+}
+.icon-hotel-icon-baggage:before {
+    content: "\e962";
+}
+.icon-hotel-icon-basketball:before {
+    content: "\e963";
+}
+.icon-hotel-icon-beach:before {
+    content: "\e964";
+}
+.icon-hotel-icon-accesibility:before {
+    content: "\e965";
+}
+.icon-hotel-icon-airConditioning:before {
+    content: "\e966";
+}
+.icon-hotel-icon-airplane:before {
+    content: "\e967";
+}

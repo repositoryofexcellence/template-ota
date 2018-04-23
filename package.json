@@ -39,6 +39,7 @@
     "react-dom": "^16.3.1",
     "react-dom-animated": "^1.0.5",
     "react-dynamic-swiper": "^1.1.2",
+    "react-fontawesome": "^1.6.1",
     "react-gmaps": "^1.9.0",
     "react-google-maps": "^9.4.5",
     "react-loader-advanced": "^1.7.1",

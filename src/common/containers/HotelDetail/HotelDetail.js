@@ -5,12 +5,15 @@ import SearchFormDetail from '../../components/searchForm/SearchForm'
 import Slider from "react-slick";
 import Tabs, {Tab} from 'material-ui/Tabs';
 import classnames from 'classnames';
+import IconButton from 'material-ui/IconButton';
+import Tooltip from 'material-ui/Tooltip';
 import {Swiper, Slide} from 'react-dynamic-swiper'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import Divider from 'material-ui/Divider';
 import * as actions from "../../redux/actions";
 import {bindActionCreators} from "redux";
 import {Star} from 'material-ui-icons';
+import FontAwesome from 'react-fontawesome'
 
 import {connect} from "react-redux";
 import Card, {CardContent, CardMedia, CardActions} from 'material-ui/Card';
@@ -69,6 +72,14 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         backgroundColor: "blue",
     },
+        fab: {
+            margin: theme.spacing.unit * 2,
+        },
+        absolute: {
+            position: 'absolute',
+            bottom: theme.spacing.unit * 2,
+            right: theme.spacing.unit * 3,
+        },
     card: {
         marginTop: 20,
         marginBottom: 20
@@ -110,7 +121,14 @@ const styles = theme => ({
     },
     expandOpen: {},
 });
+const HotelIcon = (props) => (
+    <Tooltip id="tooltip-fab" title={props.iconTitle}>
+        <IconButton style={{backgroundColor:"#2a98d8"}} aria-label={props.iconTitle}>
+            <i  title="" className={`icon-hotel-icon-${props.iconName} circle`}></i>
+        </IconButton>
+    </Tooltip>
 
+)
 
 class HotelDetail extends Component {
     constructor(props) {
@@ -147,7 +165,7 @@ class HotelDetail extends Component {
     render() {
         const {classes} = this.props;
         const {value} = this.state;
-        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating} = this.props.hotel
+        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating,HotelFacilities} = this.props.hotel
         var ratings = []
         let i = 0
         for (i; i < Rating; i++) {
@@ -211,18 +229,96 @@ class HotelDetail extends Component {
 
                         </Col>
                         <Col md={4}>
-                            {this.props.avail ?
+
                                 <div>
 
+                                    <div className="detail-left">
+                                    <h2 className="detail-title">{Description}</h2>
+                                    <div className="hotel-rating-detail">{ratings}  {this.props.avail ?<div className="detail-price">
+                                        {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''}
+                                    </div> : ''}</div>
 
-                                    <h2>{Description}</h2>
-                                    <div className="hotel-rating-detail">{ratings}</div>
-                                    <div>
-                                        {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + '€' : ''}
                                     </div>
-
+                                    <div className="detail-left-bottom">
+                                        <h3 className="detail-title">Otel Özellikleri</h3>
+                                        <div className="hotelFac">{HotelFacilities["string"].map(facility =>{
+                                            let fac = ''
+                                            if (facility === "Televiziyon"){
+                                               fac = <HotelIcon iconTitle={facility} iconName="television"/>
+                                            }
+                                            else if (facility === "Yuzme Havuzu"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="swimmingPool"/>
+                                            }
+                                            else if (facility === "WI-FI Internet"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="wifi"/>
+                                            }
+                                            else if (facility === "Klima"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="airConditioning"/>
+                                            }
+                                            else if (facility === "Deniz"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="beach"/>
+                                            }
+                                            else if (facility === "Oda Servisi"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="breakfast"/>
+                                            }
+                                            else if (facility === "Animasyon"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="entertainment"/>
+                                            }
+                                            else if (facility === "Kafeterya"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="coffee"/>
+                                            }
+                                            else if (facility === "Fotograf Servisi"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="camera2"/>
+                                            }
+                                            else if (facility === "Mescid"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="mosque"/>
+                                            }
+                                            else if (facility === "Spa"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="spa"/>
+                                            }
+                                            else if (facility === "Ottopark"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="parking"/>
+                                            }
+                                            else if (facility === "Otopark"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="parking"/>
+                                            }
+                                            else if (facility === "Fitness Salonu"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="fitness"/>
+                                            }
+                                            else if (facility === "Su Sporlari"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="sailing"/>
+                                            }
+                                            else if (facility === "Transfer Servisi"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="airplane"/>
+                                            }
+                                            else if (facility === "Çamaşır Servisi"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="washingMachine"/>
+                                            }
+                                            else if (facility === "tenis kortu"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="tennis"/>
+                                            }
+                                            else if (facility === "Halı Saha"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="football"/>
+                                            }
+                                            else if (facility === "Alışveriş İmkanı"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="package"/>
+                                            }
+                                            else if (facility === "Oyun Salonu"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="video"/>
+                                            }
+                                            else if (facility === "Uyandırma Servisi"){
+                                                fac = <HotelIcon iconTitle={facility} iconName="wakeupService"/>
+                                            }
+                                            else {
+                                                return ''
+                                            }
+                                            return(
+                                                <div className="hotelFacDet">{fac}</div>
+                                            )
+                                        })}</div>
+                                    </div>
                                 </div>
-                                : ''}
+
 
 
                         </Col>

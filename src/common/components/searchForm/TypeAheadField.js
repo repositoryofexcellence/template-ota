@@ -27,26 +27,20 @@ const DownShiftInput = ({ input, meta, label, items }) => (
                 maxRanking: matchSorter.rankings.STARTS_WITH
             });
             return (
-                <div>
-                    <label {...getLabelProps()}>{label}</label>
-                    <div style={{ position: "relative" }}>
-                        <input
+                <div className="react-autosuggest__container">
+
+                    <div >
+                        <input className="react-autosuggest__input"
                             {...getInputProps({
                                 name: input.name,
                                 onBlur: input.onBlur
                             })}
+                            placeholder="Otel Adı"
                         />
                         {isOpen &&
                         !!filteredItems.length && (
-                            <div
-                                style={{
-                                    background: "white",
-                                    position: "absolute",
-                                    top: "100%",
-                                    left: 0,
-                                    width: "100%",
-                                    zIndex: 4
-                                }}
+                            <div className="react-autosuggest__suggestions-container--open"
+
                             >
                                 {filteredItems.map((item, index) => (
                                     <div
