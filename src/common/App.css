@@ -438,3 +438,22 @@ color: #333;
 }
 
 
+.popover {
+    background: #fff;
+    border-radius: 4px;
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    padding: 15px;
+    position: relative;
+    float: left;
+background-color: white;
+z-index: 10;
+}
+
+.popover-container {
+    width: 200px;
+    position: relative;
+    float: left;
+}
+
