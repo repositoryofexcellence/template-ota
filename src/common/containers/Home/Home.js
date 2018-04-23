@@ -19,8 +19,17 @@ class Home extends Component {
     }
 
     submit = (values) => {
+
+            let cbds = values.childBirthDates.map(cbd => {
+
+                var cbdt = {name: cbd.birth}
+
+                return (cbdt.name)
+            })
+
+        console.log(cbds)
         // Do something with the form values
-        this.props.availHotelsForm(values.start,values.end,values.adultNumber,values.childNumber,values.hotelName);
+        this.props.availHotelsForm(values.hotelName,values.start,values.end,values.adultNumber,values.childNumber,cbds);
     }
     render() {
         return (

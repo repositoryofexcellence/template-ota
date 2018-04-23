@@ -1,17 +1,24 @@
 import React from 'react'
-import {Field, Fields, reduxForm} from 'redux-form'
+import {Field, Fields, FieldArray,reduxForm} from 'redux-form'
 import NameSearch from './nameSearch'
 import {connect} from 'react-redux'
+import DatePicker from 'react-datepicker'
+import PropTypes from 'prop-types'
+import 'react-datepicker/dist/react-datepicker.css'
+
 import {withRouter} from 'react-router'
 import {DateRangePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
+import momentLocalizer from 'react-widgets-moment';
 import hotelList from "../../../data/hotelsTur.json"
 import * as actionCreators from "../../redux/actions";
 import {bindActionCreators} from "redux";
 import TypeAheadField from "./TypeAheadField";
 
 moment.locale('tr-TR')
+momentLocalizer()
+
 
 
 class DateRangePickerWrapper extends React.Component {
@@ -70,8 +77,74 @@ const language = hotelList.Hotels.map(hotel => {
 
 })
 const items = language;
+class renderDateTimePicker extends React.Component {
+    static propTypes = {
+        input: PropTypes.shape({
+            onChange: PropTypes.func.isRequired,
+            value: PropTypes.string.isRequired,
+        }).isRequired,
+        meta: PropTypes.shape({
+            touched: PropTypes.bool,
+            error: PropTypes.bool,
+        }),
+        placeholder: PropTypes.string,
+    }
 
+    static defaultProps = {
+        placeholder: ''
+    }
 
+    constructor (props) {
+        super(props)
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange (date) {
+        this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+    }
+
+    render () {
+        const {
+            input, placeholder,
+            meta: {touched, error}
+        } = this.props
+
+        return (
+            <div>
+                <DatePicker
+                    {...input}
+                    placeholder={placeholder}
+                    dateFormat="YYYY-MM-DD"
+                    selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
+                    onChange={this.handleChange}
+                />
+                {touched && error && <span>{error}</span>}
+            </div>
+        )
+    }
+}
+const renderChildBirthDates = ({ fields, meta: { error, submitFailed } }) => (
+    <ul>
+        <li>
+            <button type="button" onClick={() => fields.push({})}>Add Member</button>
+            {submitFailed && error && <span>{error}</span>}
+        </li>
+        {fields.map((child, index) => (
+            <li key={index}>
+                <button
+                    type="button"
+                    title="Remove Member"
+                    onClick={() => fields.remove(index)}/>
+                <h4>Child #{index + 1}</h4>
+                <Field
+                    name={`${child}.birth`}
+                    showTime={false}
+                    component={renderDateTimePicker}
+                />
+            </li>
+        ))}
+    </ul>
+)
 class SearchForm extends React.Component {
     constructor(props) {
         super(props)
@@ -100,6 +173,7 @@ class SearchForm extends React.Component {
 
     handlesOutsideClick(e) {
         // ignore clicks on the component itself
+
         if (this.node.contains(e.target)) {
             return;
         }
@@ -173,6 +247,7 @@ class SearchForm extends React.Component {
                                     <option value="3">3 Çocuk</option>
                                     <option value="4">4 Çocuk</option>
                                 </Field>
+                                <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
                             </div>
                         )}
                     </div>

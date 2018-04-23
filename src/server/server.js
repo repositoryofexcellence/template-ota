@@ -48,8 +48,8 @@ server.get(`/api/search-results`, async (req, res) => {
             Currency: 'EUR',
             Language: 'TR',
             SearchCriteria: {
-                ChildAges:{ int:req.query.childAges},
-                ChildBirthDates:{sys:req.query.childBirthDates},
+                ChildAges:{int:req.query.childAges},
+                ChildBirthDates:{"dateTime":req.query.childBirthDates},
                 EndDate: req.query.endDate,
                 LocationName: req.query.location,
                 NumberOfAdults:req.query.adultNum,
