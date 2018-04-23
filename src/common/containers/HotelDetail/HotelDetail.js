@@ -13,7 +13,6 @@ import Divider from 'material-ui/Divider';
 import * as actions from "../../redux/actions";
 import {bindActionCreators} from "redux";
 import {Star} from 'material-ui-icons';
-import FontAwesome from 'react-fontawesome'
 
 import {connect} from "react-redux";
 import Card, {CardContent, CardMedia, CardActions} from 'material-ui/Card';

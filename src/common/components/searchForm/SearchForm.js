@@ -6,12 +6,65 @@ import {withRouter} from 'react-router'
 import {DateRangePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
+import hotelList from "../../../data/hotelsTur.json"
 import * as actionCreators from "../../redux/actions";
 import {bindActionCreators} from "redux";
 import TypeAheadField from "./TypeAheadField";
 moment.locale('tr-TR')
 
+class Popover extends React.Component {
+    constructor() {
+        super();
 
+        this.handleClick = this.handleClick.bind(this);
+        this.handleOutsideClick = this.handleOutsideClick.bind(this);
+
+        this.state = {
+            popupVisible: false
+        };
+    }
+
+    handleClick() {
+        if (!this.state.popupVisible) {
+            // attach/remove event handler
+            document.addEventListener('click', this.handleOutsideClick, false);
+        } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
+        }
+
+        this.setState(prevState => ({
+            popupVisible: !prevState.popupVisible,
+        }));
+    }
+
+    handleOutsideClick(e) {
+        // ignore clicks on the component itself
+        if (this.node.contains(e.target)) {
+            return;
+        }
+
+        this.handleClick();
+    }
+
+    render() {
+        return (
+            <div className="popover-container" ref={node => { this.node = node; }}>
+                <button
+                    onClick={this.handleClick}
+                >
+                    Toggle Popover
+                </button>
+                {this.state.popupVisible && (
+                    <div
+                        className="popover"
+                    >
+                        {this.props.children}
+                    </div>
+                )}
+            </div>
+        );
+    }
+}
 class DateRangePickerWrapper extends React.Component {
     constructor(props) {
         super(props);
@@ -61,8 +114,14 @@ class DateRangePickerWrapper extends React.Component {
 
 
 
+const language = hotelList.Hotels.map(hotel => {
 
-const items = ["apple", "pear", "orange", "grape", "banana"];
+    var HotelName = {name: hotel.Description}
+
+    return (HotelName.name)
+
+})
+const items = language;
 
 
 class SearchForm extends React.Component {
@@ -88,13 +147,17 @@ class SearchForm extends React.Component {
     normalizeDates = (name, value) => {
         return moment(value).format('YYYY-MM-DD');
     };
+    incAdult = (value) => {
+
+        this.props.change('adultNumber', this.props.incAdultNum())
+    }
     render(){
         const { handleSubmit } = this.props;
         return(
             <form onSubmit={handleSubmit}>
             <div className="search-form" >
 
-                <TypeAheadField name="fruit" label="Enter fruit name" items={items} />
+                <TypeAheadField name="hotelName" label="Otel Adı" items={items} />
 
                 <Fields
                     names={['start', 'end']}
@@ -102,7 +165,25 @@ class SearchForm extends React.Component {
                     normalize={this.normalizeDates}
                     format={this.formatDates}
                 />
-                <Field className="search-form-main" placeholder="2 Yetişkin" disabled name="email" component="input" type="email" />
+                <Popover>
+                <Field name="adultNumber"  component="select">
+                    <option defaultValue="2" />
+                    <option value="1">1 Yetişkin</option>
+                    <option placeholder="2 Yetişkin" selected value="2">2 Yetişkin</option>
+                    <option value="3">3 Yetişkin</option>
+                    <option value="4">4 Yetişkin</option>
+                    <option value="5">5 Yetişkin</option>
+                    <option value="6">6 Yetişkin</option>
+                </Field>
+                <Field name="childNumber" component="select">
+                    <option></option>
+                    <option selected aria-selected value="0">0 Çocuk</option>
+                    <option value="1">1 Çocuk</option>
+                    <option value="2">2 Çocuk</option>
+                    <option value="3">3 Çocuk</option>
+                    <option value="4">4 Çocuk</option>
+                </Field>
+                </Popover>
                 <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>
             </div>
             </form>
@@ -117,8 +198,10 @@ SearchForm = reduxForm({
 })(SearchForm)
 function mapStateToProps(state) {
     return {value: state.value,
+        hotels:state.hotel.hotels,
         availHotel:state.availHotel,
-    startDate:state.startDate}
+    startDate:state.startDate,
+    adultNum:state.adultNum}
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch)

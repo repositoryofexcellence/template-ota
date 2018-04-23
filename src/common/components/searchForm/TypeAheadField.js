@@ -42,7 +42,7 @@ const DownShiftInput = ({ input, meta, label, items }) => (
                             <div className="react-autosuggest__suggestions-container--open"
 
                             >
-                                {filteredItems.map((item, index) => (
+                                {filteredItems.slice(0, 5).map((item, index) => (
                                     <div
                                         {...getItemProps({
                                             key: item,

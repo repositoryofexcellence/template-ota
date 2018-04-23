@@ -5,5 +5,5 @@ export {
     clearSuggestions,
     updateInputValue,
     loadSuggestions
-} from './autoSuggest',
+} from './autoSuggest';
 export {incAdultNum, decAdultNum} from './adultNumber'
