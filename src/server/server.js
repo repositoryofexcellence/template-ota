@@ -49,7 +49,7 @@ server.get(`/api/search-results`, async (req, res) => {
             Language: 'TR',
             SearchCriteria: {
                 ChildAges:null,
-                ChildBirthDates:{dateTime: [req.query.childBirthDates]},
+                ChildBirthDates:{List: req.query.childBirthDates},
                 EndDate: req.query.endDate,
                 LocationName: req.query.location,
                 NumberOfAdults:req.query.adultNum,
