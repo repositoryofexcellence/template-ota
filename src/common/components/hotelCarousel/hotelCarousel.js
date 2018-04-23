@@ -22,7 +22,7 @@ class HotelCarousel extends Component {
     render() {
         const {hotels, hotelSearchResult} = this.state
         let allHotelsList = ''
-        if (hotelSearchResult.length > 2 && hotels != null) {
+        if (hotelSearchResult.length > 1 && hotels != null) {
             var uniqueArray = hotelSearchResult.concat(hotels)
             var allHotels = removeDuplicates(uniqueArray, 'Description');
             allHotelsList = allHotels.map(all => {

@@ -1,11 +1,11 @@
 import React from 'react'
-import {Field, Fields, FieldArray,reduxForm} from 'redux-form'
+import {Field, Fields, FieldArray, reduxForm} from 'redux-form'
 import NameSearch from './nameSearch'
 import {connect} from 'react-redux'
 import DatePicker from 'react-datepicker'
 import PropTypes from 'prop-types'
 import 'react-datepicker/dist/react-datepicker.css'
-
+import { load as loadAccount } from './account'
 import {withRouter} from 'react-router'
 import {DateRangePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
@@ -19,6 +19,15 @@ import TypeAheadField from "./TypeAheadField";
 moment.locale('tr-TR')
 momentLocalizer()
 
+const data = {
+    // used to populate "account" reducer when "Load" is clicked
+    hotelName: " ",
+    start: moment().format('YYYY-MM-DD'),
+    end: moment().add(1, 'day').format('YYYY-MM-DD'),
+    adultNumber: 2,
+    childNumber: 0,
+    childBirthDates: null
+}
 
 
 class DateRangePickerWrapper extends React.Component {
@@ -77,6 +86,7 @@ const language = hotelList.Hotels.map(hotel => {
 
 })
 const items = language;
+
 class renderDateTimePicker extends React.Component {
     static propTypes = {
         input: PropTypes.shape({
@@ -94,16 +104,16 @@ class renderDateTimePicker extends React.Component {
         placeholder: ''
     }
 
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleChange (date) {
+    handleChange(date) {
         this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
     }
 
-    render () {
+    render() {
         const {
             input, placeholder,
             meta: {touched, error}
@@ -123,7 +133,8 @@ class renderDateTimePicker extends React.Component {
         )
     }
 }
-const renderChildBirthDates = ({ fields, meta: { error, submitFailed } }) => (
+
+const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
     <ul>
         <li>
             <button type="button" onClick={() => fields.push({})}>Add Member</button>
@@ -145,6 +156,7 @@ const renderChildBirthDates = ({ fields, meta: { error, submitFailed } }) => (
         ))}
     </ul>
 )
+
 class SearchForm extends React.Component {
     constructor(props) {
         super(props)
@@ -156,6 +168,13 @@ class SearchForm extends React.Component {
             popupVisible: false
         }
 
+    }
+
+    componentDidMount() {
+        this.props.load(data)
+    }
+    componentDidUpdate() {
+        this.props.load(data)
     }
 
     handlesClick() {
@@ -203,6 +222,7 @@ class SearchForm extends React.Component {
         const {handleSubmit} = this.props;
         return (
             <form onSubmit={handleSubmit}>
+
                 <div className="search-form">
 
                     <TypeAheadField name="hotelName" label="Otel Adı" items={items}/>
@@ -216,13 +236,14 @@ class SearchForm extends React.Component {
 
 
                     <div
-                         ref={node => {
-                        this.node = node;
-                    }}>
+                        ref={node => {
+                            this.node = node;
+                        }}>
                         <div onClick={this.handlesClick} className="popover-container"
 
                         >
-                            <Field  name="adultNumber" className="search-form-main" disabled component="input" type="text" placeHolder="2 Yetişkin" value={this.value + "Yetişkin"} />
+                            <Field name="adultNumber" className="search-form-main" disabled component="input"
+                                   type="text" placeHolder="2 Yetişkin" value={this.value + "Yetişkin"}/>
 
                         </div>
 
@@ -255,6 +276,7 @@ class SearchForm extends React.Component {
 
                     <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>
                 </div>
+
             </form>
         )
     }
@@ -266,18 +288,11 @@ SearchForm = reduxForm({
 
 })(SearchForm)
 
-function mapStateToProps(state) {
-    return {
-        value: state.value,
-        hotels: state.hotel.hotels,
-        availHotel: state.availHotel,
-        startDate: state.startDate,
-        adultNum: state.adultNum
-    }
-}
+SearchForm = connect(
+    state => ({
+        initialValues: state.reducerData.data // pull initial values from account reducer
+    }),
+    { load: loadAccount } // bind account loading action creator
+)(SearchForm)
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch)
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchForm));
+export default SearchForm

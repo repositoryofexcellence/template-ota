@@ -6,8 +6,10 @@ import {availHotel} from './reducers/availHotel'
 import {autoSuggest} from './reducers/autoSuggest'
 import {staticState} from './reducers/staticState'
 import {adultNum} from "./reducers/adultNumber";
+import reducerData from "../components/searchForm/account";
 
 export default combineReducers({
+    reducerData,
     adultNum,
     autoSuggest,
     availHotel,

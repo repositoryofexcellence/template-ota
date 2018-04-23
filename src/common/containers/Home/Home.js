@@ -19,13 +19,18 @@ class Home extends Component {
     }
 
     submit = (values) => {
+        let cbds = null
+            if(values.childBirthDates != null){
+                cbds = values.childBirthDates.map(cbd => {
 
-            let cbds = values.childBirthDates.map(cbd => {
+                    var cbdt = {name: cbd.birth}
 
-                var cbdt = {name: cbd.birth}
+                    return (cbdt.name)
+                })
+            } else if(values.childBirthDates == null ){
+                cbds = " "
+            }
 
-                return (cbdt.name)
-            })
 
         console.log(cbds)
         // Do something with the form values
