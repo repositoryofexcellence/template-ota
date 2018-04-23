@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
+import {withRouter} from 'react-router'
+
 import Header from '../../components/header/header'
 import HotelCarousel from '../../components/hotelCarousel/hotelCarousel'
 import ThermalCarousel from '../../components/hotelCarousel/thermalCarousel'
@@ -31,7 +33,7 @@ class Home extends Component {
                 cbds = " "
             }
 
-
+        this.props.history.push('/search-results')
         console.log(cbds)
         // Do something with the form values
         this.props.availHotelsForm(cbds,values.end,values.hotelName,values.adultNumber,values.childNumber,values.start);
@@ -91,6 +93,6 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch)
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,mapDispatchToProps
-)(Home);
+)(Home));

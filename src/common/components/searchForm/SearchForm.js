@@ -141,7 +141,7 @@ const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
     <ul>
         <h4>Çocukların Doğum Tarihleri</h4>
         <li >
-            <button type="button" onClick={() => fields.push({})}>Add Member</button>
+            <button type="button" onClick={() => fields.push({})}>Çocuk Ekle</button>
             {submitFailed && error && <span>{error}</span>}
         </li>
         {fields.map((child, index) => (
@@ -149,7 +149,7 @@ const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
                 <button
                     type="button"
                     title="Remove Member"
-                    onClick={() => fields.remove(index)}/>
+                    onClick={() => fields.remove(index)}>Çocuk Çıkar</button>
                 <h4>{index + 1}. Çocuk</h4>
                 <Field
                     name={`${child}.birth`}
@@ -247,7 +247,7 @@ class SearchForm extends React.Component {
 
                         >
                             <Field name="adultNumber" className="search-form-main" disabled component="input"
-                                   type="text"  value={`${"childNumber".value} Yetişkin` }/>
+                                   type="text" placeholder="Misafir Sayısı"  value={`${"childNumber".value} Yetişkin` }/>
 
                         </div>
 
@@ -258,7 +258,8 @@ class SearchForm extends React.Component {
                             >
                                 <div className="guest-container">
                                     <div className="adultnum guest">
-                                <Field name="adultNumber" component="select">
+                                        <h4>Yetişkin Sayısı</h4>
+                                <Field name="adultNumber"  component="select">
 
                                     <option value="1">1 Yetişkin</option>
                                     <option placeholder="2 Yetişkin" selected value="2">2 Yetişkin</option>
@@ -269,6 +270,7 @@ class SearchForm extends React.Component {
                                 </Field>
                                     </div>
                                     <div className="childnum guest">
+                                        <h4>Çocuk Sayısı</h4>
                                 <Field name="childNumber" component="select">
 
                                     <option selected aria-selected value="0">0 Çocuk</option>
