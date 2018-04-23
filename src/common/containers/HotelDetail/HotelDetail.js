@@ -241,7 +241,7 @@ class HotelDetail extends Component {
                                     </div>
                                     <div className="detail-left-bottom">
                                         <h3 className="detail-title">Otel Özellikleri</h3>
-                                        <div className="hotelFac">{HotelFacilities["string"].map(facility =>{
+                                        <div className="hotelFac">{HotelFacilities != null ? HotelFacilities["string"].map(facility =>{
                                             let fac = ''
                                             if (facility === "Televiziyon"){
                                                fac = <HotelIcon iconTitle={facility} iconName="television"/>
@@ -315,7 +315,7 @@ class HotelDetail extends Component {
                                             return(
                                                 <div className="hotelFacDet">{fac}</div>
                                             )
-                                        })}</div>
+                                        }):<p>Otel özellikleri henüz sisteme yüklenmemiştir</p>}</div>
                                     </div>
                                 </div>
 
