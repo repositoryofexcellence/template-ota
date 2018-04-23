@@ -27,7 +27,7 @@ class Home extends Component {
 
                     var cbdt = {name: cbd.birth}
 
-                    return (cbdt.name)
+                    return (`childBirthDates[]=${cbdt.name}&`)
                 })
             } else if(values.childBirthDates == null ){
                 cbds = " "
