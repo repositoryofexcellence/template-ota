@@ -140,10 +140,25 @@ class HotelDetail extends Component {
         };
     }
 
-    componentDidUpdate() {
 
-        this.props.actions.availHotel
 
+    submit = (values) => {
+        let cbds = null
+        if(values.childBirthDates != null){
+            cbds = values.childBirthDates.map(cbd => {
+
+                var cbdt = {name: cbd.birth}
+
+                return (`childBirthDates[]=${cbdt.name}&`)
+            })
+        } else if(values.childBirthDates == null ){
+            cbds = " "
+        }
+
+
+        console.log(cbds)
+        // Do something with the form values
+        this.props.availHotelsForm(cbds,values.end,this.props.hotel.Description,values.adultNumber,values.childNumber,values.start);
     }
 
     handleExpandClick = () => {
@@ -177,7 +192,7 @@ class HotelDetail extends Component {
                     <Grid>
                         <Row>
                             <Col md={12}>
-                                <SearchFormDetail className="search-form-detail"/>
+                                <SearchFormDetail onSubmit={this.submit} className="search-form-detail"/>
                             </Col>
                         </Row>
 

@@ -300,7 +300,7 @@ class SearchForm extends React.Component {
 SearchForm = reduxForm({
     // a unique name for the form
     form: 'searchForm',
-
+    destroyOnUnmount: false,
 })(SearchForm)
 
 SearchForm = connect(

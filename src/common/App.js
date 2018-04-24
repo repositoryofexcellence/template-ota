@@ -47,10 +47,14 @@ class App extends Component {
                     {props => {
                         const hotelDetail = this.props.hotels.find(hotel => hotel.Description === props.match.params.id)
                         var availRooms = []
-                            if(this.props.availHotel.length > 2){
+                            if(this.props.availHotel && Array.isArray(this.props.availHotel)){
                                 availRooms = this.props.availHotel.find(availhotel => availhotel.Description === props.match.params.id);
                                 return <HotelDetail {...props} hotel={hotelDetail} avail={availRooms} />;
-                            } else {
+                            }  else if(this.props.availHotel && !Array.isArray(this.props.availHotel)){
+                                availRooms = this.props.availHotel
+                                return <HotelDetail {...props} hotel={hotelDetail} avail={availRooms} />;
+                            }
+                            else {
                                 return <HotelDetail {...props} hotel={hotelDetail} avail={null} />
                             }
 
