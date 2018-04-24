@@ -27,7 +27,7 @@ class SearchResults extends Component {
                 return (`childBirthDates[]=${cbdt.name}&`)
             })
         } else if (values.childBirthDates == null) {
-            cbds = " "
+            cbds = ''
         }
 
 
@@ -48,7 +48,7 @@ class SearchResults extends Component {
         return (
             <div>
                 <Header/>
-                <div className="jumbotron main-head">
+                <div className="jumbotron">
                     <Grid>
                         <Row>
                             <Col md={12}>
@@ -80,7 +80,7 @@ class SearchResults extends Component {
                                             hotelName={search.Description}
                                             hotelRating={ratings}
                                             hotelPlace={search.Place}
-                                            minPrice={search.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                            minPrice={search.RoomTypes.apiHotelRoomTypeInfo ?search.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net:''}
                                         />
                                     </Link>
                                 </Col>
@@ -94,7 +94,7 @@ class SearchResults extends Component {
                                         hotelName={this.props.availHotel.Description}
                                         hotelRating={ratingsa.length >2 ? ratingsa:''}
                                         hotelPlace={this.props.availHotel.Place}
-                                        minPrice={this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                        minPrice={this.props.RoomTypes.apiHotelRoomTypeInfo ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net:''}
                                     />
                                 </Link>
                             </Col>

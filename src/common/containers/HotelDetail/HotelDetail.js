@@ -3,24 +3,18 @@ import {withRouter} from 'react-router'
 import Header from '../../components/header/header'
 import SearchFormDetail from '../../components/searchForm/SearchForm'
 import Slider from "react-slick";
-import Tabs, {Tab} from 'material-ui/Tabs';
-import classnames from 'classnames';
+
 import IconButton from 'material-ui/IconButton';
 import Tooltip from 'material-ui/Tooltip';
 import {Swiper, Slide} from 'react-dynamic-swiper'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import Divider from 'material-ui/Divider';
-import * as actions from "../../redux/actions";
+import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
 import {Star} from 'material-ui-icons';
 
 import {connect} from "react-redux";
-import Card, {CardContent, CardMedia, CardActions} from 'material-ui/Card';
-import Collapse from 'material-ui/transitions/Collapse';
-import Typography from 'material-ui/Typography';
-import {withStyles} from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import {Gmaps, Marker} from 'react-gmaps';
 
 const params = {v: '3.exp', key: 'AIzaSyD1zi-3_-hEhcE_BaC4dezdsAEKZ9LGZKY'};
 
@@ -65,61 +59,6 @@ class MiniMap extends React.Component {
 
 };
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        marginTop: theme.spacing.unit * 3,
-        backgroundColor: "blue",
-    },
-    fab: {
-        margin: theme.spacing.unit * 2,
-    },
-    absolute: {
-        position: 'absolute',
-        bottom: theme.spacing.unit * 2,
-        right: theme.spacing.unit * 3,
-    },
-    card: {
-        marginTop: 20,
-        marginBottom: 20
-    },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    content: {
-        flex: '1 0 auto',
-    },
-    cover: {
-        width: 300,
-        height: 200,
-        float: 'left'
-    },
-    controls: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-    },
-    playIcon: {
-        height: 38,
-        width: 38,
-    },
-    actions: {
-        width: '100% !important'
-    },
-    expand: {
-
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-        marginLeft: 'auto',
-    },
-    button: {
-        width: '100%'
-    },
-    expandOpen: {},
-});
 const HotelIcon = (props) => (
     <Tooltip id="tooltip-fab" title={props.iconTitle}>
         <IconButton style={{backgroundColor: "#2a98d8"}} aria-label={props.iconTitle}>
@@ -133,10 +72,10 @@ class HotelDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 0,
+
             nav1: null,
             nav2: null,
-            expanded: false
+
         };
     }
 
@@ -152,21 +91,18 @@ class HotelDetail extends Component {
                 return (`childBirthDates[]=${cbdt.name}&`)
             })
         } else if(values.childBirthDates == null ){
-            cbds = " "
+            cbds = ''
         }
 
 
         console.log(cbds)
         // Do something with the form values
-        this.props.availHotelsForm(cbds,values.end,this.props.hotel.Description,values.adultNumber,values.childNumber,values.start);
+        this.props.availHotelsForm(cbds,values.end,values.hotelName,values.adultNumber,values.childNumber,values.start);
+
+
     }
 
-    handleExpandClick = () => {
-        this.setState({expanded: !this.state.expanded});
-    };
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
+
 
     componentDidMount() {
         this.setState({
@@ -177,8 +113,7 @@ class HotelDetail extends Component {
     }
 
     render() {
-        const {classes} = this.props;
-        const {value} = this.state;
+
         const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
         var ratings = []
         let i = 0
@@ -250,7 +185,7 @@ class HotelDetail extends Component {
                                     <h2 className="detail-title">{Description}</h2>
                                     <div className="hotel-rating-detail">{ratings} {this.props.avail ?
                                         <div className="detail-price">
-                                            {this.props.avail.RoomTypes ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''}
+                                            {this.props.avail.RoomTypes.apiHotelRoomTypeInfo ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''}
                                         </div> : ''}</div>
 
                                 </div>
@@ -344,7 +279,7 @@ class HotelDetail extends Component {
 
 
                         {
-                            this.props.avail && Array.isArray(this.props.avail) ?
+                            this.props.avail && this.props.avail.RoomTypes.apiHotelRoomTypeInfo &&  Array.isArray(this.props.avail) ?
                                 this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
                                     return (
 
@@ -415,7 +350,7 @@ class HotelDetail extends Component {
                                         </Col>
 
                                     )
-                                }) : this.props.avail && !Array.isArray(this.props.avail) ?
+                                }) : this.props.avail && this.props.avail.RoomTypes.apiHotelRoomTypeInfo  && !Array.isArray(this.props.avail) ?
                                 this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
                                     return (
                                         <Col className="room-grid" xs={12} md={4}>
@@ -549,9 +484,7 @@ class HotelDetail extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({...actions}, dispatch)
-    };
+    return bindActionCreators(actionCreators, dispatch)
 }
 
 function mapStateToProps(state) {
@@ -560,6 +493,6 @@ function mapStateToProps(state) {
     }
 }
 
-export default withRouter(withStyles(styles, {withTheme: true})(connect(
+export default withRouter(connect(
     mapDispatchToProps,mapStateToProps
-)(HotelDetail)));
+)(HotelDetail));

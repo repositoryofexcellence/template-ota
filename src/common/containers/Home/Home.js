@@ -32,7 +32,7 @@ class Home extends Component {
                     return (`childBirthDates[]=${cbdt.name}&`)
                 })
             } else if(values.childBirthDates == null ){
-                cbds = " "
+                cbds = ''
             }
         this.setState({ redirect: true })
 
@@ -88,12 +88,7 @@ class Home extends Component {
 function mapStateToProps(state) {
     return {hotels: state.hotel.hotels,
         availHotel:state.availHotel,
-    startDate:state.staticState.startDate,
-        endDate:state.staticState.endDate,
-        adultNum:state.staticState.adultNum,
-        childNum:state.staticState.childNum,
-        childAges:state.staticState.childAges,
-        location:state.staticState.location
+
     }
 }
 
