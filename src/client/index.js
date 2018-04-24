@@ -1,3 +1,7 @@
+import 'core-js/es6/map'
+import 'core-js/es6/set'
+import 'raf/polyfill'
+
 import React from 'react';
 import {hydrate} from 'react-dom';
 import theme from '../server/theme';
