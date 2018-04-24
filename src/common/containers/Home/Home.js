@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {withRouter} from 'react-router'
-
+import MainSlider from '../../components/mainSlider/mainSlider'
 import Header from '../../components/header/header'
 import HotelCarousel from '../../components/hotelCarousel/hotelCarousel'
 import ThermalCarousel from '../../components/hotelCarousel/thermalCarousel'
@@ -50,7 +50,7 @@ class Home extends Component {
         return (
             <div>
                 <Header/>
-                <div className="jumbotron main-head">
+                <MainSlider>
 
                         <Grid>
                             <Row>
@@ -61,7 +61,7 @@ class Home extends Component {
                             </Row>
                         </Grid>
 
-                </div>
+                </MainSlider>
                 <Grid>
                     <Row>
                         <Col md={12}>

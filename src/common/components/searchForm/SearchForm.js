@@ -1,5 +1,5 @@
 import React from 'react'
-import {Field, Fields, FieldArray, reduxForm} from 'redux-form'
+import {Field, Fields, FieldArray, reduxForm,formValueSelector} from 'redux-form'
 import NameSearch from './nameSearch'
 import {connect} from 'react-redux'
 import DatePicker from 'react-datepicker'
@@ -23,7 +23,7 @@ momentLocalizer()
 
 const data = {
     // used to populate "account" reducer when "Load" is clicked
-    hotelName: " ",
+    hotelName: "Otel Adı",
     start: moment().format('YYYY-MM-DD'),
     end: moment().add(1, 'day').format('YYYY-MM-DD'),
     adultNumber: 2,
@@ -223,13 +223,20 @@ class SearchForm extends React.Component {
     }
 
     render() {
-        const {handleSubmit} = this.props;
+
+        const {handleSubmit,childNumber,adultNumber} = this.props;
+        let childPlace = ''
+        if (childNumber > 0) {
+            childPlace =`${childNumber} Çocuk`
+        }
+        const placeholders = `${adultNumber} Yetişkin ${childPlace}`
+
         return (
             <form onSubmit={handleSubmit}>
 
                 <div className="search-form">
 
-                    <TypeAheadField name="hotelName" label="Otel Adı" items={items}/>
+                    <TypeAheadField placeholder="Otel Adı" name="hotelName" label="Otel Adı" items={items}/>
 
                     <Fields
                         names={['start', 'end']}
@@ -246,8 +253,8 @@ class SearchForm extends React.Component {
                         <div onClick={this.handlesClick} className="popover-container"
 
                         >
-                            <Field name="adultNumber" className="search-form-main" disabled component="input"
-                                   type="text" placeholder="Misafir Sayısı"  value={`${"childNumber".value} Yetişkin` }/>
+                            <Field name="numbers" className="search-form-main" readOnly component="input"
+                                   type="text" placeholder={placeholders} />
 
                         </div>
 
@@ -262,7 +269,7 @@ class SearchForm extends React.Component {
                                 <Field name="adultNumber"  component="select">
 
                                     <option value="1">1 Yetişkin</option>
-                                    <option placeholder="2 Yetişkin" selected value="2">2 Yetişkin</option>
+                                    <option value="2">2 Yetişkin</option>
                                     <option value="3">3 Yetişkin</option>
                                     <option value="4">4 Yetişkin</option>
                                     <option value="5">5 Yetişkin</option>
@@ -273,7 +280,7 @@ class SearchForm extends React.Component {
                                         <h4>Çocuk Sayısı</h4>
                                 <Field name="childNumber" component="select">
 
-                                    <option selected aria-selected value="0">0 Çocuk</option>
+                                    <option value="0">0 Çocuk</option>
                                     <option value="1">1 Çocuk</option>
                                     <option value="2">2 Çocuk</option>
                                     <option value="3">3 Çocuk</option>
@@ -296,7 +303,7 @@ class SearchForm extends React.Component {
         )
     }
 }
-
+const selector = formValueSelector('searchForm') // <-- same as form name
 SearchForm = reduxForm({
     // a unique name for the form
     form: 'searchForm',
@@ -305,7 +312,9 @@ SearchForm = reduxForm({
 
 SearchForm = connect(
     state => ({
-        initialValues: state.reducerData.data // pull initial values from account reducer
+        initialValues: state.reducerData.data,
+        childNumber: selector(state, 'childNumber'),
+        adultNumber: selector(state, 'adultNumber')// pull initial values from account reducer
     }),
     { load: loadAccount } // bind account loading action creator
 )(SearchForm)

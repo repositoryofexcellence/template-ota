@@ -66,14 +66,14 @@ class SearchResults extends Component {
 
 
 
-                        {this.props.availHotel && this.props.availHotel.length > 2 ? availables.map(search => {
+                        {this.props.availHotel && this.props.availHotel.length > 2  && Array.isArray(this.props.availHotel) ?  availables.map(search => {
                             let i = 0;
                             var ratings = []
                             for (i; i < search.Rating; i++) {
                                 ratings.push(<Star/>)
                             }
                             return (
-                                <Col md={4}>
+                                <Col className="hotelcard" md={4}>
                                     <Link to={`hotels/${search.Description}`}>
                                         <HotelCard
                                             hotelImage={search.ImageURL["string"][0] + '.jpg'}
@@ -92,9 +92,9 @@ class SearchResults extends Component {
                                     <HotelCard
                                         hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
                                         hotelName={this.props.availHotel.Description}
-                                        hotelRating={ratingsa.length >2 ? ratingsa:''}
+                                        hotelRating={ratingsa}
                                         hotelPlace={this.props.availHotel.Place}
-                                        minPrice={this.props.RoomTypes.apiHotelRoomTypeInfo ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net:''}
+                                        minPrice={this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
                                     />
                                 </Link>
                             </Col>
