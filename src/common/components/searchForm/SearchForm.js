@@ -89,25 +89,19 @@ const formatDate = (value) => {
 const normalizeDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
-const month = moment()
-const onMonthSelect = (month, value) => {
-    return
-}
 
-const onYearSelect = (month, value) => {
-    return
-}
 const renderDate = ({input, label, type, meta}) => (
     <SingleDatePicker
         isOutsideRange={() => false}
         numberOfMonths={1}
         keepOpenOnDateSelect={false}
         date={input.value}
+        disableScroll={false}
         focused={meta.active}
         onDateChange={value => input.onChange({ value })}
         onFocusChange={({ focused }) => input.onFocus({ focused })}
         renderCaption={({month, onMonthSelect, onYearSelect}) => (
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
                     <select
                         value={month.month()}
@@ -119,6 +113,9 @@ const renderDate = ({input, label, type, meta}) => (
                             <option value={value}>{label}</option>
                         ))}
                     </select>
+                </div>
+                <div>
+                    <h4>{input.value.format('DD MMMM YYYY')}</h4>
                 </div>
                 <div>
                     <select

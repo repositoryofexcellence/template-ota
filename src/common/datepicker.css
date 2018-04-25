@@ -457,13 +457,18 @@
 .DayPickerNavigation_container__verticalScrollable {
     position: relative
 }
+
+.childagesfloat .DayPickerNavigation_button {
+    display: none !important;
+}
 .DayPickerNavigation_button {
     cursor: pointer;
     line-height: .78;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none
+    user-select: none;
+
 }
 .DayPickerNavigation_button__default {
     border: 1px solid #e4e7e7;
