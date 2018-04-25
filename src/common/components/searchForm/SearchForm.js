@@ -85,68 +85,13 @@ const language = hotelList.Hotels.map(hotel => {
 })
 const items = language;
 
-class renderDateTimePicker extends React.Component {
-    static propTypes = {
-        input: PropTypes.shape({
-            onChange: PropTypes.func.isRequired,
-            value: PropTypes.string.isRequired,
-        }).isRequired,
-        meta: PropTypes.shape({
-            touched: PropTypes.bool,
-            error: PropTypes.bool,
-        }),
-        placeholder: PropTypes.string,
-    }
-
-    static defaultProps = {
-        placeholder: ''
-    }
-
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(date) {
-        this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
-    }
-
-    render() {
-        const {
-            input, placeholder,
-            meta: {touched, error}
-        } = this.props
-
-        return (
-            <div>
-                <DatePicker
-                    {...input}
-                    placeholder={placeholder}
-                    dateFormat="YYYY-MM-DD"
-                    selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
-                    onChange={this.handleChange}
-
-                />
-                {touched && error && <span>{error}</span>}
-            </div>
-        )
-    }
-}
-
 const formatDate = (value) => {
     return moment(value);
 };
 const normalizeDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
-const month = moment()
-const onMonthSelect = (month, value) => {
-    return
-}
 
-const onYearSelect = (month, value) => {
-    return
-}
 const renderDate = ({input, label, type, meta}) => (
     <SingleDatePicker
         isOutsideRange={() => false}
