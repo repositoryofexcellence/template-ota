@@ -86,32 +86,13 @@ const language = hotelList.Hotels.map(hotel => {
 })
 const items = language;
 
-const formatDate = (value) => {
-    return moment(value);
-};
-const normalizeDate = (value) => {
-    return value.value.format('YYYY-MM-DD');
-};
-const  handleDateChange = (date) => {
-    const startField = this.props[this.props.startDateFieldName];
-    startField.input.onChange(date.startDate);
-}
-
-const handleSingleFocusChange = (focused) => {
-    this.setState({focused});
-
-        this.props[this.props.startDateFieldName].input.onFocus();
-
-
-
-}
 class renderDate extends React.Component {
     state = { focused: null };
     handleFocusChange = ({ focused }) => this.setState({ focused });
 
     render(){
         const { focused = null } = this.state;
-        const { input, label, type, meta } = this.props
+        const { input} = this.props
         return(
             <SingleDatePicker
                 isOutsideRange={() => false}
@@ -178,31 +159,7 @@ const normalizedDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
 
-const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
-    <ul>
-        <h4>Çocukların Doğum Tarihleri</h4>
-        <li>
-            <button type="button" onClick={() => fields.push({})}>Çocuk Ekle</button>
-            {submitFailed && error && <span>{error}</span>}
-        </li>
-        {fields.map((child, index) => (
-            <li className="childagesfloat" key={index}>
-                <button
-                    type="button"
-                    title="Remove Member"
-                    onClick={() => fields.remove(index)}>Çocuk Çıkar
-                </button>
-                <h4>{index + 1}. Çocuk</h4>
-                <Field
-                    name={`${child}.birth`}
-                    component={renderDate}
-                    normalize={normalizedDate}
-                    format={formattedDate}
-                />
-            </li>
-        ))}
-    </ul>
-)
+
 
 class SearchForm extends React.Component {
     constructor(props) {
@@ -224,7 +181,31 @@ class SearchForm extends React.Component {
     componentDidUpdate() {
         this.props.load(data)
     }
-
+    renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
+        <ul>
+            <h4>Çocukların Doğum Tarihleri</h4>
+            <li>
+                <button type="button" onClick={() => fields.push({})}>Çocuk Ekle</button>
+                {submitFailed && error && <span>{error}</span>}
+            </li>
+            {fields.map((child, index) => (
+                <li className="childagesfloat" key={index}>
+                    <button
+                        type="button"
+                        title="Remove Member"
+                        onClick={() => fields.remove(index)}>Çocuk Çıkar
+                    </button>
+                    <h4>{index + 1}. Çocuk</h4>
+                    <Field
+                        name={`${child}.birth`}
+                        component={renderDate}
+                        normalize={normalizedDate}
+                        format={formattedDate}
+                    />
+                </li>
+            ))}
+        </ul>
+    )
     handlesClick() {
         if (!this.state.popupVisible) {
             // attach/remove event handler
@@ -330,7 +311,7 @@ class SearchForm extends React.Component {
                                         </Field>
                                     </div>
                                     <div className="childages guest">
-                                        <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
+                                        <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
                                     </div>
 
                                 </div>
