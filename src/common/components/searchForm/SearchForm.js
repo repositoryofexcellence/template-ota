@@ -1,21 +1,17 @@
 import React from 'react'
-import {Field, Fields, FieldArray, reduxForm,formValueSelector} from 'redux-form'
-import NameSearch from './nameSearch'
+import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 import DatePicker from 'react-datepicker'
 import PropTypes from 'prop-types'
 import 'react-datepicker/dist/react-datepicker.css'
-import { load as loadAccount } from './account'
-import {withRouter} from 'react-router'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid';
+import {load as loadAccount} from './account'
 
-import {DateRangePicker, END_DATE, START_DATE} from 'react-dates'
+
+import {DateRangePicker, SingleDatePicker,END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
 import hotelList from "../../../data/hotelsTur.json"
-import * as actionCreators from "../../redux/actions";
-import {bindActionCreators} from "redux";
 import TypeAheadField from "./TypeAheadField";
 
 moment.locale('tr-TR')
@@ -137,10 +133,63 @@ class renderDateTimePicker extends React.Component {
     }
 }
 
+const formatDate = (value) => {
+    return moment(value);
+};
+const normalizeDate = (value) => {
+    return value.value.format('YYYY-MM-DD');
+};
+const month = moment()
+const onMonthSelect = (month, value) => {
+    return
+}
+
+const onYearSelect = (month, value) => {
+    return
+}
+const renderDate = ({input, label, type, meta}) => (
+    <SingleDatePicker
+        isOutsideRange={() => false}
+        numberOfMonths={1}
+        keepOpenOnDateSelect={false}
+        date={input.value}
+        focused={meta.active}
+        onDateChange={value => input.onChange({ value })}
+        onFocusChange={({ focused }) => input.onFocus({ focused })}
+        renderCaption={({month, onMonthSelect, onYearSelect}) => (
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div>
+                    <select
+                        value={month.month()}
+                        onChange={(e) => {
+                            onMonthSelect(month, e.target.value);
+                        }}
+                    >
+                        {moment.months().map((label, value) => (
+                            <option value={value}>{label}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <select
+                        value={month.year()}
+                        onChange={(e) => {
+                            onYearSelect(month, e.target.value);
+                        }}
+                    >
+                        <option value={moment().year() - 1}>Last year</option>
+                        <option value={moment().year()}>{moment().year()}</option>
+                        <option value={moment().year() + 1}>Next year</option>
+                    </select>
+                </div>
+            </div>
+        )}
+    />
+);
 const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
     <ul>
         <h4>Çocukların Doğum Tarihleri</h4>
-        <li >
+        <li>
             <button type="button" onClick={() => fields.push({})}>Çocuk Ekle</button>
             {submitFailed && error && <span>{error}</span>}
         </li>
@@ -149,12 +198,14 @@ const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
                 <button
                     type="button"
                     title="Remove Member"
-                    onClick={() => fields.remove(index)}>Çocuk Çıkar</button>
+                    onClick={() => fields.remove(index)}>Çocuk Çıkar
+                </button>
                 <h4>{index + 1}. Çocuk</h4>
                 <Field
                     name={`${child}.birth`}
-                    showTime={false}
-                    component={renderDateTimePicker}
+                    component={renderDate}
+                    normalize={normalizeDate}
+                    format={formatDate}
                 />
             </li>
         ))}
@@ -177,6 +228,7 @@ class SearchForm extends React.Component {
     componentDidMount() {
         this.props.load(data)
     }
+
     componentDidUpdate() {
         this.props.load(data)
     }
@@ -224,10 +276,10 @@ class SearchForm extends React.Component {
 
     render() {
 
-        const {handleSubmit,childNumber,adultNumber} = this.props;
+        const {handleSubmit, childNumber, adultNumber} = this.props;
         let childPlace = ''
         if (childNumber > 0) {
-            childPlace =`${childNumber} Çocuk`
+            childPlace = `${childNumber} Çocuk`
         }
         const placeholders = `${adultNumber} Yetişkin ${childPlace}`
 
@@ -246,50 +298,49 @@ class SearchForm extends React.Component {
                     />
 
 
-                    <div className="popover-container"
-                        ref={node => {
-                            this.node = node;
-                        }}>
-                        <div onClick={this.handlesClick} className="popover-container"
+                    <div className="popover-container">
 
-                        >
+                        <div onClick={this.handlesClick} className="popover-container">
                             <Field name="numbers" className="search-form-main" readOnly component="input"
-                                   type="text" placeholder={placeholders} />
+                                   type="text" placeholder={placeholders}/>
 
                         </div>
 
                         {this.state.popupVisible && (
 
                             <div
-                                className="popover-open"
-                            >
+                                className="popover-open" ref={node => {
+                                this.node = node;
+                            }}>
+
                                 <div className="guest-container">
                                     <div className="adultnum guest">
                                         <h4>Yetişkin Sayısı</h4>
-                                <Field name="adultNumber"  component="select">
+                                        <Field name="adultNumber" component="select">
 
-                                    <option value="1">1 Yetişkin</option>
-                                    <option value="2">2 Yetişkin</option>
-                                    <option value="3">3 Yetişkin</option>
-                                    <option value="4">4 Yetişkin</option>
-                                    <option value="5">5 Yetişkin</option>
-                                    <option value="6">6 Yetişkin</option>
-                                </Field>
+                                            <option value="1">1 Yetişkin</option>
+                                            <option value="2">2 Yetişkin</option>
+                                            <option value="3">3 Yetişkin</option>
+                                            <option value="4">4 Yetişkin</option>
+                                            <option value="5">5 Yetişkin</option>
+                                            <option value="6">6 Yetişkin</option>
+                                        </Field>
                                     </div>
                                     <div className="childnum guest">
                                         <h4>Çocuk Sayısı</h4>
-                                <Field name="childNumber" component="select">
+                                        <Field name="childNumber" component="select">
 
-                                    <option value="0">0 Çocuk</option>
-                                    <option value="1">1 Çocuk</option>
-                                    <option value="2">2 Çocuk</option>
-                                    <option value="3">3 Çocuk</option>
-                                    <option value="4">4 Çocuk</option>
-                                </Field>
-                                </div>
-                                <div className="childages guest">
-                                <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
-                                </div>
+                                            <option value="0">0 Çocuk</option>
+                                            <option value="1">1 Çocuk</option>
+                                            <option value="2">2 Çocuk</option>
+                                            <option value="3">3 Çocuk</option>
+                                            <option value="4">4 Çocuk</option>
+                                        </Field>
+                                    </div>
+                                    <div className="childages guest">
+                                        <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
+                                    </div>
+
                                 </div>
                             </div>
                         )}
@@ -303,6 +354,7 @@ class SearchForm extends React.Component {
         )
     }
 }
+
 const selector = formValueSelector('searchForm') // <-- same as form name
 SearchForm = reduxForm({
     // a unique name for the form
@@ -316,7 +368,7 @@ SearchForm = connect(
         childNumber: selector(state, 'childNumber'),
         adultNumber: selector(state, 'adultNumber')// pull initial values from account reducer
     }),
-    { load: loadAccount } // bind account loading action creator
+    {load: loadAccount} // bind account loading action creator
 )(SearchForm)
 
 export default SearchForm

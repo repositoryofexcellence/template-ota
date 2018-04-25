@@ -39,7 +39,7 @@
     "react-autosuggest": "^9.3.3",
     "react-bootstrap": "^0.31.5",
     "react-datepicker": "^1.4.1",
-    "react-dates": "^16.2.1",
+    "react-dates": "GoGoCarl/react-dates",
     "react-dom": "^16.3.1",
     "react-dom-animated": "^1.0.5",
     "react-dynamic-swiper": "^1.1.2",
