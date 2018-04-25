@@ -55,7 +55,7 @@ class Header extends React.Component {
         return (
             <div>
                 <div className={classes.root}>
-                    <AppBar position="static" color="white">
+                    <AppBar position="static" color="inherit">
                        <Grid>
                            <Row>
                                <Col md={12}>

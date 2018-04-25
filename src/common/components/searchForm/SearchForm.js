@@ -63,6 +63,9 @@ class DateRangePickerWrapper extends React.Component {
                 endDatePlaceholderText="End Date"
                 focusedInput={this.state.focusedInput || null}
                 minimumNights={0}
+                startDateId="your_unique_start_date_id"
+                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+
                 onDatesChange={this.handleDatesChange}
                 onFocusChange={this.handleFocusChange}
                 startDate={startDate}
