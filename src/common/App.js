@@ -5,7 +5,6 @@ import HotelDetail from './containers/HotelDetail/HotelDetail'
 import SearchResults from './containers/SearchResults/SearchResults'
 import './bootstrap.css';
 import './App.css'
-import 'react-widgets/dist/css/react-widgets.css';
 
 import './components/fonts/fonts.css';
 import './components/fonts/hotelfonts.css';

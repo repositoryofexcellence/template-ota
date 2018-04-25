@@ -1,3 +1,4 @@
+import 'react-dates/initialize'
 import React from 'react'
 import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'

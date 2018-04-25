@@ -1,3 +1,7 @@
+import 'core-js/es6/map'
+import 'core-js/es6/set'
+import 'raf/polyfill'
+
 import express from 'express';
 import app from './server/server';
 
