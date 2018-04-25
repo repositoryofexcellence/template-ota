@@ -92,66 +92,92 @@ const formatDate = (value) => {
 const normalizeDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
+const  handleDateChange = (date) => {
+    const startField = this.props[this.props.startDateFieldName];
+    startField.input.onChange(date.startDate);
+}
 
-const renderDate = ({input, label, type, meta}) => (
-    <SingleDatePicker
-        isOutsideRange={() => false}
-        numberOfMonths={1}
-        keepOpenOnDateSelect={false}
-        date={input.value}
-        disableScroll={false}
-        focused={meta.active}
-        onDateChange={value => input.onChange({ value })}
-        onFocusChange={({ focused }) => input.onFocus({ focused })}
-        renderCaption={({month, onMonthSelect, onYearSelect}) => (
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <div>
-                    <select
-                        value={month.month()}
-                        onChange={(e) => {
-                            onMonthSelect(month, e.target.value);
-                        }}
-                    >
-                        {moment.months().map((label, value) => (
-                            <option value={value}>{label}</option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <h4>{input.value.format('DD MMMM YYYY')}</h4>
-                </div>
-                <div>
-                    <select
-                        value={month.year()}
-                        onChange={(e) => {
-                            onYearSelect(month, e.target.value);
-                        }}
-                    >
+const handleSingleFocusChange = (focused) => {
+    this.setState({focused});
 
-                        <option value={moment().year()}>{moment().year()}</option>
-                        <option value={moment().year() - 1}>{moment().year() -1}</option>
-                        <option value={moment().year() - 2}>{moment().year() -2}</option>
-                        <option value={moment().year() - 3}>{moment().year() -3}</option>
-                        <option value={moment().year() - 4}>{moment().year() -4}</option>
-                        <option value={moment().year() - 5}>{moment().year() -5}</option>
-                        <option value={moment().year() - 6}>{moment().year() -6}</option>
-                        <option value={moment().year() - 7}>{moment().year() -7}</option>
-                        <option value={moment().year() - 8}>{moment().year() -8}</option>
-                        <option value={moment().year() - 9}>{moment().year() -9}</option>
-                        <option value={moment().year() - 10}>{moment().year() -10}</option>
-                        <option value={moment().year() - 11}>{moment().year() -11}</option>
-                        <option value={moment().year() - 12}>{moment().year() -12}</option>
-                        <option value={moment().year() - 13}>{moment().year() -13}</option>
-                        <option value={moment().year() - 14}>{moment().year() -14}</option>
-                        <option value={moment().year() - 15}>{moment().year() -15}</option>
-                        <option value={moment().year() - 16}>{moment().year() -16}</option>
+        this.props[this.props.startDateFieldName].input.onFocus();
 
-                    </select>
-                </div>
-            </div>
-        )}
-    />
-);
+
+
+}
+class renderDate extends React.Component {
+    state = { focused: null };
+    handleFocusChange = ({ focused }) => this.setState({ focused });
+
+    render(){
+        const { focused = null } = this.state;
+        const { input, label, type, meta } = this.props
+        return(
+            <SingleDatePicker
+                isOutsideRange={() => false}
+                numberOfMonths={1}
+                date={input.value}
+                focused={focused}
+                onDateChange={value => input.onChange({ value })}
+                onFocusChange={this.handleFocusChange}
+                renderCaption={({month, onMonthSelect, onYearSelect}) => (
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <div>
+                            <select
+                                value={month.month()}
+                                onChange={(e) => {
+                                    onMonthSelect(month, e.target.value);
+                                }}
+                            >
+                                {moment.months().map((label, value) => (
+                                    <option value={value}>{label}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <h4>{input.value.format('DD MMMM YYYY')}</h4>
+                        </div>
+                        <div>
+                            <select
+                                value={month.year()}
+                                onChange={(e) => {
+                                    onYearSelect(month, e.target.value);
+                                }}
+                            >
+
+                                <option value={moment().year()}>{moment().year()}</option>
+                                <option value={moment().year() - 1}>{moment().year() -1}</option>
+                                <option value={moment().year() - 2}>{moment().year() -2}</option>
+                                <option value={moment().year() - 3}>{moment().year() -3}</option>
+                                <option value={moment().year() - 4}>{moment().year() -4}</option>
+                                <option value={moment().year() - 5}>{moment().year() -5}</option>
+                                <option value={moment().year() - 6}>{moment().year() -6}</option>
+                                <option value={moment().year() - 7}>{moment().year() -7}</option>
+                                <option value={moment().year() - 8}>{moment().year() -8}</option>
+                                <option value={moment().year() - 9}>{moment().year() -9}</option>
+                                <option value={moment().year() - 10}>{moment().year() -10}</option>
+                                <option value={moment().year() - 11}>{moment().year() -11}</option>
+                                <option value={moment().year() - 12}>{moment().year() -12}</option>
+                                <option value={moment().year() - 13}>{moment().year() -13}</option>
+                                <option value={moment().year() - 14}>{moment().year() -14}</option>
+                                <option value={moment().year() - 15}>{moment().year() -15}</option>
+                                <option value={moment().year() - 16}>{moment().year() -16}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                )}
+            />
+        )
+    }
+}
+const formattedDate = (value) => {
+    return moment(value);
+};
+const normalizedDate = (value) => {
+    return value.value.format('YYYY-MM-DD');
+};
+
 const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
     <ul>
         <h4>Çocukların Doğum Tarihleri</h4>
@@ -170,8 +196,8 @@ const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
                 <Field
                     name={`${child}.birth`}
                     component={renderDate}
-                    normalize={normalizeDate}
-                    format={formatDate}
+                    normalize={normalizedDate}
+                    format={formattedDate}
                 />
             </li>
         ))}
