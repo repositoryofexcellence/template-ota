@@ -127,9 +127,23 @@ const renderDate = ({input, label, type, meta}) => (
                             onYearSelect(month, e.target.value);
                         }}
                     >
-                        <option value={moment().year() - 1}>Last year</option>
+
                         <option value={moment().year()}>{moment().year()}</option>
-                        <option value={moment().year() + 1}>Next year</option>
+                        <option value={moment().year() - 1}>{moment().year() -1}</option>
+                        <option value={moment().year() - 2}>{moment().year() -2}</option>
+                        <option value={moment().year() - 3}>{moment().year() -3}</option>
+                        <option value={moment().year() - 4}>{moment().year() -4}</option>
+                        <option value={moment().year() - 5}>{moment().year() -5}</option>
+                        <option value={moment().year() - 6}>{moment().year() -6}</option>
+                        <option value={moment().year() - 7}>{moment().year() -7}</option>
+                        <option value={moment().year() - 8}>{moment().year() -8}</option>
+                        <option value={moment().year() - 9}>{moment().year() -9}</option>
+                        <option value={moment().year() - 10}>{moment().year() -10}</option>
+                        <option value={moment().year() - 11}>{moment().year() -11}</option>
+                        <option value={moment().year() - 12}>{moment().year() -12}</option>
+                        <option value={moment().year() - 13}>{moment().year() -13}</option>
+                        <option value={moment().year() - 14}>{moment().year() -14}</option>
+                        <option value={moment().year() - 15}>{moment().year() -15}</option>
                     </select>
                 </div>
             </div>
