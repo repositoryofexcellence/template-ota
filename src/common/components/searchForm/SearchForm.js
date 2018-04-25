@@ -1,21 +1,18 @@
 import React from 'react'
 import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
-import DatePicker from 'react-datepicker'
-import PropTypes from 'prop-types'
-import 'react-datepicker/dist/react-datepicker.css'
+
 import {load as loadAccount} from './account'
 
 
 import {DateRangePicker, SingleDatePicker,END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
-import momentLocalizer from 'react-widgets-moment';
 import hotelList from "../../../data/hotelsTur.json"
 import TypeAheadField from "./TypeAheadField";
 
 moment.locale('tr-TR')
-momentLocalizer()
+
 
 const data = {
     // used to populate "account" reducer when "Load" is clicked
@@ -91,7 +88,14 @@ const formatDate = (value) => {
 const normalizeDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
+const month = moment()
+const onMonthSelect = (month, value) => {
+    return
+}
 
+const onYearSelect = (month, value) => {
+    return
+}
 const renderDate = ({input, label, type, meta}) => (
     <SingleDatePicker
         isOutsideRange={() => false}
