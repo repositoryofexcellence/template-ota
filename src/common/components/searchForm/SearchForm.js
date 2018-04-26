@@ -4,6 +4,7 @@ import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-for
 import {connect} from 'react-redux'
 
 import {load as loadAccount} from './account'
+import "react-awesome-popover/dest/react-awesome-popover.css";
 
 import ReactAwesomePopover from 'react-awesome-popover'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
