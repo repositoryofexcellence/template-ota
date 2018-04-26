@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add raf
+  /usr/local/bin/node /usr/local/bin/yarn add glamorous glamor
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/DevDesktop/drush:/Users/[yourusername]/Library/Android/sdk/platfor‌​m-tools/:/Users/alperenyildirim/Library/Android/sdk/platfor‌​m-tools/:/Users/alperenyildirim/Library/Android/sdk/platfor​m-tools/:/Users/alperenyildirim/Library/Android/sdk/platform-tools/:/Users/alperenyildirim/.rvm/bin
@@ -44,15 +44,17 @@ npm manifest:
       "match-sorter": "^2.2.1",
       "material-ui": "^1.0.0-beta.41",
       "material-ui-icons": "^1.0.0-beta.17",
+      "mineral-ui": "^0.29.0",
       "moment": "^2.20.1",
       "node-mailer": "^0.1.1",
       "nodemailer": "^4.4.1",
       "nodemailer-mandrill-transport": "^1.2.0",
       "photoswipe": "^4.1.2",
-      "raf": "dev",
+      "raf": "^3.4.0",
       "razzle": "^0.8.7",
       "react": "^16.3.1",
       "react-autosuggest": "^9.3.3",
+      "react-awesome-popover": "^2.0.3",
       "react-bootstrap": "^0.31.5",
       "react-dates": "GoGoCarl/react-dates",
       "react-dom": "^16.3.1",
@@ -63,6 +65,7 @@ npm manifest:
       "react-loader-advanced": "^1.7.1",
       "react-md-spinner": "^0.2.5",
       "react-octicon": "^3.0.1",
+      "react-popper": "^0.10.1",
       "react-redux": "^5.0.6",
       "react-router": "^4.2.0",
       "react-router-dom": "^4.2.2",
@@ -215,6 +218,12 @@ Lockfile:
   alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
+  
+  amator@1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/amator/-/amator-1.0.1.tgz#0fd3663fef5f3334d088cf68a70ba74398aa0e26"
+    dependencies:
+      bezier-easing "^2.0.3"
   
   amdefine@>=0.0.4:
     version "1.0.1"
@@ -1195,6 +1204,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
     dependencies:
       tweetnacl "^0.14.3"
+  
+  bezier-easing@^2.0.3:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.0.3.tgz#cb493fddb7f8920ecca00973344ce0518885f17e"
   
   big.js@^3.1.3:
     version "3.2.0"
@@ -2681,7 +2694,7 @@ Lockfile:
       signal-exit "^3.0.0"
       strip-eof "^1.0.0"
   
-  exenv@^1.2.1:
+  exenv@1.2.2, exenv@^1.2.1:
     version "1.2.2"
     resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
   
@@ -2781,6 +2794,10 @@ Lockfile:
   extsprintf@^1.2.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
+  
+  fast-deep-equal@1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
   
   fast-deep-equal@^1.0.0:
     version "1.0.0"
@@ -2962,6 +2979,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.4.0.tgz#a146a3a5d402201c7a3e6128643f0e336d212b10"
     dependencies:
       debug "^3.1.0"
+  
+  fontfaceobserver@2.0.13:
+    version "2.0.13"
+    resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.13.tgz#47adbb343261eda98cb44db2152196ff124d3221"
   
   for-in@^1.0.1:
     version "1.0.2"
@@ -4811,6 +4832,17 @@ Lockfile:
     dependencies:
       dom-walk "^0.1.0"
   
+  mineral-ui@^0.29.0:
+    version "0.29.0"
+    resolved "https://registry.yarnpkg.com/mineral-ui/-/mineral-ui-0.29.0.tgz#11c3c23d894b5c8f3b2ac1661989a71161496282"
+    dependencies:
+      exenv "1.2.2"
+      fast-deep-equal "1.1.0"
+      fontfaceobserver "2.0.13"
+      prop-types "^15.5.7"
+      react-popper "0.9.2"
+      scroll-into-view-if-needed "1.5.0"
+  
   minimalistic-assert@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.0.tgz#702be2dda6b37f4836bcb3f5db56641b64a1d3d3"
@@ -5405,7 +5437,7 @@ Lockfile:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
   
-  popper.js@^1.12.9:
+  popper.js@^1.12.5, popper.js@^1.12.9, popper.js@^1.14.1:
     version "1.14.3"
     resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
   
@@ -5777,7 +5809,7 @@ Lockfile:
       loose-envify "^1.3.1"
       object-assign "^4.1.1"
   
-  prop-types@^15.5.7, prop-types@^15.5.9:
+  prop-types@^15.5.7, prop-types@^15.5.9, prop-types@^15.6.1:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
     dependencies:
@@ -5874,17 +5906,15 @@ Lockfile:
     dependencies:
       performance-now "^2.1.0"
   
-  raf@dev:
-    version "3.3.2"
-    resolved "https://registry.yarnpkg.com/raf/-/raf-3.3.2.tgz#0c13be0b5b49b46f76d6669248d527cf2b02fe27"
-    dependencies:
-      performance-now "^2.1.0"
-  
   rafl@~1.2.1:
     version "1.2.2"
     resolved "https://registry.yarnpkg.com/rafl/-/rafl-1.2.2.tgz#fe930f758211020d47e38815f5196a8be4150740"
     dependencies:
       global "~4.3.0"
+  
+  random-id@^0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/random-id/-/random-id-0.0.2.tgz#291b7d76d39c914196ca4b19d83509e67cdf1590"
   
   randomatic@^1.1.3:
     version "1.1.7"
@@ -6001,6 +6031,14 @@ Lockfile:
       prop-types "^15.5.8"
       react-themeable "^1.1.0"
       section-iterator "^2.0.0"
+  
+  react-awesome-popover@^2.0.3:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/react-awesome-popover/-/react-awesome-popover-2.0.3.tgz#75cf0b815120d4742dcf7d0b041656f65c0839fc"
+    dependencies:
+      random-id "^0.0.2"
+      react "^16.2.0"
+      react-popper "^0.7.4"
   
   react-bootstrap@^0.31.5:
     version "0.31.5"
@@ -6224,6 +6262,27 @@ Lockfile:
       prop-types-extra "^1.0.1"
       warning "^3.0.0"
   
+  react-popper@0.9.2:
+    version "0.9.2"
+    resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.9.2.tgz#27a198e421e45e53261734dca28c6e57dd2c1604"
+    dependencies:
+      popper.js "^1.14.1"
+      prop-types "^15.6.1"
+  
+  react-popper@^0.10.1:
+    version "0.10.1"
+    resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.1.tgz#6a1f2595faffda77105bed4e89ecf22607a4c452"
+    dependencies:
+      popper.js "^1.14.1"
+      prop-types "^15.6.1"
+  
+  react-popper@^0.7.4:
+    version "0.7.5"
+    resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.5.tgz#71c25946f291db381231281f6b95729e8b801596"
+    dependencies:
+      popper.js "^1.12.5"
+      prop-types "^15.5.10"
+  
   react-popper@^0.8.0:
     version "0.8.3"
     resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.3.tgz#0f73333137c9fb0af6ec4074d2d0585a0a0461e1"
@@ -6388,6 +6447,15 @@ Lockfile:
   "react@^15 || ^16":
     version "16.2.0"
     resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+    dependencies:
+      fbjs "^0.8.16"
+      loose-envify "^1.1.0"
+      object-assign "^4.1.1"
+      prop-types "^15.6.0"
+  
+  react@^16.2.0:
+    version "16.3.2"
+    resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
     dependencies:
       fbjs "^0.8.16"
       loose-envify "^1.1.0"
@@ -6799,6 +6867,12 @@ Lockfile:
   scriptjs@^2.5.8:
     version "2.5.8"
     resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
+  
+  scroll-into-view-if-needed@1.5.0:
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-1.5.0.tgz#39e8ce15cb74348a897ee96110e848fed50aaf95"
+    dependencies:
+      amator "1.0.1"
   
   scroll@^2.0.3:
     version "2.0.3"
@@ -7970,7 +8044,8 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: connect ENETUNREACH 104.16.63.173:443
-      at Object._errnoException (util.js:1026:11)
-      at _exceptionWithHostPort (util.js:1049:20)
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1174:14)
+  Error: https://registry.yarnpkg.com/glamorous: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/Cellar/yarn/0.27.5/libexec/lib/yarn-cli.js:114906:19)
+      at ontimeout (timers.js:469:11)
+      at tryOnTimeout (timers.js:304:5)
+      at Timer.listOnTimeout (timers.js:264:5)

@@ -3,10 +3,12 @@ import React from 'react'
 import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 
+import Popover from 'mineral-ui/Popover';
+
 import {load as loadAccount} from './account'
 
-
-import {DateRangePicker, SingleDatePicker,END_DATE, START_DATE} from 'react-dates'
+import ReactAwesomePopover from 'react-awesome-popover'
+import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
 import hotelList from "../../../data/hotelsTur.json"
@@ -87,19 +89,19 @@ const language = hotelList.Hotels.map(hotel => {
 const items = language;
 
 class renderDate extends React.Component {
-    state = { focused: null };
-    handleFocusChange = ({ focused }) => this.setState({ focused });
+    state = {focused: null};
+    handleFocusChange = ({focused}) => this.setState({focused});
 
-    render(){
-        const { focused = null } = this.state;
-        const { input} = this.props
-        return(
+    render() {
+        const {focused = null} = this.state;
+        const {input} = this.props
+        return (
             <SingleDatePicker
                 isOutsideRange={() => false}
                 numberOfMonths={1}
                 date={input.value}
                 focused={focused}
-                onDateChange={value => input.onChange({ value })}
+                onDateChange={value => input.onChange({value})}
                 onFocusChange={this.handleFocusChange}
                 renderCaption={({month, onMonthSelect, onYearSelect}) => (
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -127,22 +129,22 @@ class renderDate extends React.Component {
                             >
 
                                 <option value={moment().year()}>{moment().year()}</option>
-                                <option value={moment().year() - 1}>{moment().year() -1}</option>
-                                <option value={moment().year() - 2}>{moment().year() -2}</option>
-                                <option value={moment().year() - 3}>{moment().year() -3}</option>
-                                <option value={moment().year() - 4}>{moment().year() -4}</option>
-                                <option value={moment().year() - 5}>{moment().year() -5}</option>
-                                <option value={moment().year() - 6}>{moment().year() -6}</option>
-                                <option value={moment().year() - 7}>{moment().year() -7}</option>
-                                <option value={moment().year() - 8}>{moment().year() -8}</option>
-                                <option value={moment().year() - 9}>{moment().year() -9}</option>
-                                <option value={moment().year() - 10}>{moment().year() -10}</option>
-                                <option value={moment().year() - 11}>{moment().year() -11}</option>
-                                <option value={moment().year() - 12}>{moment().year() -12}</option>
-                                <option value={moment().year() - 13}>{moment().year() -13}</option>
-                                <option value={moment().year() - 14}>{moment().year() -14}</option>
-                                <option value={moment().year() - 15}>{moment().year() -15}</option>
-                                <option value={moment().year() - 16}>{moment().year() -16}</option>
+                                <option value={moment().year() - 1}>{moment().year() - 1}</option>
+                                <option value={moment().year() - 2}>{moment().year() - 2}</option>
+                                <option value={moment().year() - 3}>{moment().year() - 3}</option>
+                                <option value={moment().year() - 4}>{moment().year() - 4}</option>
+                                <option value={moment().year() - 5}>{moment().year() - 5}</option>
+                                <option value={moment().year() - 6}>{moment().year() - 6}</option>
+                                <option value={moment().year() - 7}>{moment().year() - 7}</option>
+                                <option value={moment().year() - 8}>{moment().year() - 8}</option>
+                                <option value={moment().year() - 9}>{moment().year() - 9}</option>
+                                <option value={moment().year() - 10}>{moment().year() - 10}</option>
+                                <option value={moment().year() - 11}>{moment().year() - 11}</option>
+                                <option value={moment().year() - 12}>{moment().year() - 12}</option>
+                                <option value={moment().year() - 13}>{moment().year() - 13}</option>
+                                <option value={moment().year() - 14}>{moment().year() - 14}</option>
+                                <option value={moment().year() - 15}>{moment().year() - 15}</option>
+                                <option value={moment().year() - 16}>{moment().year() - 16}</option>
 
                             </select>
                         </div>
@@ -152,13 +154,13 @@ class renderDate extends React.Component {
         )
     }
 }
+
 const formattedDate = (value) => {
     return moment(value);
 };
 const normalizedDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
-
 
 
 class SearchForm extends React.Component {
@@ -181,6 +183,7 @@ class SearchForm extends React.Component {
     componentDidUpdate() {
         this.props.load(data)
     }
+
     renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
         <ul>
             <h4>Çocukların Doğum Tarihleri</h4>
@@ -206,6 +209,7 @@ class SearchForm extends React.Component {
             ))}
         </ul>
     )
+
     handlesClick() {
         if (!this.state.popupVisible) {
             // attach/remove event handler
@@ -229,6 +233,7 @@ class SearchForm extends React.Component {
         this.handlesClick();
     }
 
+
     renderDates = fields => (
         <DateRangePickerWrapper
             startDateFieldName="start"
@@ -246,6 +251,41 @@ class SearchForm extends React.Component {
 
         this.props.change('adultNumber', this.props.incAdultNum())
     }
+
+    popover =() =>(
+        <div>
+
+            <div>
+                <div>
+                    <h4>Yetişkin Sayısı</h4>
+                    <Field name="adultNumber" component="select">
+
+                        <option value="1">1 Yetişkin</option>
+                        <option value="2">2 Yetişkin</option>
+                        <option value="3">3 Yetişkin</option>
+                        <option value="4">4 Yetişkin</option>
+                        <option value="5">5 Yetişkin</option>
+                        <option value="6">6 Yetişkin</option>
+                    </Field>
+                </div>
+                <div>
+                    <h4>Çocuk Sayısı</h4>
+                    <Field name="childNumber" component="select">
+
+                        <option value="0">0 Çocuk</option>
+                        <option value="1">1 Çocuk</option>
+                        <option value="2">2 Çocuk</option>
+                        <option value="3">3 Çocuk</option>
+                        <option value="4">4 Çocuk</option>
+                    </Field>
+                </div>
+                <div>
+                    <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
+                </div>
+
+            </div>
+        </div>
+    )
 
     render() {
 
@@ -271,53 +311,14 @@ class SearchForm extends React.Component {
                     />
 
 
-                    <div className="popover-container">
-
-                        <div onClick={this.handlesClick} className="popover-container">
+                        <Popover content={this.popover}>
                             <Field name="numbers" className="search-form-main" readOnly component="input"
                                    type="text" placeholder={placeholders}/>
+                        </Popover>
 
-                        </div>
 
-                        {this.state.popupVisible && (
 
-                            <div
-                                className="popover-open" ref={node => {
-                                this.node = node;
-                            }}>
 
-                                <div className="guest-container">
-                                    <div className="adultnum guest">
-                                        <h4>Yetişkin Sayısı</h4>
-                                        <Field name="adultNumber" component="select">
-
-                                            <option value="1">1 Yetişkin</option>
-                                            <option value="2">2 Yetişkin</option>
-                                            <option value="3">3 Yetişkin</option>
-                                            <option value="4">4 Yetişkin</option>
-                                            <option value="5">5 Yetişkin</option>
-                                            <option value="6">6 Yetişkin</option>
-                                        </Field>
-                                    </div>
-                                    <div className="childnum guest">
-                                        <h4>Çocuk Sayısı</h4>
-                                        <Field name="childNumber" component="select">
-
-                                            <option value="0">0 Çocuk</option>
-                                            <option value="1">1 Çocuk</option>
-                                            <option value="2">2 Çocuk</option>
-                                            <option value="3">3 Çocuk</option>
-                                            <option value="4">4 Çocuk</option>
-                                        </Field>
-                                    </div>
-                                    <div className="childages guest">
-                                        <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
-                                    </div>
-
-                                </div>
-                            </div>
-                        )}
-                    </div>
 
 
                     <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>

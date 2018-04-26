@@ -5,6 +5,7 @@ import HotelDetail from './containers/HotelDetail/HotelDetail'
 import SearchResults from './containers/SearchResults/SearchResults'
 import './bootstrap.css';
 import './App.css'
+import "react-awesome-popover/dest/react-awesome-popover.css";
 
 import './components/fonts/fonts.css';
 import './components/fonts/hotelfonts.css';
