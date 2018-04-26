@@ -3,8 +3,6 @@ import React from 'react'
 import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 
-import Popover from 'mineral-ui/Popover';
-
 import {load as loadAccount} from './account'
 
 import ReactAwesomePopover from 'react-awesome-popover'
@@ -233,7 +231,6 @@ class SearchForm extends React.Component {
         this.handlesClick();
     }
 
-
     renderDates = fields => (
         <DateRangePickerWrapper
             startDateFieldName="start"
@@ -251,41 +248,6 @@ class SearchForm extends React.Component {
 
         this.props.change('adultNumber', this.props.incAdultNum())
     }
-
-    popover =() =>(
-        <div>
-
-            <div>
-                <div>
-                    <h4>Yetişkin Sayısı</h4>
-                    <Field name="adultNumber" component="select">
-
-                        <option value="1">1 Yetişkin</option>
-                        <option value="2">2 Yetişkin</option>
-                        <option value="3">3 Yetişkin</option>
-                        <option value="4">4 Yetişkin</option>
-                        <option value="5">5 Yetişkin</option>
-                        <option value="6">6 Yetişkin</option>
-                    </Field>
-                </div>
-                <div>
-                    <h4>Çocuk Sayısı</h4>
-                    <Field name="childNumber" component="select">
-
-                        <option value="0">0 Çocuk</option>
-                        <option value="1">1 Çocuk</option>
-                        <option value="2">2 Çocuk</option>
-                        <option value="3">3 Çocuk</option>
-                        <option value="4">4 Çocuk</option>
-                    </Field>
-                </div>
-                <div>
-                    <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
-                </div>
-
-            </div>
-        </div>
-    )
 
     render() {
 
@@ -309,16 +271,45 @@ class SearchForm extends React.Component {
                         normalize={this.normalizeDates}
                         format={this.formatDates}
                     />
+                    <ReactAwesomePopover>
 
 
-                        <Popover content={this.popover}>
                             <Field name="numbers" className="search-form-main" readOnly component="input"
                                    type="text" placeholder={placeholders}/>
-                        </Popover>
+                            <div>
 
+                                <div>
+                                    <div>
+                                        <h4>Yetişkin Sayısı</h4>
+                                        <Field name="adultNumber" component="select">
 
+                                            <option value="1">1 Yetişkin</option>
+                                            <option value="2">2 Yetişkin</option>
+                                            <option value="3">3 Yetişkin</option>
+                                            <option value="4">4 Yetişkin</option>
+                                            <option value="5">5 Yetişkin</option>
+                                            <option value="6">6 Yetişkin</option>
+                                        </Field>
+                                    </div>
+                                    <div>
+                                        <h4>Çocuk Sayısı</h4>
+                                        <Field name="childNumber" component="select">
 
+                                            <option value="0">0 Çocuk</option>
+                                            <option value="1">1 Çocuk</option>
+                                            <option value="2">2 Çocuk</option>
+                                            <option value="3">3 Çocuk</option>
+                                            <option value="4">4 Çocuk</option>
+                                        </Field>
+                                    </div>
+                                    <div>
+                                        <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
+                                    </div>
 
+                                </div>
+                            </div>
+
+                    </ReactAwesomePopover>
 
 
                     <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>
