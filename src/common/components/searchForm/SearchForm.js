@@ -18,7 +18,7 @@ moment.locale('tr-TR')
 
 const data = {
     // used to populate "account" reducer when "Load" is clicked
-    hotelName: "Otel Adı",
+    hotelName: null,
     start: moment().format('YYYY-MM-DD'),
     end: moment().add(1, 'day').format('YYYY-MM-DD'),
     adultNumber: 2,

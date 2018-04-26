@@ -29,11 +29,18 @@ class SearchResults extends Component {
         } else if (values.childBirthDates == null) {
             cbds = ''
         }
+        let name = null
+        if (values.hotelName != null) {
+            name = values.hotelName
+        } else if (values.hotelName == null) {
+            name = ''
+        }
 
 
-        console.log(cbds)
+
+
         // Do something with the form values
-        this.props.availHotelsForm(cbds, values.end, values.hotelName, values.adultNumber, values.childNumber, values.start);
+        this.props.availHotelsForm(cbds, values.end, name, values.adultNumber, values.childNumber, values.start);
     }
 
     render() {

@@ -24,21 +24,27 @@ class Home extends Component {
 
     submit = (values) => {
         let cbds = null
-            if(values.childBirthDates != null){
-                cbds = values.childBirthDates.map(cbd => {
+        if (values.childBirthDates != null) {
+            cbds = values.childBirthDates.map(cbd => {
 
-                    var cbdt = {name: cbd.birth}
+                var cbdt = {name: cbd.birth}
 
-                    return (`childBirthDates[]=${cbdt.name}&`)
-                })
-            } else if(values.childBirthDates == null ){
-                cbds = ''
-            }
+                return (`childBirthDates[]=${cbdt.name}&`)
+            })
+        } else if (values.childBirthDates == null) {
+            cbds = ''
+        }
+        let name = null
+        if (values.hotelName != null) {
+            name = values.hotelName
+        } else if (values.hotelName == null) {
+            name = ''
+        }
         this.setState({ redirect: true })
 
-        console.log(cbds)
+
         // Do something with the form values
-        this.props.availHotelsForm(cbds,values.end,values.hotelName,values.adultNumber,values.childNumber,values.start);
+        this.props.availHotelsForm(cbds, values.end, name, values.adultNumber, values.childNumber, values.start);
     }
     render() {
         const { redirect } = this.state;
