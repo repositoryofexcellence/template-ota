@@ -4,7 +4,7 @@ import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-for
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
-
+import NumericInput from 'react-numeric-input';
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -153,35 +153,52 @@ class renderDate extends React.Component {
     }
 }
 
+class renderChildBirthDates extends React.Component {
+    render(){
+        const {childNumber,fields, meta: {error, submitFailed}} = this.props
 
 
-const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) =>{
-    return(
-        <ul>
-            <h4>Çocukların Doğum Tarihleri</h4>
-            <li>
-                <button type="button" onClick={() => fields.push({})}>Çocuk Ekle</button>
-                {submitFailed && error && <span>{error}</span>}
-            </li>
-            {fields.map((child, index) => (
-                <li className="childagesfloat" key={index}>
-                    <button
-                        type="button"
-                        title="Remove Member"
-                        onClick={() => fields.remove(index)}>Çocuk Çıkar
-                    </button>
-                    <h4>{index + 1}. Çocuk</h4>
-                    <Field
-                        name={`${child}.birth`}
-                        component={renderDate}
-                        normalize={normalizedDate}
-                        format={formattedDate}
-                    />
-                </li>
-            ))}
-        </ul>
-    )
+        return(
+            <ul>
+                <div>
+                    <h4>Çocuk Sayısı</h4>
+                    <Field name="childNumber" component="select">
+
+                        <option value="0">0 Çocuk</option>
+                        <option value="1">1 Çocuk</option>
+                        <option value="2">2 Çocuk</option>
+                        <option value="3">3 Çocuk</option>
+                        <option value="4">4 Çocuk</option>
+                    </Field>
+                </div>
+                {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> :'' }
+
+
+
+                {fields.map((child, index) => (
+                    <li className="childagesfloat" key={index}>
+                        <h4>{index + 1}. Çocuk</h4>
+                        <Field
+                            name={`${child}.birth`}
+                            component={renderDate}
+                            normalize={normalizedDate}
+                            format={formattedDate}
+                        />
+                    </li>
+                ))}
+            </ul>
+        )
+    }
 }
+
+renderChildBirthDates = connect(
+    state => ({
+
+        childNumber: selector(state, 'childNumber'),
+
+    }),
+    // bind account loading action creator
+)(renderChildBirthDates)
 const formattedDate = (value) => {
     return moment(value);
 };
@@ -301,17 +318,7 @@ class SearchForm extends React.Component {
                                             <option value="6">6 Yetişkin</option>
                                         </Field>
                                     </div>
-                                    <div>
-                                        <h4>Çocuk Sayısı</h4>
-                                        <Field name="childNumber" component="select">
 
-                                            <option value="0">0 Çocuk</option>
-                                            <option value="1">1 Çocuk</option>
-                                            <option value="2">2 Çocuk</option>
-                                            <option value="3">3 Çocuk</option>
-                                            <option value="4">4 Çocuk</option>
-                                        </Field>
-                                    </div>
                                     <div>
                                         <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
                                     </div>
