@@ -550,9 +550,118 @@ h4 {
 .popup-content {
     position: absolute;
     z-index: 2;
-    width: 200px;
+    width: 500px !important;
     background: rgb(255, 255, 255);
     border: 1px solid rgb(187, 187, 187);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
     padding: 5px;
+}
+
+.amount {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    border-radius: 100%;
+    background-color: #2a98d8;
+    color: white;
+    float: left;
+    cursor: pointer!important;
+    font-weight: 600 !important;
+text-align: center;
+}
+
+
+
+.dateLine {
+    width: 100% !important;
+    float: left;
+    margin: 0px auto;
+
+    position: relative;
+    display: inline-block;
+
+    font-size: 18px;
+    font-weight: 600 !important;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.dateLine .DateInput  {
+
+    padding-top: 0px !important;
+
+
+}
+
+
+.dateLine .DateInput_input  {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #565a5c;
+    background-color: #fff;
+    padding-top: 0px !important;
+    padding: 0px !important;
+    border: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 2px solid transparent;
+    border-left: 0;
+    text-align: left;
+
+}
+
+.amountDisabled {
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    border-radius: 100%;
+    background-color: #2a98d8;
+    color: white;
+    opacity: 0.4;
+    float: left;
+    cursor: none!important;
+    font-weight: 600 !important;
+    text-align: center;
+}
+
+
+
+.inputAmount {
+
+    float: left !important;
+    border: none !important;
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    text-align: center;
+    padding: 0px !important;
+}
+
+.inputAmountContainer {
+
+    float: left !important;
+    border: none !important;
+    width: 50% !important;
+
+    font-size: 24px;
+    text-align: center;
+    padding: 0px !important;
+}
+
+.inputAmountTitle {
+
+    float: left !important;
+    border: none !important;
+    height: 32px;
+    font-size: 24px;
+    text-align: center;
+    padding: 0px !important;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

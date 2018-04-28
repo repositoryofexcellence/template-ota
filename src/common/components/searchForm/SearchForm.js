@@ -4,9 +4,7 @@ import {Field, Fields, FieldArray, reduxForm,change, formValueSelector} from 're
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
-import {bindActionCreators} from "redux";
-
-import NumericInput from 'react-numeric-input';
+import {Grid,Row,Col} from 'react-styled-flexboxgrid'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -159,51 +157,77 @@ class renderChildBirthDates extends React.Component {
     constructor(props){
         super(props)
     }
+    incAdt = () => {
 
+        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber +1)
 
+    }
+    decAdt = () => {
+
+        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber -1)
+
+    }
+
+    inc = () => {
+
+        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber +1)
+        this.props.fields.push({})
+    }
+     dec = () => {
+
+        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber -1)
+        this.props.fields.pop()
+    }
     render(){
-        const {childNumber,fields, meta: {error, submitFailed}} = this.props
+        const {adultNumber,childNumber,fields} = this.props
 
-        const increase = () => {
 
-            this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber+1)
-            this.props.fields.push({})
-        }
-        const decrease = (index) => {
-
-            this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber-1)
-            fields.pop()
-        }
         return(
             <ul>
-                <div>
+                <div className="guestNumbers">
+                    <Row>
+                        <Col md={6}>
+                    <h4>Yetişkin Sayısı</h4>
+                    <div className="guestLine">
+                    {adultNumber == 1 ? <div className="amountDisabled" >-</div>  : <div className="amount" onClick={this.decAdt}>-</div> }
+                    <div className="inputAmountContainer">
+                        <Field name="adultNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Yetişkin</div>
+                    </div>
+                    {adultNumber == 6 ? <div className="amountDisabled" >+</div> : <div className="amount" onClick={this.incAdt}>+</div> }
+                    </div>
+                        </Col>
+                        <Col md={6}>
                     <h4>Çocuk Sayısı</h4>
-                    <button onClick={increase}>increase</button>
-                    <button onClick={decrease}>decrease</button>
-                    <Field name="childNumber" component="select">
 
-                        <option value="0">0 Çocuk</option>
-                        <option value="1">1 Çocuk</option>
-                        <option value="2">2 Çocuk</option>
-                        <option value="3">3 Çocuk</option>
-                        <option value="4">4 Çocuk</option>
-                    </Field>
+                    <div className="guestLine">
+                    {childNumber == 0 ? <div className="amountDisabled" >-</div> : <div className="amount" onClick={this.dec}>-</div> }
+                        <div className="inputAmountContainer">
+                    <Field name="childNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Çocuk</div>
+                        </div>
+                    {childNumber == 4 ? <div className="amountDisabled" >+</div> :                <div className="amount" onClick={this.inc}>+</div> }
+                    </div>
+                        </Col>
+                    <div className="dateLine">
+                    {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> :'' }
+                        {fields.map((child, index) => (
+                            <Col md={6} className="childagesfloat" key={index}>
+                                <h4>{index + 1}. Çocuk</h4>
+                                <Field
+                                    name={`${child}.birth`}
+                                    component={renderDate}
+                                    normalize={normalizedDate}
+                                    format={formattedDate}
+                                />
+                            </Col>
+                        ))}
+                    </div>
+                    </Row>
                 </div>
-                {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> :'' }
 
 
 
-                {fields.map((child, index) => (
-                    <li className="childagesfloat" key={index}>
-                        <h4>{index + 1}. Çocuk</h4>
-                        <Field
-                            name={`${child}.birth`}
-                            component={renderDate}
-                            normalize={normalizedDate}
-                            format={formattedDate}
-                        />
-                    </li>
-                ))}
+
+
             </ul>
         )
     }
@@ -221,7 +245,7 @@ renderChildBirthDates = connect(
     state => ({
 
         childNumber: selector(state, 'childNumber'),
-
+        adultNumber: selector(state, 'adultNumber')
     }),
 mapDispatchToProps,
     // bind account loading action creator
@@ -329,30 +353,8 @@ class SearchForm extends React.Component {
                         closeOnDocumentClick
                     >
                         <div>
-                            <div>
 
-
-                                <div>
-                                    <div>
-                                        <h4>Yetişkin Sayısı</h4>
-                                        <Field name="adultNumber" component="select">
-
-                                            <option value="1">1 Yetişkin</option>
-                                            <option value="2">2 Yetişkin</option>
-                                            <option value="3">3 Yetişkin</option>
-                                            <option value="4">4 Yetişkin</option>
-                                            <option value="5">5 Yetişkin</option>
-                                            <option value="6">6 Yetişkin</option>
-                                        </Field>
-                                    </div>
-
-                                    <div>
                                         <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
-                                    </div>
-
-                                </div>
-
-                        </div>
                         </div>
                     </Popup>
 
