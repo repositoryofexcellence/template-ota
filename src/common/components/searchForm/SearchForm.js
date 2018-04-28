@@ -1,9 +1,11 @@
 import 'react-dates/initialize'
 import React from 'react'
-import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
+import {Field, Fields, FieldArray, reduxForm,change, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
+import {bindActionCreators} from "redux";
+
 import NumericInput from 'react-numeric-input';
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
@@ -154,14 +156,30 @@ class renderDate extends React.Component {
 }
 
 class renderChildBirthDates extends React.Component {
+    constructor(props){
+        super(props)
+    }
+
+
     render(){
         const {childNumber,fields, meta: {error, submitFailed}} = this.props
 
+        const increase = () => {
 
+            this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber+1)
+            this.props.fields.push({})
+        }
+        const decrease = (index) => {
+
+            this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber-1)
+            fields.pop()
+        }
         return(
             <ul>
                 <div>
                     <h4>Çocuk Sayısı</h4>
+                    <button onClick={increase}>increase</button>
+                    <button onClick={decrease}>decrease</button>
                     <Field name="childNumber" component="select">
 
                         <option value="0">0 Çocuk</option>
@@ -190,6 +208,14 @@ class renderChildBirthDates extends React.Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // This will be passed as a property to this component
+        changeFieldValue: function(form,field, value) {
+            dispatch(change(form, field, value))
+        }
+    }
+}
 
 renderChildBirthDates = connect(
     state => ({
@@ -197,6 +223,7 @@ renderChildBirthDates = connect(
         childNumber: selector(state, 'childNumber'),
 
     }),
+mapDispatchToProps,
     // bind account loading action creator
 )(renderChildBirthDates)
 const formattedDate = (value) => {
@@ -352,7 +379,7 @@ SearchForm = connect(
         childNumber: selector(state, 'childNumber'),
         adultNumber: selector(state, 'adultNumber')// pull initial values from account reducer
     }),
-    {load: loadAccount} // bind account loading action creator
+    {load: loadAccount}
 )(SearchForm)
 
 export default SearchForm
