@@ -72,7 +72,7 @@ width: 100%;
 }
 
 .search-form-main {
-width: 100%;
+
     height: 88px;
     float: left;
     padding: 0px;
@@ -545,4 +545,14 @@ h4 {
     position: relative;
     width: auto;
     float: left;
+}
+
+.popup-content {
+    position: absolute;
+    z-index: 2;
+    width: 200px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(187, 187, 187);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px;
+    padding: 5px;
 }

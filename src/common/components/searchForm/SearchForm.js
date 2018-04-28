@@ -2,11 +2,9 @@ import 'react-dates/initialize'
 import React from 'react'
 import {Field, Fields, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
-
 import {load as loadAccount} from './account'
-import "react-awesome-popover/dest/react-awesome-popover.css";
+import Popup from "reactjs-popup";
 
-import ReactAwesomePopover from 'react-awesome-popover'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -24,6 +22,7 @@ const data = {
     adultNumber: 2,
     childNumber: 0,
     childBirthDates: null
+    , min: '1', max: '10'
 }
 
 
@@ -154,36 +153,10 @@ class renderDate extends React.Component {
     }
 }
 
-const formattedDate = (value) => {
-    return moment(value);
-};
-const normalizedDate = (value) => {
-    return value.value.format('YYYY-MM-DD');
-};
 
 
-class SearchForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handlesClick = this.handlesClick.bind(this);
-        this.handlesOutsideClick = this.handlesOutsideClick.bind(this);
-        this.state = {
-            loading: false,
-            searchResults: null,
-            popupVisible: false
-        }
-
-    }
-
-    componentDidMount() {
-        this.props.load(data)
-    }
-
-    componentDidUpdate() {
-        this.props.load(data)
-    }
-
-    renderChildBirthDates = ({fields, meta: {error, submitFailed}}) => (
+const renderChildBirthDates = ({fields, meta: {error, submitFailed}}) =>{
+    return(
         <ul>
             <h4>Çocukların Doğum Tarihleri</h4>
             <li>
@@ -208,6 +181,38 @@ class SearchForm extends React.Component {
             ))}
         </ul>
     )
+}
+const formattedDate = (value) => {
+    return moment(value);
+};
+const normalizedDate = (value) => {
+    return value.value.format('YYYY-MM-DD');
+};
+
+
+
+class SearchForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handlesClick = this.handlesClick.bind(this);
+        this.handlesOutsideClick = this.handlesOutsideClick.bind(this);
+        this.state = {
+            loading: false,
+            searchResults: null,
+            popupVisible: false
+        }
+
+    }
+
+    componentDidMount() {
+        this.props.load(data)
+    }
+
+    componentDidUpdate() {
+        this.props.load(data)
+    }
+
+
 
     handlesClick() {
         if (!this.state.popupVisible) {
@@ -239,6 +244,7 @@ class SearchForm extends React.Component {
             {...fields}
         />
     );
+
     formatDates = (value, name) => {
         return moment(value);
     };
@@ -272,12 +278,15 @@ class SearchForm extends React.Component {
                         normalize={this.normalizeDates}
                         format={this.formatDates}
                     />
-                    <ReactAwesomePopover>
-
-
-                            <Field name="numbers" className="search-form-main" readOnly component="input"
-                                   type="text" placeholder={placeholders}/>
+                    <Popup
+                        trigger={   <Field name="numbers" className="search-form-main" readOnly component="input"
+                                           type="text" placeholder={placeholders}/>}
+                        position="bottom center"
+                        closeOnDocumentClick
+                    >
+                        <div>
                             <div>
+
 
                                 <div>
                                     <div>
@@ -304,13 +313,15 @@ class SearchForm extends React.Component {
                                         </Field>
                                     </div>
                                     <div>
-                                        <FieldArray name="childBirthDates" component={this.renderChildBirthDates}/>
+                                        <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
                                     </div>
 
                                 </div>
-                            </div>
 
-                    </ReactAwesomePopover>
+                        </div>
+                        </div>
+                    </Popup>
+
 
 
                     <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>

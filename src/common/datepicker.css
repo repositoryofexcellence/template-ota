@@ -11,6 +11,7 @@
     padding: 4px 12px;
     margin-right: 8px;
     font: inherit;
+    font: inherit;
     font-weight: 700;
     line-height: normal;
     overflow: visible;
@@ -161,6 +162,7 @@
     display: inline-block;
     height: 96px;
     float: left;
+    width: 28% !important;
 }
 .DateRangePicker__block {
     display: block
@@ -170,6 +172,7 @@
     background-color: #fff;
     position: absolute;
     top:92px !important;
+
 }
 .DateRangePicker_picker__rtl {
     direction: rtl
