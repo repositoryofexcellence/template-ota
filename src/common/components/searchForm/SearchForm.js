@@ -369,7 +369,7 @@ class SearchForm extends React.Component {
     }
 }
 
-const selector = formValueSelector('searchForm') // <-- same as form name
+export const selector = formValueSelector('searchForm') // <-- same as form name
 SearchForm = reduxForm({
     // a unique name for the form
     form: 'searchForm',

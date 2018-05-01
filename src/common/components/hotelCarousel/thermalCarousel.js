@@ -92,8 +92,7 @@ class ThermalCarousel extends Component {
                                     hotelName={all.Description}
                                     hotelRating={ratings}
                                     hotelPlace={all.Place}
-                                    hotelPension={all.PensionTypes["string"]}
-                                    minPrice={null}
+
                                 />
                             </Link>
                         </Slide>

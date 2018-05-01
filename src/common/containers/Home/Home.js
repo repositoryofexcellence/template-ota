@@ -5,13 +5,14 @@ import MainSlider from '../../components/mainSlider/mainSlider'
 import Header from '../../components/header/header'
 import HotelCarousel from '../../components/hotelCarousel/hotelCarousel'
 import ThermalCarousel from '../../components/hotelCarousel/thermalCarousel'
-import Divider from 'material-ui/Divider'
+import {selector} from '../../components/searchForm/SearchForm'
 import SearchForm from '../../components/searchForm/SearchForm'
 import * as actionCreators from "../../redux/actions/index";
 import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router'
 
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
+import {formValueSelector} from "redux-form";
 
 class Home extends Component {
     constructor(props){
@@ -51,7 +52,6 @@ class Home extends Component {
     }
     render() {
         const { redirect } = this.state;
-
         if (redirect) {
             return <Redirect to='/search-results'/>;
         }
@@ -77,7 +77,9 @@ class Home extends Component {
                 <Grid>
                     <Row>
                         <Col md={12}>
-                    <h2>Sahil Otelleri</h2>
+                            <Row> <Col md={6}><h2>Sahil Otelleri </h2></Col><Col md={6}><p className="indicator"> {this.props.start} - {this.props.end} tarihlerinde,
+                        {this.props.adultNumber} Yetişkin {this.props.childNumber > 0 ?this.props.childNumber + ' Çocuk için' :'' }
+                            </p></Col></Row>
 
                     <HotelCarousel className="carousel-main"
 
@@ -85,7 +87,8 @@ class Home extends Component {
 
 
 
-                    <h2>Termal Oteller</h2>
+                    <h2>Termal Oteller / {this.props.start} - {this.props.end} tarihlerinde,
+                        {this.props.adultNumber} Yetişkin {this.props.childNumber} Çocuk için</h2>
 
                     <ThermalCarousel className="carousel-main"
 
@@ -97,11 +100,15 @@ class Home extends Component {
         )
     }
 }
+
 function mapStateToProps(state) {
     return {hotels: state.hotel.hotels,
         availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading
-
+        loading:state.availHotel.loading,
+        start: selector(state, 'start'),
+        end: selector(state, 'end'),
+        childNumber: selector(state, 'childNumber'),
+        adultNumber: selector(state, 'adultNumber'),
     }
 }
 
