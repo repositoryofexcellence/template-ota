@@ -78,7 +78,7 @@ class Home extends Component {
                     <Row>
                         <Col md={12}>
                     <h2>Sahil Otelleri</h2>
-                    <Divider/>
+
                     <HotelCarousel className="carousel-main"
 
                     />
@@ -86,7 +86,7 @@ class Home extends Component {
 
 
                     <h2>Termal Oteller</h2>
-                    <Divider/>
+
                     <ThermalCarousel className="carousel-main"
 
                     />

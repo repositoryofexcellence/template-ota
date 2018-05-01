@@ -5,8 +5,11 @@ import {Star} from 'material-ui-icons';
 import removeDuplicates from 'removeduplicates'
 import {Swiper, Slide} from 'react-dynamic-swiper'
 import Next from 'material-ui-icons/ChevronRight'
-import Prev from 'material-ui-icons/ChevronLeft'
 
+
+import Prev from 'material-ui-icons/ChevronLeft'
+import MyLoader from '../skeleton/skeleton'
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
@@ -69,8 +72,7 @@ class HotelCarousel extends Component {
             })
 
 
-        }
-        else if (!Array.isArray(hotelSearchResult) && hotels != null) {
+        } else if (!Array.isArray(hotelSearchResult) && hotels != null) {
             var singleHotel = [hotelSearchResult]
 
             var uniqueArray = singleHotel.concat(hotels)
@@ -121,7 +123,8 @@ class HotelCarousel extends Component {
         }
         return (
             <div>
-            {this.props.loading ? 'Bekleyin' :
+                {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                        <Col md={4}><MyLoader/></Col></Row> :
 
                 <Swiper
                     swiperOptions={{

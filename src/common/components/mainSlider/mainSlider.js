@@ -11,17 +11,16 @@ class MainSlider extends React.Component{
                     spaceBetween: 0,
                     freeMode: false,
                     autoplay: 3000,
-                    effect: 'fade',
                     loop: true,
                 }}
                 pagination={false}
                 navigation={false}
             >
                 <Slide>
-                    <div style={{backgroundPosition:'50%',height:500,backgroundSize: "cover",backgroundImage: `url("http://gallery.suaytour.com/UploadedFiles/Hotel/2e32b487-c2d7-476f-b361-872d718efd4b.jpg")`}}></div>
+                    <div style={{backgroundPosition:'50%',opacity:0.5,height:700,backgroundSize: "cover",backgroundImage: `url("http://www.sahinnparadise.com/Uploaded/Content/c65de6c0-0f65-4d66-b274-1326e5d2e87a.jpg")`}}></div>
                 </Slide>
                 <Slide>
-                    <div style={{backgroundPosition:'50%',height:500,backgroundSize: "cover",backgroundImage: `url("http://gallery.suaytour.com/UploadedFiles/Hotel/2e790473-71e7-40db-b032-985b82f302f0.jpg")`}}></div>
+                    <div style={{backgroundPosition:'50%',opacity:0.5,height:700,backgroundSize: "cover",backgroundImage: `url("http://www.sahinnparadise.com/Uploaded/Content/7bdc37ed-bbf5-44e0-b179-53661a20435b.jpg")`}}></div>
                 </Slide>
 
             </Swiper>

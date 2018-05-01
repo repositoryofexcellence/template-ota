@@ -70,7 +70,7 @@ class DateRangePickerWrapper extends React.Component {
                 onFocusChange={this.handleFocusChange}
                 startDate={startDate}
                 startDatePlaceholderText="Start Date"
-                isOutsideRange={() => false}
+
             />
         );
     }

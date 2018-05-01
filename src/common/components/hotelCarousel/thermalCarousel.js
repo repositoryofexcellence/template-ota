@@ -6,7 +6,8 @@ import removeDuplicates from 'removeduplicates'
 import {Swiper, Slide} from 'react-dynamic-swiper'
 import Next from 'material-ui-icons/ChevronRight'
 import Prev from 'material-ui-icons/ChevronLeft'
-
+import MyLoader from '../skeleton/skeleton'
+import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
@@ -120,7 +121,8 @@ class ThermalCarousel extends Component {
         }
         return (
             <div>
-                {this.props.loading ? 'Bekleyin' :
+                {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                        <Col md={4}><MyLoader/></Col></Row> :
 
                     <Swiper
                         swiperOptions={{

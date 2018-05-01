@@ -41,6 +41,7 @@
     "react": "^16.3.1",
     "react-autosuggest": "^9.3.3",
     "react-bootstrap": "^0.31.5",
+    "react-content-loader": "^3.1.1",
     "react-dates": "GoGoCarl/react-dates",
     "react-dom": "^16.3.1",
     "react-dom-animated": "^1.0.5",

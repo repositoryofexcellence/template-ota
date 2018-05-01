@@ -5982,6 +5982,10 @@ react-bootstrap@^0.31.5:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
+react-content-loader@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.1.1.tgz#4121cdf1bbf58387bfd031fd4569d0617c0de69d"
+
 react-dates@GoGoCarl/react-dates:
   version "16.4.0"
   resolved "https://codeload.github.com/GoGoCarl/react-dates/tar.gz/60f3eedcdfe3e2239dc69812d9a8b5de8cba0b33"
