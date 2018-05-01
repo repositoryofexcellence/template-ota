@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from 'react-router'
 import MainSlider from '../../components/mainSlider/mainSlider'
 import Header from '../../components/header/header'
+import moment from 'moment'
 import HotelCarousel from '../../components/hotelCarousel/hotelCarousel'
 import ThermalCarousel from '../../components/hotelCarousel/thermalCarousel'
 import {selector} from '../../components/searchForm/SearchForm'
@@ -77,9 +78,9 @@ class Home extends Component {
                 <Grid>
                     <Row>
                         <Col md={12}>
-                            <Row> <Col md={6}><h2>Sahil Otelleri </h2></Col><Col md={6}><p className="indicator"> {this.props.start} - {this.props.end} tarihlerinde,
-                        {this.props.adultNumber} Yetişkin {this.props.childNumber > 0 ?this.props.childNumber + ' Çocuk için' :'' }
-                            </p></Col></Row>
+                            <Row> <Col md={6}><h2>Sahil Otelleri </h2></Col><Col md={6}><p className="indicator">   <strong>{moment(this.props.start).format('DD-MM-YYYY')}  </strong> -   <strong>{moment(this.props.end).format('DD-MM-YYYY')}  </strong> tarihlerinde,
+                                <strong>{this.props.adultNumber}</strong> Yetişkin   {this.props.childNumber > 0 ?  <dummy> <strong>{this.props.childNumber}</strong> Çocuk </dummy> :'' }
+                                için fiyatlar </p></Col></Row>
 
                     <HotelCarousel className="carousel-main"
 
@@ -87,10 +88,12 @@ class Home extends Component {
 
 
 
-                    <h2>Termal Oteller / {this.props.start} - {this.props.end} tarihlerinde,
-                        {this.props.adultNumber} Yetişkin {this.props.childNumber} Çocuk için</h2>
+                            <Row> <Col md={6}><h2>Termal Oteller </h2></Col><Col md={6}><p className="indicator">   <strong>{moment(this.props.start).format('DD-MM-YYYY')}  </strong> -   <strong>{moment(this.props.end).format('DD-MM-YYYY')}  </strong> tarihlerinde,
+                                <strong>{this.props.adultNumber}</strong> Yetişkin   {this.props.childNumber > 0 ?  <dummy> <strong>{this.props.childNumber}</strong> Çocuk</dummy> :'' }
+                                için fiyatlar </p></Col></Row>
 
-                    <ThermalCarousel className="carousel-main"
+
+                            <ThermalCarousel className="carousel-main"
 
                     />
                         </Col>
