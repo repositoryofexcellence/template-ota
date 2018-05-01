@@ -19,7 +19,9 @@ export function availHotels(startDate,endDate,adultNum,childNum,location) {
 
 export function availHotelsForm(childBirth,endDate,location,adultNum,childNum,startDate) {
     return function(dispatch) {
-        axios.get(`/api/search-results?${childBirth}endDate=${endDate}&location=${location}&adultNum=${adultNum}&childNum=${childNum}&startDate=${startDate}`)
+        let url = `/api/search-results?${childBirth}endDate=${endDate}&location=${location}&adultNum=${adultNum}&childNum=${childNum}&startDate=${startDate}`
+        let urlClear = url.replace(",","")
+        axios.get(urlClear)
             .then((response => {
                 dispatch({
                     type: HOTEL_SEARCH_FORM,

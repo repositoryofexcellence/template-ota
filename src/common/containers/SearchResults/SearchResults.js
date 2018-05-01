@@ -26,6 +26,7 @@ class SearchResults extends Component {
 
                 return (`childBirthDates[]=${cbdt.name}&`)
             })
+
         } else if (values.childBirthDates == null) {
             cbds = ''
         }
