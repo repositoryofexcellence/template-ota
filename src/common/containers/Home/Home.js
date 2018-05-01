@@ -21,6 +21,9 @@ class Home extends Component {
 
         }
     }
+    noSubmit = (values) =>{
+        return
+    }
 
     submit = (values) => {
         let cbds = null
@@ -62,7 +65,10 @@ class Home extends Component {
                             <Row>
                                 <Col md={12}>
                         <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
-                                    <SearchForm onSubmit={this.submit} className="search-form"/>
+                                    {this.props.loading ?
+                                        <SearchForm onSubmit={this.noSubmit} className="search-form"/>
+                                        : <SearchForm onSubmit={this.submit} className="search-form"/>}
+
                                 </Col>
                             </Row>
                         </Grid>

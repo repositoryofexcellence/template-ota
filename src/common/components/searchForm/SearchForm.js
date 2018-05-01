@@ -359,8 +359,9 @@ class SearchForm extends React.Component {
                     </Popup>
 
 
+                    {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit" type="submit">Bekleyin</button> :
+                        <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>}
 
-                    <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>
                 </div>
 
             </form>
@@ -379,8 +380,10 @@ SearchForm = connect(
     state => ({
         initialValues: state.reducerData.data,
         childNumber: selector(state, 'childNumber'),
-        adultNumber: selector(state, 'adultNumber')// pull initial values from account reducer
+        adultNumber: selector(state, 'adultNumber'),
+        loading:state.availHotel.loading// pull initial values from account reducer
     }),
+
     {load: loadAccount}
 )(SearchForm)
 
