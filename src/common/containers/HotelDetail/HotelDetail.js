@@ -503,7 +503,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        availHotel: state.availHotel,
+        availHotel:state.availHotel.availHotel,
+        loading:state.availHotel.loading
     }
 }
 

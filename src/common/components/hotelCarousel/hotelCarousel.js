@@ -70,22 +70,28 @@ class HotelCarousel extends Component {
 
         }
         return (
-            <Swiper
-                swiperOptions={{
-                    slidesPerView: 3,
-                    spaceBetween: 15,
-                    freeMode: false
+            <div>
+            {this.props.loading ? 'Bekleyin' :
 
-                }}
-                pagination={false}
-                nextButton={<div className="swiper-button-next"><Next/></div>}
-                prevButton={<div className="swiper-button-prev"><Prev/></div>}
-            >
+                <Swiper
+                    swiperOptions={{
+                        slidesPerView: 3,
+                        spaceBetween: 15,
+                        freeMode: false
 
-                {allHotelsList}
+                    }}
+                    pagination={false}
+                    nextButton={<div className="swiper-button-next"><Next/></div>}
+                    prevButton={<div className="swiper-button-prev"><Prev/></div>}
+                >
 
 
-            </Swiper>
+
+                    {allHotelsList}
+
+                </Swiper> }
+
+            </div>
         )
     }
 }
@@ -93,7 +99,8 @@ class HotelCarousel extends Component {
 function mapStateToProps(state) {
     return {
         hotels: state.hotel.hotels,
-        availHotel: state.availHotel
+        availHotel:state.availHotel.availHotel,
+        loading:state.availHotel.loading
     }
 }
 

@@ -73,7 +73,8 @@ function mapDispatchToProps(dispatch) {
 /* istanbul ignore next */
 function mapStateToProps(state) {
     return {hotels: state.hotel.hotels,
-    availHotel:state.availHotel}
+    availHotel:state.availHotel.availHotel,
+    loading:state.availHotel.loading}
 }
 
 /* istanbul ignore next */

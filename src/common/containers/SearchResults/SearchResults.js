@@ -73,7 +73,7 @@ class SearchResults extends Component {
 
                     <h2>Arama Sonuçları</h2>
 
-                            {this.props.availHotel.length > 0 && availables ? availables.map(avail =>{
+                            {this.props.availHotel.length > 0 && this.props.loading == false && availables ? availables.map(avail =>{
                                     let i = 0;
                                     var ratings = []
                                     for (i; i < avail.Rating; i++) {
@@ -105,9 +105,9 @@ class SearchResults extends Component {
                                                 : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net :'' }
                                         />
                                     </Link>
-                                </Col> :
-
-                                <div>Bekleyin</div> }
+                                </Col> :this.props.availHotel.length > 0 && this.props.loading == true
+?
+                                <div>Bekleyin</div>: '' }
 
 
                         </Col>
@@ -122,7 +122,8 @@ class SearchResults extends Component {
 function mapStateToProps(state) {
     return {
         hotels: state.hotel.hotels,
-        availHotel: state.availHotel,
+        availHotel:state.availHotel.availHotel,
+        loading:state.availHotel.loading
     }
 }
 

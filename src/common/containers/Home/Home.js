@@ -93,7 +93,8 @@ class Home extends Component {
 }
 function mapStateToProps(state) {
     return {hotels: state.hotel.hotels,
-        availHotel:state.availHotel,
+        availHotel:state.availHotel.availHotel,
+        loading:state.availHotel.loading
 
     }
 }
