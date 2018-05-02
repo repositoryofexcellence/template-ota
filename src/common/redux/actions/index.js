@@ -1,1 +1,1 @@
-export {availHotels,availHotelsForm} from './availHotel';
+export {availHotels,availHotelsForm,restoreRedirect} from './availHotel';

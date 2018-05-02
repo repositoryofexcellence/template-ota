@@ -44,15 +44,15 @@ class Home extends Component {
         } else if (values.hotelName == null) {
             name = ''
         }
-        this.setState({ redirect: true })
+
 
 
         // Do something with the form values
         this.props.availHotelsForm(cbds, values.end, name, values.adultNumber, values.childNumber, values.start);
     }
     render() {
-        const { redirect } = this.state;
-        if (redirect) {
+
+        if (this.props.redirect) {
             return <Redirect to='/search-results'/>;
         }
 
@@ -107,6 +107,7 @@ function mapStateToProps(state) {
     return {hotels: state.hotel.hotels,
         availHotel:state.availHotel.availHotel,
         loading:state.availHotel.loading,
+        redirect:state.availHotel.redirect,
         start: selector(state, 'start'),
         end: selector(state, 'end'),
         childNumber: selector(state, 'childNumber'),

@@ -1,8 +1,9 @@
-import {HOTEL_SEARCH,HOTEL_SEARCH_FORM,SET_LOADING} from "../constants";
+import {HOTEL_SEARCH,HOTEL_SEARCH_FORM,SET_LOADING,HOTEL_SEARCH_FORM_COMPLETE} from "../constants";
 
 export const initialState = {
     availHotel:[],
-    loading:false
+    loading:false,
+    redirect:false,
 }
 
 export function availHotel(state = initialState, action) {
@@ -13,6 +14,11 @@ export function availHotel(state = initialState, action) {
             return action.payload
         case HOTEL_SEARCH_FORM:
             return action.payload
+        case HOTEL_SEARCH_FORM_COMPLETE:
+            return {
+                ...state,
+                redirect: state.redirect = false
+            }
         default:
             return state;
     }

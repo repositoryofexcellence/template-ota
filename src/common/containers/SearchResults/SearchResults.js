@@ -17,6 +17,10 @@ class SearchResults extends Component {
         this.state = {}
     }
 
+    componentDidMount(){
+        this.props.restoreRedirect()
+    }
+
     submit = (values) => {
         let cbds = null
         if (values.childBirthDates != null) {
@@ -123,7 +127,8 @@ function mapStateToProps(state) {
     return {
         hotels: state.hotel.hotels,
         availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading
+        loading:state.availHotel.loading,
+        redirect:state.availHotel.redirect
     }
 }
 
