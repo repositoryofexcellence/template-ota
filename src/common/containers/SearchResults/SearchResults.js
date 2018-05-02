@@ -21,6 +21,10 @@ class SearchResults extends Component {
         this.props.restoreRedirect()
     }
 
+    componentDidUpdate(){
+        this.props.restoreRedirect()
+    }
+
     submit = (values) => {
         let cbds = null
         if (values.childBirthDates != null) {
