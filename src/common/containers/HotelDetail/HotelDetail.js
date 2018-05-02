@@ -108,9 +108,12 @@ class HotelDetail extends Component {
 
     }
 
-
+    componentDidUpdate(){
+        this.props.restoreRedirect()
+    }
 
     componentDidMount() {
+        this.props.restoreRedirect()
         this.setState({
             nav1: this.slider1,
             nav2: this.slider2,
@@ -504,7 +507,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading
+        loading:state.availHotel.loading,
+        redirect:state.availHotel.redirect
     }
 }
 
