@@ -52,11 +52,11 @@ server.get(`/api/search-results`, async (req, res) => {
             Currency: 'EUR',
             Language: 'TR',
             SearchCriteria: {
-                ChildAges:null,
-                ChildBirthDates: [{"sys:dateTime":req.query.childBirthDates}],
+                ChildAges: null,
+                ChildBirthDates: [{"sys:dateTime": req.query.childBirthDates}],
                 EndDate: req.query.endDate,
                 LocationName: req.query.location,
-                NumberOfAdults:req.query.adultNum,
+                NumberOfAdults: req.query.adultNum,
                 NumberOfChildren: req.query.childNum,
                 StartDate: req.query.startDate
             },
@@ -81,23 +81,21 @@ server
         const sheetsManager = new WeakMap();
         // This is needed in order to inject the critical CSS.
         // Compile an initial state
-        const { store, history } = createServerStore(req.path);
+        const {store, history} = createServerStore(req.path);
 
         const sheetsRegistry = new SheetsRegistry();
         const markup = renderToString(
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
 
-                        <Provider store={store}>
-                            <ConnectedRouter history={history}>
+                    <JssProvider registry={sheetsRegistry} jss={jss}>
+                        <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+                            <App/>
+                        </MuiThemeProvider>
+                    </JssProvider>
 
-                                    <JssProvider registry={sheetsRegistry} jss={jss}>
-                                        <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-                                    <App/>
-                                        </MuiThemeProvider>
-                                    </JssProvider>
-
-                            </ConnectedRouter>
-                        </Provider>
-
+                </ConnectedRouter>
+            </Provider>
         );
 
         const css = sheetsRegistry.toString();
@@ -109,7 +107,7 @@ server
         <meta charSet='utf-8' />
         <title>Demiroğlu Reisen</title>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:300,400,500,600,700&amp;subset=latin-ext" rel="stylesheet">
        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">

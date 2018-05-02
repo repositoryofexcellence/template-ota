@@ -9,7 +9,7 @@ import Next from 'material-ui-icons/ChevronRight'
 
 import Prev from 'material-ui-icons/ChevronLeft'
 import MyLoader from '../skeleton/skeleton'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid';
+import {Row, Col} from 'react-styled-flexboxgrid';
 import {withRouter} from "react-router";
 import {connect} from "react-redux";
 
@@ -75,8 +75,8 @@ class HotelCarousel extends Component {
         } else if (!Array.isArray(hotelSearchResult) && hotels != null) {
             var singleHotel = [hotelSearchResult]
 
-            var uniqueArray = singleHotel.concat(hotels)
-            var allHotels = removeDuplicates(uniqueArray, 'Description');
+            uniqueArray = singleHotel.concat(hotels)
+            allHotels = removeDuplicates(uniqueArray, 'Description');
             console.log(allHotels)
             allHotelsList = allHotels.map(all => {
                 let i = 0;

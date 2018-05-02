@@ -4,7 +4,7 @@ import {Field, Fields, FieldArray, reduxForm,change, formValueSelector} from 're
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
-import {Grid,Row,Col} from 'react-styled-flexboxgrid'
+import {Row,Col} from 'react-styled-flexboxgrid'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -154,9 +154,7 @@ class renderDate extends React.Component {
 }
 
 class renderChildBirthDates extends React.Component {
-    constructor(props){
-        super(props)
-    }
+
     incAdt = () => {
 
         this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber +1)
@@ -189,22 +187,22 @@ class renderChildBirthDates extends React.Component {
                         <Col md={6}>
                     <h4>Yetişkin Sayısı</h4>
                     <div className="guestLine">
-                    {adultNumber == 1 ? <div className="amountDisabled" >-</div>  : <div className="amount" onClick={this.decAdt}>-</div> }
+                    {adultNumber === 1 ? <div className="amountDisabled" >-</div>  : <div className="amount" onClick={this.decAdt}>-</div> }
                     <div className="inputAmountContainer">
                         <Field name="adultNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Yetişkin</div>
                     </div>
-                    {adultNumber == 6 ? <div className="amountDisabled" >+</div> : <div className="amount" onClick={this.incAdt}>+</div> }
+                    {adultNumber === 6 ? <div className="amountDisabled" >+</div> : <div className="amount" onClick={this.incAdt}>+</div> }
                     </div>
                         </Col>
                         <Col md={6}>
                     <h4>Çocuk Sayısı</h4>
 
                     <div className="guestLine">
-                    {childNumber == 0 ? <div className="amountDisabled" >-</div> : <div className="amount" onClick={this.dec}>-</div> }
+                    {childNumber === 0 ? <div className="amountDisabled" >-</div> : <div className="amount" onClick={this.dec}>-</div> }
                         <div className="inputAmountContainer">
                     <Field name="childNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Çocuk</div>
                         </div>
-                    {childNumber == 4 ? <div className="amountDisabled" >+</div> :                <div className="amount" onClick={this.inc}>+</div> }
+                    {childNumber === 4 ? <div className="amountDisabled" >+</div> :                <div className="amount" onClick={this.inc}>+</div> }
                     </div>
                         </Col>
                     <div className="dateLine">

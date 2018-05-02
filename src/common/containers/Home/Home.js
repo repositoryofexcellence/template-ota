@@ -13,7 +13,6 @@ import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router'
 
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
-import {formValueSelector} from "redux-form";
 
 class Home extends Component {
     constructor(props){
