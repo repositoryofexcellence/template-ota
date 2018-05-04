@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Header from '../../components/header/header'
 import SearchFormDetail from '../../components/searchForm/SearchForm'
 
-import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from 'react-image-gallery';
 
 import IconButton from 'material-ui/IconButton';
@@ -132,7 +131,13 @@ class HotelDetail extends Component {
         console.log(ImageURL)
         ImageURL["string"].map(imgs => {
 
-            imageSlide.push({original: imgs, thumbnail: imgs})
+            imageSlide.push(
+
+
+                {original: imgs, thumbnail: imgs,originalClass:'fullScreenSlide',
+                }
+
+                )
         })
         console.log(imageSlide)
         return (
