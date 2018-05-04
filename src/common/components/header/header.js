@@ -15,9 +15,12 @@ import {Link} from 'react-router-dom';
 
 const styles = {
     root: {
-        flexGrow: 1
-    },
+        flexGrow: 1,
 
+    },
+    appBar:{
+        boxShadow:"none"
+    },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
@@ -55,7 +58,7 @@ class Header extends React.Component {
         return (
             <div>
                 <div className={classes.root}>
-                    <AppBar position="static" color="inherit">
+                    <AppBar className={classes.appBar} position="static" color="inherit">
                        <Grid>
                            <Row>
                                <Col md={12}>

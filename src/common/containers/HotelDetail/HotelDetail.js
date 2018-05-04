@@ -121,7 +121,7 @@ class HotelDetail extends Component {
 
     render() {
 
-        const {Description, ImageURL, HotelInformations, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
+        const {Description,Region,DistanceToAirport,DistanceToCenter, ImageURL,CheckInTime,CheckOutTime, HotelInformations,Place, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
         var ratings = []
         let i = 0
         for (i; i < Rating; i++) {
@@ -134,7 +134,7 @@ class HotelDetail extends Component {
             imageSlide.push(
 
 
-                {original: imgs, thumbnail: imgs,originalClass:'fullScreenSlide',
+                {original: imgs, thumbnail: imgs,originalClass:'fullScreenSlide',thumbnailClass:'fullScreenThumb',
                 }
 
                 )
@@ -143,18 +143,9 @@ class HotelDetail extends Component {
         return (
             <div>
                 <Header/>
-                <div className="jumbotron">
-                    <Grid>
-                        <Row>
-                            <Col md={12}>
-                                <SearchFormDetail onSubmit={this.submit} className="search-form-detail"/>
-                            </Col>
-                        </Row>
 
-                    </Grid>
-                </div>
                 <Grid>
-                    <Row>
+                    <Row className="detail-row">
 
 
                         <Col md={8}>
@@ -162,6 +153,38 @@ class HotelDetail extends Component {
                          <ImageGallery additionalClass="app-image-gallery" showPlayButton={false} sizes={300} items={imageSlide}/>
                         </Col>
                         <Col md={4}>
+
+                            <div className="detail-side-bar">
+                                <div className="detail-container">
+                                    <div className="detail-place">{Place}  /  {Region} </div>
+                                    <div className="hotel-rating-detail">{ratings}</div>
+                                    <h2 className="detail-title">{Description}</h2>
+                                    <div className="detail-place">Pansiyon Türleri {Array.isArray(PensionTypes["string"])?PensionTypes["string"].map(pension=>{
+                                        return(
+                                            <div>
+                                                - {pension}
+                                            </div>
+                                        )
+
+                                    }):Array.isArray(PensionTypes["string"])? <div>{PensionTypes["string"]}</div> :''}</div>
+                                    <div className="detail-place">Otele Giriş Saati<div> {CheckInTime}</div></div>
+                                    <div className="detail-place">Otelden Çıkış Saati<div> {CheckOutTime}</div></div>
+                                    <div className="detail-place">Havaalanına Uzaklık<div> {DistanceToAirport} km</div></div>
+                                    <div className="detail-place">Merkeze Uzaklık<div> {DistanceToCenter} km</div></div>
+                                    <div className="detail-place-price">En Düşük Fiyat</div>
+                                    <button className="detail-form-button" type="submit">{this.props.avail ?
+
+                                        <div>{Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + ' EUR'
+                                            : !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net + ' EUR' : ''
+                                        }</div>
+
+                                        : ''}
+                                    </button>
+
+                                </div>
+                            </div>
+                        </Col>
+                        {/*<Col md={4}>
 
                             <div>
 
@@ -264,7 +287,7 @@ class HotelDetail extends Component {
                             </div>
 
 
-                        </Col>
+                        </Col>*/}
                         <Col xs={12} md={12}>
                             <h2>Odalar</h2>
                             <Divider/>

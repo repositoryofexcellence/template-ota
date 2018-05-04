@@ -59,15 +59,26 @@ class Home extends Component {
         return (
             <div>
                 <Header/>
+
+                <div className="search-component">
+                    <Grid>
+                        <Row>
+                            <Col md={12}>
+                {this.props.loading ?
+                    <SearchForm onSubmit={this.noSubmit} className="search-form"/>
+                    : <SearchForm onSubmit={this.submit} className="search-form"/>}
+
+                            </Col>
+                        </Row>
+                    </Grid>
+                </div>
                 <MainSlider>
 
                         <Grid>
                             <Row>
                                 <Col md={12}>
                         <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
-                                    {this.props.loading ?
-                                        <SearchForm onSubmit={this.noSubmit} className="search-form"/>
-                                        : <SearchForm onSubmit={this.submit} className="search-form"/>}
+
 
                                 </Col>
                             </Row>
