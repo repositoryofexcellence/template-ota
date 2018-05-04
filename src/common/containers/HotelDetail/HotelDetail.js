@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import Header from '../../components/header/header'
 import SearchFormDetail from '../../components/searchForm/SearchForm'
-import Slider from "react-slick";
+
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from 'react-image-gallery';
 
 import IconButton from 'material-ui/IconButton';
 import Tooltip from 'material-ui/Tooltip';
@@ -129,6 +131,13 @@ class HotelDetail extends Component {
         for (i; i < Rating; i++) {
             ratings.push(<Star/>)
         }
+        let imageSlide = []
+        console.log(ImageURL)
+        let images = ImageURL["string"].map(imgs => {
+
+               imageSlide = [{original:imgs, thumbnail:imgs}]
+        })
+        console.log(imageSlide)
         return (
             <div>
                 <Header/>
@@ -147,43 +156,7 @@ class HotelDetail extends Component {
 
 
                         <Col md={8}>
-                            <Slider
-                                ref={slider => (this.slider1 = slider)}
-                                asNavFor={this.state.nav2}
-                            >{ImageURL["string"].map(slide => {
-                                return (
-                                    <div>
-                                        <div style={{
-                                            borderRadius: 4,
-                                            height: 400,
-                                            backgroundImage: `url(${slide})`,
-                                            backgroundSize: "cover"
-                                        }}></div>
-                                    </div>
-                                )
-                            })}
 
-                            </Slider>
-                            <Slider
-                                ref={slider => (this.slider2 = slider)}
-                                slidesToShow={8}
-                                asNavFor={this.state.nav1}
-                                swipeToSlide={true}
-                                focusOnSelect={true}
-                            >{ImageURL["string"].map(slide => {
-                                return (
-                                    <div>
-                                        <div style={{
-                                            borderRadius: 4,
-                                            margin: 5,
-                                            height: 60,
-                                            backgroundImage: `url(${slide})`,
-                                            backgroundSize: "cover"
-                                        }}></div>
-                                    </div>
-                                )
-                            })}
-                            </Slider>
 
                         </Col>
                         <Col md={4}>
