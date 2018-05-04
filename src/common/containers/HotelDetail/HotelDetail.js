@@ -81,7 +81,6 @@ class HotelDetail extends Component {
     }
 
 
-
     submit = (values) => {
         let cbds = null
         if (values.childBirthDates != null) {
@@ -102,15 +101,13 @@ class HotelDetail extends Component {
         }
 
 
-
-
         // Do something with the form values
         this.props.availHotelsForm(cbds, values.end, name, values.adultNumber, values.childNumber, values.start);
 
 
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.props.restoreRedirect()
     }
 
@@ -133,9 +130,9 @@ class HotelDetail extends Component {
         }
         let imageSlide = []
         console.log(ImageURL)
-        let images = ImageURL["string"].map(imgs => {
+        ImageURL["string"].map(imgs => {
 
-               imageSlide = [{original:imgs, thumbnail:imgs}]
+            imageSlide.push({original: imgs, thumbnail: imgs})
         })
         console.log(imageSlide)
         return (
@@ -157,7 +154,7 @@ class HotelDetail extends Component {
 
                         <Col md={8}>
 
-
+                         <ImageGallery additionalClass="app-image-gallery" showPlayButton={false} sizes={300} items={imageSlide}/>
                         </Col>
                         <Col md={4}>
 
@@ -169,14 +166,15 @@ class HotelDetail extends Component {
                                         <div className="detail-price">
                                             {this.props.avail ?
 
-                                                    <div>{Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR'
-                                                    : !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' :''
-                                                    }</div>
+                                                <div>{Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR'
+                                                    : !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net + 'EUR' : ''
+                                                }</div>
 
-                                            :''}
+                                                : ''}
 
 
-                                        </div> </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div className="detail-left-bottom">
@@ -268,150 +266,150 @@ class HotelDetail extends Component {
                         </Col>
 
                         <Grid>
-                        {this.props.avail ?
-                        <Row>{Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ?
-                            this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
-                                return (
+                            {this.props.avail ?
+                                <Row>{Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ?
+                                    this.props.avail.RoomTypes.apiHotelRoomTypeInfo.map((room, i) => {
+                                        return (
 
-                                    <Col className="room-grid" xs={12} md={4}>
+                                            <Col className="room-grid" xs={12} md={4}>
 
-                                        <div className="hotel-card">
+                                                <div className="hotel-card">
 
-                                            <Swiper
-                                                swiperOptions={{
-                                                    slidesPerView: 1,
-                                                    spaceBetween: 15,
-                                                    freeMode: false,
+                                                    <Swiper
+                                                        swiperOptions={{
+                                                            slidesPerView: 1,
+                                                            spaceBetween: 15,
+                                                            freeMode: false,
 
 
-                                                }}
-                                                pagination={false}
+                                                        }}
+                                                        pagination={false}
 
-                                            >
-                                                {room.ImageURL && Array.isArray(room.ImageURL["string"]) ? room.ImageURL["string"].map(r => {
+                                                    >
+                                                        {room.ImageURL && Array.isArray(room.ImageURL["string"]) ? room.ImageURL["string"].map(r => {
 
-                                                    return (
+                                                            return (
+                                                                <Slide>
+                                                                    <div className="hotel-card-media" style={{
+
+                                                                        height: 250,
+                                                                        backgroundImage: `url(${r}.jpg)`,
+                                                                        backgroundSize: "cover"
+                                                                    }}>
+
+                                                                    </div>
+                                                                </Slide>
+                                                            )
+                                                        }) : room.ImageURL && !Array.isArray(room.ImageURL["string"]) ?
+                                                            <Slide>
+                                                                <div className="hotel-card-media" style={{
+
+                                                                    height: 250,
+                                                                    backgroundImage: `url(${room.ImageURL["string"]}.jpg)`,
+                                                                    backgroundSize: "cover"
+                                                                }}>
+
+                                                                </div>
+                                                            </Slide>
+                                                            : ''}
+
+                                                    </Swiper>
+                                                    <div className="room-card-top-content">
+                                                        <div className="room-pension">
+                                                            {PensionTypes["string"] + " - "}
+                                                        </div>
+                                                        <div
+                                                            className="room-price">{room.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="hotel-card-content">
+                                                        <div className="hotel-title">
+                                                            {room.Name}
+                                                        </div>
+                                                        <div className="hotel-place">
+                                                            <p dangerouslySetInnerHTML={{__html: room.Description}}/>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </Col>
+
+                                        )
+                                    }) :
+                                    !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ?
+
+                                        <Col className="room-grid" xs={12} md={4}>
+
+                                            <div className="hotel-card">
+
+                                                <Swiper
+                                                    swiperOptions={{
+                                                        slidesPerView: 1,
+                                                        spaceBetween: 15,
+                                                        freeMode: false,
+
+
+                                                    }}
+                                                    pagination={false}
+
+                                                >
+                                                    {this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL && Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"].map(r => {
+
+                                                        return (
+                                                            <Slide>
+                                                                <div className="hotel-card-media" style={{
+
+                                                                    height: 250,
+                                                                    backgroundImage: `url(${r}.jpg)`,
+                                                                    backgroundSize: "cover"
+                                                                }}>
+
+                                                                </div>
+                                                            </Slide>
+                                                        )
+                                                    }) : this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL && !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]) ?
                                                         <Slide>
                                                             <div className="hotel-card-media" style={{
 
                                                                 height: 250,
-                                                                backgroundImage: `url(${r}.jpg)`,
+                                                                backgroundImage: `url(${this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]}.jpg)`,
                                                                 backgroundSize: "cover"
                                                             }}>
 
                                                             </div>
                                                         </Slide>
-                                                    )
-                                                }) : room.ImageURL && !Array.isArray(room.ImageURL["string"]) ?
-                                                    <Slide>
-                                                        <div className="hotel-card-media" style={{
+                                                        : ''}
 
-                                                            height: 250,
-                                                            backgroundImage: `url(${room.ImageURL["string"]}.jpg)`,
-                                                            backgroundSize: "cover"
-                                                        }}>
-
-                                                        </div>
-                                                    </Slide>
-                                                    : ''}
-
-                                            </Swiper>
-                                            <div className="room-card-top-content">
-                                                <div className="room-pension">
-                                                    {PensionTypes["string"] + " - "}
-                                                </div>
-                                                <div
-                                                    className="room-price">{room.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
-                                                </div>
-                                            </div>
-
-                                            <div className="hotel-card-content">
-                                                <div className="hotel-title">
-                                                    {room.Name}
-                                                </div>
-                                                <div className="hotel-place">
-                                                    <p dangerouslySetInnerHTML={{__html: room.Description}}/>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </Col>
-
-                                )
-                            }) :
-                            !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo) ?
-
-                                <Col className="room-grid" xs={12} md={4}>
-
-                                    <div className="hotel-card">
-
-                                        <Swiper
-                                            swiperOptions={{
-                                                slidesPerView: 1,
-                                                spaceBetween: 15,
-                                                freeMode: false,
-
-
-                                            }}
-                                            pagination={false}
-
-                                        >
-                                            {this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL && Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]) ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"].map(r => {
-
-                                                return (
-                                                    <Slide>
-                                                        <div className="hotel-card-media" style={{
-
-                                                            height: 250,
-                                                            backgroundImage: `url(${r}.jpg)`,
-                                                            backgroundSize: "cover"
-                                                        }}>
-
-                                                        </div>
-                                                    </Slide>
-                                                )
-                                            }) : this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL && !Array.isArray(this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]) ?
-                                                <Slide>
-                                                    <div className="hotel-card-media" style={{
-
-                                                        height: 250,
-                                                        backgroundImage: `url(${this.props.avail.RoomTypes.apiHotelRoomTypeInfo.ImageURL["string"]}.jpg)`,
-                                                        backgroundSize: "cover"
-                                                    }}>
-
+                                                </Swiper>
+                                                <div className="room-card-top-content">
+                                                    <div className="room-pension">
+                                                        {PensionTypes["string"] + " - "}
                                                     </div>
-                                                </Slide>
-                                                : ''}
+                                                    <div
+                                                        className="room-price">{this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
+                                                    </div>
+                                                </div>
 
-                                        </Swiper>
-                                        <div className="room-card-top-content">
-                                            <div className="room-pension">
-                                                {PensionTypes["string"] + " - "}
-                                            </div>
-                                            <div
-                                                className="room-price">{this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net} EUR
-                                            </div>
-                                        </div>
+                                                <div className="hotel-card-content">
+                                                    <div className="hotel-title">
+                                                        {this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Name}
+                                                    </div>
+                                                    <div className="hotel-place">
+                                                        <p dangerouslySetInnerHTML={{__html: this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Description}}/>
+                                                    </div>
 
-                                        <div className="hotel-card-content">
-                                            <div className="hotel-title">
-                                                {this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Name}
-                                            </div>
-                                            <div className="hotel-place">
-                                                <p dangerouslySetInnerHTML={{__html: this.props.avail.RoomTypes.apiHotelRoomTypeInfo.Description}}/>
+                                                </div>
                                             </div>
 
-                                        </div>
-                                    </div>
 
+                                        </Col>
 
-                                </Col>
-
-                       :'' }
-                            </Row>
-                            :''}</Grid>
+                                        : ''}
+                                </Row>
+                                : ''}</Grid>
 
                     </Row>
                 </Grid>
@@ -479,9 +477,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading,
-        redirect:state.availHotel.redirect
+        availHotel: state.availHotel.availHotel,
+        loading: state.availHotel.loading,
+        redirect: state.availHotel.redirect
     }
 }
 
