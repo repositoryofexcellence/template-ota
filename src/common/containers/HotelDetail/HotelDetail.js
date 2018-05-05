@@ -3,6 +3,7 @@ import Header from '../../components/header/header'
 import SearchFormDetail from '../../components/searchForm/SearchForm'
 
 import ImageGallery from 'react-image-gallery';
+import HotelCard from '../../components/hotelCard/hotelCard'
 
 import IconButton from 'material-ui/IconButton';
 import Tooltip from 'material-ui/Tooltip';
@@ -301,19 +302,40 @@ class HotelDetail extends Component {
                         </Col>
 
                         <Grid>
+                            <Row>
                             {allRooms? allRooms.map(room => {
                                 if(!room.Pricings && room.Pricings === null){
+
                                     return(
-                                        <p>{room.Name}</p>
+                                        <Col md={4}>
+                                        <HotelCard
+                                            hotelImage={Array.isArray(room.ImageURL["string"])? room.ImageURL["string"][0] + '.jpg':!Array.isArray(room.ImageURL["string"])? room.ImageURL["string"] :'' }
+                                            hotelName={room.Name}
+                                            hotelRating={null}
+                                            hotelPlace={null}
+                                            hotelPension={null}
+                                            minPrice={null}
+                                        />
+                                        </Col>
                                     )
                                 } else if(room.Pricings && room.Pricings !== null){
                                     return(
+                                        <Col md={4}>
+                                        <HotelCard
+                                            hotelImage={room.ImageURL["string"][0] + '.jpg'}
+                                            hotelName={room.Name}
+                                            hotelRating={null}
+                                            hotelPlace={null}
+                                            hotelPension={null}
+                                            minPrice={room.Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                        />
+                                        </Col>
 
-                                        <p>{room.Name} -  {room.Pricings.apiHotelPricingInfo.TotalPrice.Net}</p>
                                     )
                                 }
 
                             }):''}
+                            </Row>
                             </Grid>
 
                     </Row>
