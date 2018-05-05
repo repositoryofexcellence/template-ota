@@ -43,14 +43,26 @@ export function availHotelsForm(childBirth, endDate, location, adultNum, childNu
 
         axios.get(urlClear)
             .then((response => {
-                dispatch({
-                    type: HOTEL_SEARCH_FORM,
-                    payload: {
-                        availHotel: response.data.apiGetHotelSearchResultsResult.Hotels.apiHotelInfo,
-                        loading: initialState.loading = false,
-                        redirect: initialState.redirect = true
-                    }
-                });
+                if(response.data.apiGetHotelSearchResultsResult.Hotels !== null) {
+                    dispatch({
+                        type: HOTEL_SEARCH_FORM,
+                        payload: {
+                            availHotel: response.data.apiGetHotelSearchResultsResult.Hotels.apiHotelInfo,
+                            loading: initialState.loading = false,
+                            redirect: initialState.redirect = true
+                        }
+                    });
+                } else {
+                    dispatch({
+                        type: HOTEL_SEARCH_FORM,
+                        payload: {
+                            availHotel: null,
+                            loading: initialState.loading = false,
+                            redirect: initialState.redirect = true
+                        }
+                    });
+                }
+
             }))
 
             .catch((error) => dispatch({

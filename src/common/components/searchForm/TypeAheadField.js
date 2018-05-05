@@ -43,7 +43,7 @@ const DownShiftInput = ({ input, meta, label, items }) => (
 
                             >
                                 {filteredItems.slice(0, 5).map((item, index) => (
-                                    <div
+                                    <div className="react-autosuggest__suggestion"
                                         {...getItemProps({
                                             key: item,
                                             index,
@@ -55,7 +55,7 @@ const DownShiftInput = ({ input, meta, label, items }) => (
                                             }
                                         })}
                                     >
-                                        {item}
+                                        <div className="react-autosuggest__suggestion">{item}</div>
                                     </div>
                                 ))}
                             </div>

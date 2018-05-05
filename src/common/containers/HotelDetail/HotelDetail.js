@@ -328,7 +328,7 @@ class HotelDetail extends Component {
                         </Col>*/}
                         <Col xs={12} md={12}>
                             <h2>Odalar</h2>
-                            <Divider/>
+
                         </Col>
 
                         <Grid>
