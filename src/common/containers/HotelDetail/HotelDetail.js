@@ -4,10 +4,11 @@ import SearchFormDetail from '../../components/searchForm/SearchForm'
 
 import ImageGallery from 'react-image-gallery';
 import HotelCard from '../../components/hotelCard/hotelCard'
+import MyLoader from '../../components/skeleton/skeleton'
 
 import IconButton from 'material-ui/IconButton';
 import Tooltip from 'material-ui/Tooltip';
-import {Swiper, Slide} from 'react-dynamic-swiper'
+
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
 import Divider from 'material-ui/Divider';
 import * as actionCreators from "../../redux/actions/index";
@@ -77,7 +78,9 @@ class HotelDetail extends Component {
 
             nav1: null,
             nav2: null,
-            allRoom: this.props.avail? this.props.avail.RoomTypes.apiHotelRoomTypeInfo :[]
+            allRoom: this.props.avail ? this.props.avail.RoomTypes.apiHotelRoomTypeInfo : null,
+            allRooms: null,
+            roomArray: []
         };
     }
 
@@ -108,9 +111,6 @@ class HotelDetail extends Component {
 
     }
 
-    componentDidUpdate() {
-        this.props.restoreRedirect()
-    }
 
     componentDidMount() {
         this.props.restoreRedirect()
@@ -119,11 +119,20 @@ class HotelDetail extends Component {
             nav2: this.slider2,
 
         });
+
     }
 
-    render() {
 
-        const {Description,Region,DistanceToAirport,DistanceToCenter,RoomTypes, ImageURL,CheckInTime,CheckOutTime, HotelInformations,Place, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
+    render() {
+        var unique = []
+        var all = []
+        if (this.state.allRoom !== null) {
+
+            unique = this.state.allRoom.concat(this.props.hotel.RoomTypes.apiHotelRoomTypeInfo);
+            all = removeDuplicates(unique, 'Name')
+            console.log(all)
+        }
+        const {Description, Region, DistanceToAirport, DistanceToCenter, RoomTypes, ImageURL, CheckInTime, CheckOutTime, HotelInformations, Place, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
         var ratings = []
         let i = 0
         for (i; i < Rating; i++) {
@@ -134,18 +143,14 @@ class HotelDetail extends Component {
         ImageURL["string"].map(imgs => {
 
             imageSlide.push(
-
-
-                {original: imgs, thumbnail: imgs,originalClass:'fullScreenSlide',thumbnailClass:'fullScreenThumb',
+                {
+                    original: imgs,
+                    thumbnail: imgs,
+                    originalClass: 'fullScreenSlide',
+                    thumbnailClass: 'fullScreenThumb',
                 }
-
-                )
+            )
         })
-        var uniqueArray = []
-        if(this.state.allRoom !== null){
-            uniqueArray = this.state.allRoom.concat(RoomTypes.apiHotelRoomTypeInfo)
-            var allRooms = removeDuplicates(uniqueArray, 'Name');
-        }
 
 
         return (
@@ -156,29 +161,40 @@ class HotelDetail extends Component {
                     <Row className="detail-row">
 
 
-                        <Col md={8}>
+                        <Col xs={12} md={8}>
 
-                         <ImageGallery additionalClass="app-image-gallery" showPlayButton={false} sizes={300} items={imageSlide}/>
+                            <ImageGallery additionalClass="app-image-gallery" showPlayButton={false} sizes={300}
+                                          items={imageSlide}/>
                         </Col>
-                        <Col md={4}>
+                        <Col xs={false} md={4}>
 
                             <div className="detail-side-bar">
                                 <div className="detail-container">
-                                    <div className="detail-place">{Place}  /  {Region} </div>
+                                    <div className="detail-place">{Place} / {Region} </div>
                                     <div className="hotel-rating-detail">{ratings}</div>
-                                    <h2 className="detail-title">{Description}</h2>
-                                    <div className="detail-place">Pansiyon Türleri {Array.isArray(PensionTypes["string"])?PensionTypes["string"].map(pension=>{
-                                        return(
-                                            <div>
-                                                - {pension}
-                                            </div>
-                                        )
+                                    <h2 className="detail-title">{Description? Description :''}</h2>
+                                    <div className="detail-place">Pansiyon
+                                        Türleri {Array.isArray(PensionTypes["string"]) ? PensionTypes["string"].map(pension => {
+                                            return (
+                                                <div>
+                                                    - {pension}
+                                                </div>
+                                            )
 
-                                    }):Array.isArray(PensionTypes["string"])? <div>{PensionTypes["string"]}</div> :''}</div>
-                                    <div className="detail-place">Otele Giriş Saati<div> {CheckInTime}</div></div>
-                                    <div className="detail-place">Otelden Çıkış Saati<div> {CheckOutTime}</div></div>
-                                    <div className="detail-place">Havaalanına Uzaklık<div> {DistanceToAirport} km</div></div>
-                                    <div className="detail-place">Merkeze Uzaklık<div> {DistanceToCenter} km</div></div>
+                                        }) : Array.isArray(PensionTypes["string"]) ?
+                                            <div>{PensionTypes["string"]}</div> : ''}</div>
+                                    <div className="detail-place">Otele Giriş Saati
+                                        <div> {CheckInTime}</div>
+                                    </div>
+                                    <div className="detail-place">Otelden Çıkış Saati
+                                        <div> {CheckOutTime}</div>
+                                    </div>
+                                    <div className="detail-place">Havaalanına Uzaklık
+                                        <div> {DistanceToAirport} km</div>
+                                    </div>
+                                    <div className="detail-place">Merkeze Uzaklık
+                                        <div> {DistanceToCenter} km</div>
+                                    </div>
                                     <div className="detail-place-price">En Düşük Fiyat</div>
                                     <button className="detail-form-button" type="submit">{this.props.avail ?
 
@@ -257,6 +273,7 @@ class HotelDetail extends Component {
                                         else if (facility === "Otopark") {
                                             fac = <HotelIcon iconTitle={facility} iconName="parking"/>
                                         }
+
                                         else if (facility === "Fitness Salonu") {
                                             fac = <HotelIcon iconTitle={facility} iconName="fitness"/>
                                         }
@@ -302,41 +319,67 @@ class HotelDetail extends Component {
                         </Col>
 
                         <Grid>
-                            <Row>
-                            {allRooms? allRooms.map(room => {
-                                if(!room.Pricings && room.Pricings === null){
 
-                                    return(
-                                        <Col md={4}>
-                                        <HotelCard
-                                            hotelImage={Array.isArray(room.ImageURL["string"])? room.ImageURL["string"][0] + '.jpg':!Array.isArray(room.ImageURL["string"])? room.ImageURL["string"] :'' }
-                                            hotelName={room.Name}
-                                            hotelRating={null}
-                                            hotelPlace={null}
-                                            hotelPension={null}
-                                            minPrice={null}
-                                        />
-                                        </Col>
-                                    )
-                                } else if(room.Pricings && room.Pricings !== null){
-                                    return(
-                                        <Col md={4}>
-                                        <HotelCard
-                                            hotelImage={room.ImageURL["string"][0] + '.jpg'}
-                                            hotelName={room.Name}
-                                            hotelRating={null}
-                                            hotelPlace={null}
-                                            hotelPension={null}
-                                            minPrice={room.Pricings.apiHotelPricingInfo.TotalPrice.Net}
-                                        />
-                                        </Col>
+                            {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                                    <Col md={4}><MyLoader/></Col></Row> :
 
-                                    )
-                                }
+                                <Row>
 
-                            }):''}
-                            </Row>
-                            </Grid>
+                                    {all !== null ? all.map(room => {
+                                        if (!room.Pricings && room.Pricings === null) {
+                                            return (
+                                                <Col xs={12}  sm={12} md={4}>
+                                                    <HotelCard
+                                                        hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
+                                                            : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
+                                                                : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
+
+                                                                :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''}
+                                                        hotelName={room.Name}
+                                                        hotelRating={null}
+                                                        hotelPlace={null}
+                                                        hotelPension={null}
+                                                        minPrice={null}
+                                                    />
+                                                </Col>
+                                            )
+                                        }
+                                        else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates !== null) {
+                                            return (
+                                                <Col xs={12}  sm={12} md={4}>
+                                                    <HotelCard
+                                                        hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
+                                                            : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
+                                                                : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
+
+                                                                    :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''}
+                                                        hotelName={room.Name}
+                                                        hotelRating={null}
+                                                        hotelPlace={null}
+                                                        hotelPension={null}
+                                                        minPrice={null}
+                                                    /> </Col>)
+                                        }
+                                        else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates === null) {
+                                            return (
+                                                <Col xs={12} sm={12} md={4}>
+                                                    <HotelCard
+                                                        hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
+                                                            : !Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"][0] + '.jpg'
+
+                                                                :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''}
+                                                        hotelName={room.Name}
+                                                        hotelRating={null}
+                                                        hotelPlace={null}
+                                                        hotelPension={null}
+                                                        minPrice={room.Pricings.apiHotelPricingInfo.TotalPrice ? room.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
+                                                    /> </Col>)
+                                        }
+                                    }) : <div>yok</div>}
+                                </Row>}
+
+
+                        </Grid>
 
                     </Row>
                 </Grid>
@@ -363,7 +406,7 @@ class HotelDetail extends Component {
 
                 <Grid>
                     <Row>
-                        <Col md={12}>
+                        <Col  xs={12} md={12}>
                             <h2>Otel Bilgileri</h2>
                             <Divider/>
                         </Col>
@@ -373,7 +416,7 @@ class HotelDetail extends Component {
                             return (
 
 
-                                <Col md={6}>
+                                <Col  xs={12} md={6}>
                                     <div className="info-panel">
                                         <div className="info-content">
                                             <h3 dangerouslySetInnerHTML={{__html: hotelInfo.Header}}/>
