@@ -157,7 +157,20 @@ class HotelDetail extends Component {
             <div>
                 <Header/>
 
+
                 <Grid>
+                    <div className="search-component">
+                        <Grid>
+                            <Row>
+                                <Col md={12}>
+                                    {this.props.loading ?
+                                        <SearchFormDetail onSubmit={this.noSubmit} className="search-form"/>
+                                        : <SearchFormDetail onSubmit={this.submit} className="search-form"/>}
+
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </div>
                     <Row className="detail-row">
 
 
@@ -320,49 +333,69 @@ class HotelDetail extends Component {
 
                         <Grid>
 
-                            {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
-                                    <Col md={4}><MyLoader/></Col></Row> :
+                            {this.props.loading ? <Row><Col md={3}><MyLoader/></Col><Col md={3}><MyLoader/></Col>
+                                    <Col md={3}><MyLoader/></Col> <Col md={3}><MyLoader/></Col></Row> :
 
                                 <Row>
 
                                     {all !== null ? all.map(room => {
                                         if (!room.Pricings && room.Pricings === null) {
                                             return (
-                                                <Col xs={12}  sm={12} md={4}>
-                                                    <HotelCard
-                                                        hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
-                                                            : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
-                                                                : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
+                                                <Col xs={12}  sm={12} md={3}>
+                                                    <div className="hotel-card unavailHotel">
+                                                        <div className="hotel-card-media"
 
-                                                                :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''}
-                                                        hotelName={room.Name}
-                                                        hotelRating={null}
-                                                        hotelPlace={null}
-                                                        hotelPension={null}
-                                                        minPrice={null}
-                                                    />
+                                                             style={{
+                                                                 height: 250,
+                                                                 backgroundImage: `url(${Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
+                                                                     : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
+                                                                         : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
+
+                                                                             :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''})`,
+                                                                 backgroundSize: "cover"}}>
+
+                                                        </div>
+                                                        <div className="hotel-card-content">
+                                                            <div className="hotel-title">
+                                                                {room.Name}
+                                                            </div>
+                                                            <div className="hotel-price"><div>Müsait Değildir</div></div>
+
+                                                        </div>
+                                                    </div>
                                                 </Col>
                                             )
                                         }
                                         else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates !== null) {
                                             return (
-                                                <Col xs={12}  sm={12} md={4}>
-                                                    <HotelCard
-                                                        hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
-                                                            : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
-                                                                : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
 
-                                                                    :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''}
-                                                        hotelName={room.Name}
-                                                        hotelRating={null}
-                                                        hotelPlace={null}
-                                                        hotelPension={null}
-                                                        minPrice={null}
-                                                    /> </Col>)
+                                                <Col xs={12}  sm={12} md={3}>
+                                                    <div className="hotel-card unavailHotel">
+                                                        <div className="hotel-card-media"
+
+                                                             style={{
+                                                                 height: 250,
+                                                                 backgroundImage: `url(${Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
+                                                                     : !Array.isArray(room.ImageURL) && room.ImageURL !== null && !room.ImageURL["string"][0].includes(".jpg") ? room.ImageURL["string"][0] + '.jpg'
+                                                                         : !Array.isArray(room.ImageURL) && room.ImageURL !== null && room.ImageURL["string"][0].includes(".jpg")  ? room.ImageURL["string"][0]
+
+                                                                             :!Array.isArray(room.ImageURL)&& room.ImageURL === null ? 'dsad' : ''})`,
+                                                                 backgroundSize: "cover"}}>
+
+                                                        </div>
+                                                        <div className="hotel-card-content">
+                                                            <div className="hotel-title">
+                                                                {room.Name}
+                                                            </div>
+                                                            <div className="hotel-price"><div>Müsait Değildir</div></div>
+
+                                                        </div>
+                                                    </div>
+                                                   </Col>)
                                         }
                                         else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates === null) {
                                             return (
-                                                <Col xs={12} sm={12} md={4}>
+                                                <Col xs={12} sm={12} md={3}>
                                                     <HotelCard
                                                         hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
                                                             : !Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"][0] + '.jpg'
