@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Header from '../../components/header/header'
 import {Link} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid';
+import MyLoader from '../../components/skeleton/skeleton'
 
 import SearchForm from '../../components/searchForm/SearchForm'
 import removeDuplicates from 'removeduplicates'
@@ -17,11 +18,11 @@ class SearchResults extends Component {
         this.state = {}
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.restoreRedirect()
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.props.restoreRedirect()
     }
 
@@ -46,14 +47,12 @@ class SearchResults extends Component {
         }
 
 
-
-
         // Do something with the form values
         this.props.availHotelsForm(cbds, values.end, name, values.adultNumber, values.childNumber, values.start);
     }
 
     render() {
-        if(this.props.availHotel && !Array.isArray(this.props.availHotel)){
+        if (this.props.availHotel && !Array.isArray(this.props.availHotel)) {
             let i = 0;
             var ratingsa = []
             for (i; i < this.props.availHotel.Rating; i++) {
@@ -79,14 +78,15 @@ class SearchResults extends Component {
                     <Row>
                         <Col md={12}>
 
-                    <h2>Arama Sonuçları</h2>
+                            <h2>Arama Sonuçları</h2>
 
-                            {this.props.availHotel.length > 0 && this.props.loading === false && availables ? availables.map(avail =>{
-                                    let i = 0;
-                                    var ratings = []
-                                    for (i; i < avail.Rating; i++) {
-                                        ratings.push(<Star/>)
-                                    }
+                            { this.props.availHotel !== null  ? <div>{this.props.availHotel.length > 0 && this.props.availHotel !== null && this.props.loading === false && availables ? availables.map(avail => {
+                                let i = 0;
+                                var ratings = []
+                                for (i; i < avail.Rating; i++) {
+                                    ratings.push(<Star/>)
+                                }
+                                if (avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null) {
                                     return (
                                         <Col className="hotelcard" md={4}>
                                             <Link to={`hotels/${avail.Description}`}>
@@ -96,26 +96,38 @@ class SearchResults extends Component {
                                                     hotelRating={ratings}
                                                     hotelPlace={avail.Place}
                                                     minPrice={Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
-                                                    : !Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net :'' }
+                                                        : !Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
                                                 />
                                             </Link>
                                         </Col>
                                     )
-                                }) : this.props.availHotel.Description && !Array.isArray(availables) ?
-                                <Col className="hotelcard" md={4}>
-                                    <Link to={`hotels/${this.props.availHotel.Description}`}>
-                                        <HotelCard
-                                            hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
-                                            hotelName={this.props.availHotel.Description}
-                                            hotelRating={ratingsa}
-                                            hotelPlace={this.props.availHotel.Place}
-                                            minPrice={Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
-                                                : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net :'' }
-                                        />
-                                    </Link>
-                                </Col> :this.props.availHotel.length > 0 && this.props.loading === true
-?
-                                <div>Bekleyin</div>: '' }
+                                } else if (avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates !== null) {
+                                    return ("")
+                                }
+
+
+                            }) : this.props.availHotel !== null && this.props.availHotel.Description && !Array.isArray(availables) ?
+                                <div>{this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null ?
+                                    <Col className="hotelcard" md={4}>
+                                        <Link to={`hotels/${this.props.availHotel.Description}`}>
+                                            <HotelCard
+                                                hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
+                                                hotelName={this.props.availHotel.Description}
+                                                hotelRating={ratingsa}
+                                                hotelPlace={this.props.availHotel.Place}
+                                                minPrice={Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
+                                                    : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
+                                            />
+                                        </Link>
+                                    </Col>
+                                    : <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>}</div>
+                                : this.props.loading === true && !this.props.availHotel.length > 0 || !availables.Description ?
+                                    <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                                        <Col md={4}><MyLoader/></Col></Row>
+                                    : this.props.loading === false && !this.props.availHotel.length > 0 || !availables.Description ?
+                                        <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div> :
+                                        <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
+                            }</div> :<div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>}
 
 
                         </Col>
@@ -130,9 +142,9 @@ class SearchResults extends Component {
 function mapStateToProps(state) {
     return {
         hotels: state.hotel.hotels,
-        availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading,
-        redirect:state.availHotel.redirect
+        availHotel: state.availHotel.availHotel,
+        loading: state.availHotel.loading,
+        redirect: state.availHotel.redirect
     }
 }
 

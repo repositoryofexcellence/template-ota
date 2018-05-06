@@ -82,7 +82,7 @@ class ThermalCarousel extends Component {
                 for (i; i < all.Rating; i++) {
                     ratings.push(<Star/>)
                 }
-                if ( all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "TERMAL OTEL") {
+                if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings== null && all.Concepts["string"] === "TERMAL OTEL") {
                     return (
                         <Slide className="unavailHotel">
 
@@ -97,7 +97,7 @@ class ThermalCarousel extends Component {
                             </Link>
                         </Slide>
                     )
-                } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo.Pricings !== null && all.Concepts["string"] === "TERMAL OTEL") {
+                } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null &&  all.Concepts["string"] === "TERMAL OTEL") {
                     return (
                         <Slide>
                             <Link className="cardlink" to={`/hotels/${all.Description}`}>

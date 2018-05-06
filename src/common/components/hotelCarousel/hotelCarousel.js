@@ -28,13 +28,14 @@ class HotelCarousel extends Component {
         if (hotelSearchResult.length > 1 && hotels != null) {
             var uniqueArray = hotelSearchResult.concat(hotels)
             var allHotels = removeDuplicates(uniqueArray, 'Description');
+            console.log(allHotels)
             allHotelsList = allHotels.map(all => {
                 let i = 0;
                 var ratings = []
                 for (i; i < all.Rating; i++) {
                     ratings.push(<Star/>)
                 }
-                if ( all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "SAHİL OTELİ") {
+                if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "SAHİL OTELİ") {
                     return (
                         <Slide className="unavailHotel">
 
@@ -50,7 +51,7 @@ class HotelCarousel extends Component {
                             </Link>
                         </Slide>
                     )
-                } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo.Pricings !== null && all.Concepts["string"] === "SAHİL OTELİ") {
+                } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings &&all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null&& all.Concepts["string"] === "SAHİL OTELİ") {
                     return (
                         <Slide>
                             <Link className="cardlink" to={`/hotels/${all.Description}`}>
@@ -60,7 +61,7 @@ class HotelCarousel extends Component {
                                 hotelRating={ratings}
                                 hotelPlace={all.Place}
                                 hotelPension={all.PensionTypes["string"]}
-                                minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                            minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
                             />
                             </Link>
                         </Slide>
