@@ -52,7 +52,7 @@ export function availHotelsForm(childBirth, endDate, location, adultNum, childNu
                             redirect: initialState.redirect = true
                         }
                     });
-                } else {
+                } else if (response.data.apiGetHotelSearchResultsResult.Hotels === null) {
                     dispatch({
                         type: HOTEL_SEARCH_FORM,
                         payload: {

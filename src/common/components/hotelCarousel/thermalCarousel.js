@@ -23,100 +23,134 @@ class ThermalCarousel extends Component {
     render() {
         const {hotels, hotelSearchResult} = this.state
         let allHotelsList = ''
-        if (hotelSearchResult.length > 2 && hotels != null) {
-            var uniqueArray = hotelSearchResult.concat(hotels)
-            var allHotels = removeDuplicates(uniqueArray, 'Description');
-            allHotelsList = allHotels.map(all => {
-                let i = 0;
-                var ratings = []
-                for (i; i < all.Rating; i++) {
-                    ratings.push(<Star/>)
-                }
-                if ( all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "TERMAL OTEL") {
-                    return (
-                        <Slide className="unavailHotel">
+        if(this.props.availHotel !== null ){
+            if (hotelSearchResult.length > 1 && hotels != null) {
+                var uniqueArray = hotelSearchResult.concat(hotels)
+                var allHotels = removeDuplicates(uniqueArray, 'Description');
+                console.log(allHotels)
+                allHotelsList = allHotels.map(all => {
+                    let i = 0;
+                    var ratings = []
+                    for (i; i < all.Rating; i++) {
+                        ratings.push(<Star/>)
+                    }
+                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "TERMAL OTEL") {
+                        return (
+                            <Slide className="unavailHotel">
 
-                            <Link className="cardlink" to={`/hotels/${all.Description}`}>
-                                <HotelCard
-                                    hotelImage={all.ImageURL["string"][0]}
-                                    hotelName={all.Description}
-                                    hotelRating={ratings}
-                                    hotelPlace={all.Place}
-                                    hotelPension={all.PensionTypes["string"]}
-                                    minPrice={null}
-                                />
-                            </Link>
-                        </Slide>
-                    )
-                } else if ( all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo.Pricings !== null && all.Concepts["string"] === "TERMAL OTEL") {
-                    return (
-                        <Slide>
-                            <Link className="cardlink" to={`/hotels/${all.Description}`}>
-                                <HotelCard
-                                    hotelImage={all.ImageURL["string"][0] + '.jpg'}
-                                    hotelName={all.Description}
-                                    hotelRating={ratings}
-                                    hotelPlace={all.Place}
-                                    hotelPension={all.PensionTypes["string"]}
-                                    minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
-                                />
-                            </Link>
-                        </Slide>
-                    )
-                } else {
-                    return <div>Yükleniyor</div>
-                }
-            })
-            console.log(uniqueArray)
+                                <Link className="cardlink" to={`/hotels/${all.Description}`}>
+                                    <HotelCard
+                                        hotelImage={all.ImageURL["string"][0]}
+                                        hotelName={all.Description}
+                                        hotelRating={ratings}
+                                        hotelPlace={all.Place}
+                                        hotelPension={all.PensionTypes["string"]}
+                                        minPrice={null}
+                                    />
+                                </Link>
+                            </Slide>
+                        )
+                    } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings &&all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null&& all.Concepts["string"] === "TERMAL OTEL") {
+                        return (
+                            <Slide>
+                                <Link className="cardlink" to={`/hotels/${all.Description}`}>
+                                    <HotelCard
+                                        hotelImage={all.ImageURL["string"][0] + '.jpg'}
+                                        hotelName={all.Description}
+                                        hotelRating={ratings}
+                                        hotelPlace={all.Place}
+                                        hotelPension={all.PensionTypes["string"]}
+                                        minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                    />
+                                </Link>
+                            </Slide>
+                        )
 
-        }
-        else if (!Array.isArray(hotelSearchResult) && hotels != null) {
-            var singleHotel = [hotelSearchResult]
+                    } else {
+                        return <div>Yükleniyor</div>
+                    }
+                })
 
-            uniqueArray = singleHotel.concat(hotels)
-            allHotels = removeDuplicates(uniqueArray, 'Description');
-            console.log(allHotels)
-            allHotelsList = allHotels.map(all => {
-                let i = 0;
-                var ratings = []
-                for (i; i < all.Rating; i++) {
-                    ratings.push(<Star/>)
-                }
-                if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings== null && all.Concepts["string"] === "TERMAL OTEL") {
-                    return (
-                        <Slide className="unavailHotel">
 
-                            <Link className="cardlink" to={`/hotels/${all.Description}`}>
-                                <HotelCard
-                                    hotelImage={all.ImageURL["string"][0]}
-                                    hotelName={all.Description}
-                                    hotelRating={ratings}
-                                    hotelPlace={all.Place}
+            } else if (!Array.isArray(hotelSearchResult) && hotels != null) {
+                var singleHotel = [hotelSearchResult]
 
-                                />
-                            </Link>
-                        </Slide>
-                    )
-                } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null &&  all.Concepts["string"] === "TERMAL OTEL") {
-                    return (
-                        <Slide>
-                            <Link className="cardlink" to={`/hotels/${all.Description}`}>
-                                <HotelCard
-                                    hotelImage={all.ImageURL["string"][0] + '.jpg'}
-                                    hotelName={all.Description}
-                                    hotelRating={ratings}
-                                    hotelPlace={all.Place}
-                                    hotelPension={all.PensionTypes["string"]}
-                                    minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
-                                />
-                            </Link>
-                        </Slide>
-                    )
+                uniqueArray = singleHotel.concat(hotels)
+                allHotels = removeDuplicates(uniqueArray, 'Description');
+                console.log(allHotels)
+                allHotelsList = allHotels.map(all => {
+                    let i = 0;
+                    var ratings = []
+                    for (i; i < all.Rating; i++) {
+                        ratings.push(<Star/>)
+                    }
+                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "TERMAL OTEL") {
+                        return (
+                            <Slide className="unavailHotel">
 
-                } else {
-                    return <div>Yükleniyor</div>
-                }
-            })
+                                <Link className="cardlink" to={`/hotels/${all.Description}`}>
+                                    <HotelCard
+                                        hotelImage={all.ImageURL["string"][0]}
+                                        hotelName={all.Description}
+                                        hotelRating={ratings}
+                                        hotelPlace={all.Place}
+                                        hotelPension={all.PensionTypes["string"]}
+                                        minPrice={null}
+                                    />
+                                </Link>
+                            </Slide>
+                        )
+                    } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo.Pricings !== null && all.Concepts["string"] === "TERMAL OTEL") {
+                        return (
+                            <Slide>
+                                <Link className="cardlink" to={`/hotels/${all.Description}`}>
+                                    <HotelCard
+                                        hotelImage={all.ImageURL["string"][0] + '.jpg'}
+                                        hotelName={all.Description}
+                                        hotelRating={ratings}
+                                        hotelPlace={all.Place}
+                                        hotelPension={all.PensionTypes["string"]}
+                                        minPrice={all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                    />
+                                </Link>
+                            </Slide>
+                        )
+
+                    } else {
+                        return <div>Yükleniyor</div>
+                    }
+                })
+            }
+            else if(this.props.availHotel === null ){
+                uniqueArray = hotels
+                allHotels = removeDuplicates(uniqueArray, 'Description');
+                console.log(allHotels)
+                allHotelsList = allHotels.map(all => {
+                    let i = 0;
+                    var ratings = []
+                    for (i; i < all.Rating; i++) {
+                        ratings.push(<Star/>)
+                    }
+                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "TERMAL OTEL") {
+                        return (
+                            <Slide className="unavailHotel">
+
+                                <Link className="cardlink" to={`/hotels/${all.Description}`}>
+                                    <HotelCard
+                                        hotelImage={all.ImageURL["string"][0]}
+                                        hotelName={all.Description}
+                                        hotelRating={ratings}
+                                        hotelPlace={all.Place}
+                                        hotelPension={all.PensionTypes["string"]}
+                                        minPrice={null}
+                                    />
+                                </Link>
+                            </Slide>
+                        )
+                    }
+
+                })
+            }
         }
         return (
             <div>
