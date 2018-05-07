@@ -56,7 +56,8 @@
     width: 100%
 }
 .SingleDatePicker_picker__fullScreenPortal {
-    background-color: #fff
+    background-color: #fff;
+    z-index: 9999;
 }
 .SingleDatePicker_closeButton {
     background: 0 0;
