@@ -17,15 +17,15 @@ class HotelCarousel extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            hotels:this.props.hotels,
-            hotelSearchResult:this.props.availHotel
+            hotels: this.props.hotels,
+            hotelSearchResult: this.props.availHotel
         }
     }
 
     render() {
         const {hotels, hotelSearchResult} = this.state
         let allHotelsList = ''
-        if(this.props.availHotel !== null ){
+        if (this.props.availHotel !== null) {
             if (hotelSearchResult.length > 1 && hotels != null) {
                 var uniqueArray = hotelSearchResult.concat(hotels)
                 var allHotels = removeDuplicates(uniqueArray, 'Description');
@@ -36,7 +36,7 @@ class HotelCarousel extends Component {
                     for (i; i < all.Rating; i++) {
                         ratings.push(<Star/>)
                     }
-                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "SAHİL OTELİ") {
+                    if (all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "SAHİL OTELİ") {
                         return (
                             <Slide className="unavailHotel">
 
@@ -52,7 +52,7 @@ class HotelCarousel extends Component {
                                 </Link>
                             </Slide>
                         )
-                    } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings &&all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null&& all.Concepts["string"] === "SAHİL OTELİ") {
+                    } else if (all.PensionTypes && all.ImageURL && !all.AgeInformation && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings && all.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null && all.Concepts["string"] === "SAHİL OTELİ") {
                         return (
                             <Slide>
                                 <Link className="cardlink" to={`/hotels/${all.Description}`}>
@@ -86,7 +86,7 @@ class HotelCarousel extends Component {
                     for (i; i < all.Rating; i++) {
                         ratings.push(<Star/>)
                     }
-                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "SAHİL OTELİ") {
+                    if (all.PensionTypes && all.ImageURL && all.AgeInformation != null && all.RoomTypes.apiHotelRoomTypeInfo.Pricings == null && all.Concepts["string"] === "SAHİL OTELİ") {
                         return (
                             <Slide className="unavailHotel">
 
@@ -123,9 +123,9 @@ class HotelCarousel extends Component {
                     }
                 })
             }
-            else if(this.props.availHotel === null ) {
-               uniqueArray = hotels
-               allHotels = removeDuplicates(uniqueArray, 'Description');
+            else if (this.props.availHotel === null) {
+                uniqueArray = hotels
+                allHotels = removeDuplicates(uniqueArray, 'Description');
                 console.log(allHotels)
                 allHotelsList = allHotels.map(all => {
                     let i = 0;
@@ -133,7 +133,7 @@ class HotelCarousel extends Component {
                     for (i; i < all.Rating; i++) {
                         ratings.push(<Star/>)
                     }
-                    if ( all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "SAHİL OTELİ") {
+                    if (all.PensionTypes && all.ImageURL && all.AgeInformation && !all.RoomTypes.apiHotelRoomTypeInfo.Pricings && all.Concepts["string"] === "SAHİL OTELİ") {
                         return (
                             <Slide className="unavailHotel">
 
@@ -151,31 +151,49 @@ class HotelCarousel extends Component {
                         )
                     }
 
-            })
-        }
+                })
+            }
         }
         return (
             <div>
-                {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
-                        <Col md={4}><MyLoader/></Col></Row> :
+                {this.props.loading ? <div><Row className="row-desktop"><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                        <Col md={4}><MyLoader/></Col></Row>
+                    <Row className="row-mobile"><Col md={12}><MyLoader/></Col></Row></div>:
+                    <div>
+                        <Swiper
+                            swiperOptions={{
+                                slidesPerView: 3,
+                                spaceBetween: 15,
+                                freeMode: false
 
-                <Swiper
-                    swiperOptions={{
-                        slidesPerView: 3,
-                        spaceBetween: 15,
-                        freeMode: false
-
-                    }}
-                    pagination={false}
-                    nextButton={<div className="swiper-button-next"><Next/></div>}
-                    prevButton={<div className="swiper-button-prev"><Prev/></div>}
-                >
+                            }}
+                            className="swiper-desktop"
+                            pagination={false}
+                            nextButton={<div className="swiper-button-next"><Next/></div>}
+                            prevButton={<div className="swiper-button-prev"><Prev/></div>}
+                        >
 
 
+                            {allHotelsList}
 
-                    {allHotelsList}
+                        </Swiper>
+                        <Swiper
+                            swiperOptions={{
+                                slidesPerView: 1,
+                                spaceBetween: 15,
+                                freeMode: true,
+                                scrollBar: true,
+                            }}
+                            className="swiper-mobile"
+                            pagination={false}
+                            navigation={false}
 
-                </Swiper> }
+                        >
+
+
+                            {allHotelsList}
+
+                        </Swiper></div>}
 
             </div>
         )
@@ -185,8 +203,8 @@ class HotelCarousel extends Component {
 function mapStateToProps(state) {
     return {
         hotels: state.hotel.hotels,
-        availHotel:state.availHotel.availHotel,
-        loading:state.availHotel.loading
+        availHotel: state.availHotel.availHotel,
+        loading: state.availHotel.loading
     }
 }
 

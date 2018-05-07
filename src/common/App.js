@@ -5,6 +5,7 @@ import HotelDetail from './containers/HotelDetail/HotelDetail'
 import SearchResults from './containers/SearchResults/SearchResults'
 import './bootstrap.css';
 import './App.css'
+import './AppPhone.css'
 import './imageGallery.css'
 
 import './components/fonts/hotelfonts.css';

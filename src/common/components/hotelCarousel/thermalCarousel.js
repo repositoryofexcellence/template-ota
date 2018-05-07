@@ -154,26 +154,45 @@ class ThermalCarousel extends Component {
         }
         return (
             <div>
-                {this.props.loading ? <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
-                        <Col md={4}><MyLoader/></Col></Row> :
+                {this.props.loading ? <div><Row className="row-desktop"><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                        <Col md={4}><MyLoader/></Col></Row>
+                        <Row className="row-mobile"><Col md={12}><MyLoader/></Col></Row></div>:
+                    <div>
+                        <Swiper
+                            swiperOptions={{
+                                slidesPerView: 3,
+                                spaceBetween: 15,
+                                freeMode: false
 
-                    <Swiper
-                        swiperOptions={{
-                            slidesPerView: 3,
-                            spaceBetween: 15,
-                            freeMode: false
-
-                        }}
-                        pagination={false}
-                        nextButton={<div className="swiper-button-next"><Next/></div>}
-                        prevButton={<div className="swiper-button-prev"><Prev/></div>}
-                    >
+                            }}
+                            className="swiper-desktop"
+                            pagination={false}
+                            nextButton={<div className="swiper-button-next"><Next/></div>}
+                            prevButton={<div className="swiper-button-prev"><Prev/></div>}
+                        >
 
 
+                            {allHotelsList}
 
-                        {allHotelsList}
+                        </Swiper>
+                        <Swiper
+                            swiperOptions={{
+                                slidesPerView: 1,
+                                spaceBetween: 15,
+                                freeMode: true,
+                                scrollBar: true
 
-                    </Swiper> }
+                            }}
+                            className="swiper-mobile"
+                            pagination={false}
+                            navigation={false}
+
+                        >
+
+
+                            {allHotelsList}
+
+                        </Swiper></div>}
 
             </div>
         )
