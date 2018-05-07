@@ -4,7 +4,7 @@ import {Field, Fields, FieldArray, reduxForm,change, formValueSelector} from 're
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
-import {Row,Col} from 'react-styled-flexboxgrid'
+import {Grid,Row,Col} from 'react-styled-flexboxgrid'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
@@ -333,6 +333,7 @@ class SearchForm extends React.Component {
 
         return (
             <div>
+
             <form className="form-desktop" onSubmit={handleSubmit}>
 
                 <div className="search-form">
@@ -364,7 +365,10 @@ class SearchForm extends React.Component {
                 </div>
 
             </form>
-                <form className="form-mobile" onSubmit={handleSubmit}>
+                <Grid className="form-mobile" fluid>
+                    <Row>
+                        <Col xs={12} sm={12}>
+                <form  onSubmit={handleSubmit}>
 
                     <div className="search-form">
 
@@ -395,6 +399,9 @@ class SearchForm extends React.Component {
                     </div>
 
                 </form>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }
