@@ -332,7 +332,8 @@ class SearchForm extends React.Component {
         const placeholders = `${adultNumber} Yetişkin ${childPlace}`
 
         return (
-            <form onSubmit={handleSubmit}>
+            <div>
+            <form className="form-desktop" onSubmit={handleSubmit}>
 
                 <div className="search-form">
 
@@ -363,6 +364,38 @@ class SearchForm extends React.Component {
                 </div>
 
             </form>
+                <form className="form-mobile" onSubmit={handleSubmit}>
+
+                    <div className="search-form">
+
+                        <TypeAheadField placeholder="Otel Adı" name="hotelName" label="Otel Adı" items={items}/>
+
+                        <Fields
+                            names={['start', 'end']}
+                            component={this.renderDates}
+                            normalize={this.normalizeDates}
+                            format={this.formatDates}
+                        />
+                        <Popup
+                            trigger={   <Field name="numbers" className="search-form-main" readOnly component="input"
+                                               type="text" placeholder={placeholders}/>}
+                            position="bottom center"
+                            closeOnDocumentClick
+                        >
+                            <div>
+
+                                <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
+                            </div>
+                        </Popup>
+
+
+                        {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit" type="submit">Bekleyin</button> :
+                            <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>}
+
+                    </div>
+
+                </form>
+            </div>
         )
     }
 }

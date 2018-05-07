@@ -11,6 +11,19 @@
     .row-desktop{
         display: none;
     }
+    .banner-texts {
+        display: block !important;
+ line-height: 32px;
+        font-size: 28px;
+        color: white;
+    }
+
+    .form-mobile{
+        display: block;
+    }
+    .form-desktop{
+        display: none;
+    }
     .grid-mobile {
         display: block;
         padding-right: 0rem;
@@ -69,6 +82,12 @@
     }
     .slider-main-desktop-inner{
 
+        display: block;
+    }
+    .form-mobile{
+        display: none;
+    }
+    .form-desktop{
         display: block;
     }
     .slider-main-mobile{

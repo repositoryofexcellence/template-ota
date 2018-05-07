@@ -85,38 +85,17 @@ class Home extends Component {
                                 </Col>
                             </Row>
                         </Grid>
-                        <Grid fluid className="main-mobile">
 
-                            <Row>
-                                <Col xs={12} sm={12} md={12}>
-
-                                    <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
-                                    <div className="search-component">
-                                        <Grid>
-                                            <Row>
-                                                <Col xs={12} sm={12} md={12}>
-                                                    {this.props.loading ?
-                                                        <SearchForm onSubmit={this.noSubmit} className="search-form"/>
-                                                        : <SearchForm onSubmit={this.submit} className="search-form"/>}
-
-                                                </Col>
-                                            </Row>
-                                        </Grid>
-                                    </div>
-
-                                </Col>
-                            </Row>
-                        </Grid>
                     </MainSlider>
                 </div>
                 <div className="slider-main-mobile">
                     <MainSlider className="slider-main-mobile-inner">
-                        <Grid fluid>
+                        <Grid fluid className="main-mobile">
 
                             <Row>
-                                <Col md={12}>
+                                <Col xs={12} sm={12}  md={12}>
 
-                                    <h2 className="banner-text">Demiroğlu Reisen. Güvenin adresi</h2>
+                                    <h2 className="banner-texts">Demiroğlu Reisen. Güvenin adresi</h2>
                                     <div className="search-component">
                                         <Grid>
                                             <Row>
