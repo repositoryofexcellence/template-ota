@@ -22,6 +22,8 @@
 }
     .form-mobile{
         display: block;
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
     .form-desktop{
         display: none;
@@ -29,7 +31,8 @@
     .grid-mobile {
         display: block;
         padding-right: 0rem;
-        padding-left: 1rem;
+        padding-left: 0rem;
+        margin: 16px;
         text-align: left !important;
     }
     .grid-desktop {
@@ -56,7 +59,79 @@
     }
     .main-mobile {
         display: block;
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
+    .form-mobile .react-autosuggest__input {
+        float: left;
+        width: 100%;
+        height: 45px;
+
+        color: #333;
+        font-weight: 600;
+        font-size: 18px;
+        border-right: 0px solid #aaa;
+        border-style: hidden;
+        padding: 0px !important;
+    }
+
+    .form-mobile .DateInput_input {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        color: #565a5c;
+        background-color: #fff;
+        width: 100%;
+        padding: 0 0 0 0 !important;
+        border: 0;
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 2px solid transparent;
+        border-left: 0;
+    }
+    .form-mobile .DateInput {
+        margin: 0;
+        padding-top: 0px;
+        background: #fff;
+        position: relative;
+        display: inline-block;
+        width: 130px;
+        font-size: 18px;
+        font-weight: 600 !important;
+        vertical-align: middle;
+    }
+    .form-mobile .search-form-main {
+        height: 45px;
+        float: left;
+        padding: 0px;
+        font-size: 18px;
+        width: 100% !important;
+        font-weight: 600;
+        border-style: unset !important;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .form-mobile .DateRangePicker {
+        position: relative;
+        display: inline-block;
+        height: 45px;
+        float: left;
+        width: 100% !important;
+    }
+
+    .form-mobile .search-form-button {
+        width: 100%;
+        height: 45px;
+        float: left;
+        border-radius: 4px;
+        margin-right: 0px;
+        margin-top: 0px;
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        background-color: #24a8de;
+        position: relative;
+    }
+
 }
 
 @media only screen and (min-width: 600px) {

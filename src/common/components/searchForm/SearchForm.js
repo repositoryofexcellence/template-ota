@@ -1,17 +1,17 @@
 import 'react-dates/initialize'
 import React from 'react'
-import {Field, Fields, FieldArray, reduxForm,change, formValueSelector} from 'redux-form'
+import {Field, Fields, FieldArray, reduxForm, change, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 import {load as loadAccount} from './account'
 import Popup from "reactjs-popup";
-import {Grid,Row,Col} from 'react-styled-flexboxgrid'
+import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import {DateRangePicker, SingleDatePicker, END_DATE, START_DATE} from 'react-dates'
 import '../../datepicker.css'
 import moment from 'moment'
 import hotelList from "../../../data/hotelsTur.json"
 import TypeAheadField from "./TypeAheadField";
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Dialog from 'material-ui/Dialog';
 
@@ -27,10 +27,10 @@ const styles = {
         flex: 1,
     },
 };
+
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
-
 
 
 const data = {
@@ -94,6 +94,7 @@ class DateRangePickerWrapper extends React.Component {
         );
     }
 }
+
 class DateRangePickerWrapperResponsive extends React.Component {
     constructor(props) {
         super(props);
@@ -144,7 +145,6 @@ class DateRangePickerWrapperResponsive extends React.Component {
         );
     }
 }
-
 
 
 const language = hotelList.Hotels.map(hotel => {
@@ -284,7 +284,7 @@ class renderDateResponsive extends React.Component {
                             </select>
                         </div>
                     </div>
-                )}                  orientation="vertical"
+                )} orientation="vertical"
                 withFullScreenPortal
             />
         )
@@ -295,88 +295,95 @@ class renderChildBirthDates extends React.Component {
 
     incAdt = () => {
 
-        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber +1)
+        this.props.changeFieldValue('searchForm', 'adultNumber', this.props.adultNumber + 1)
 
     }
     decAdt = () => {
 
-        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber -1)
+        this.props.changeFieldValue('searchForm', 'adultNumber', this.props.adultNumber - 1)
 
     }
 
     inc = () => {
 
-        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber +1)
+        this.props.changeFieldValue('searchForm', 'childNumber', this.props.childNumber + 1)
         this.props.fields.push({})
     }
-     dec = () => {
+    dec = () => {
 
-        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber -1)
+        this.props.changeFieldValue('searchForm', 'childNumber', this.props.childNumber - 1)
         this.props.fields.pop()
     }
-    render(){
-        const {adultNumber,childNumber,fields} = this.props
+
+    render() {
+        const {adultNumber, childNumber, fields} = this.props
 
 
-        return(
+        return (
             <ul>
                 <div className="guestNumbers">
                     <Row>
                         <Col md={6}>
-                    <h4>Yetişkin Sayısı</h4>
-                    <div className="guestLine">
-                    {adultNumber === 1 ? <div className="amountDisabled" >-</div>  : <div className="amount" onClick={this.decAdt}>-</div> }
-                    <div className="inputAmountContainer">
-                        <Field name="adultNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Yetişkin</div>
-                    </div>
-                    {adultNumber === 6 ? <div className="amountDisabled" >+</div> : <div className="amount" onClick={this.incAdt}>+</div> }
-                    </div>
+                            <h4>Yetişkin Sayısı</h4>
+                            <div className="guestLine">
+                                {adultNumber === 1 ? <div className="amountDisabled">-</div> :
+                                    <div className="amount" onClick={this.decAdt}>-</div>}
+                                <div className="inputAmountContainer">
+                                    <Field name="adultNumber" readOnly className="inputAmount" type="number"
+                                           component="input"/>
+                                    <div className="inputAmountTitle"> Yetişkin</div>
+                                </div>
+                                {adultNumber === 6 ? <div className="amountDisabled">+</div> :
+                                    <div className="amount" onClick={this.incAdt}>+</div>}
+                            </div>
                         </Col>
                         <Col md={6}>
-                    <h4>Çocuk Sayısı</h4>
+                            <h4>Çocuk Sayısı</h4>
 
-                    <div className="guestLine">
-                    {childNumber === 0 ? <div className="amountDisabled" >-</div> : <div className="amount" onClick={this.dec}>-</div> }
-                        <div className="inputAmountContainer">
-                    <Field name="childNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Çocuk</div>
-                        </div>
-                    {childNumber === 4 ? <div className="amountDisabled" >+</div> :                <div className="amount" onClick={this.inc}>+</div> }
-                    </div>
+                            <div className="guestLine">
+                                {childNumber === 0 ? <div className="amountDisabled">-</div> :
+                                    <div className="amount" onClick={this.dec}>-</div>}
+                                <div className="inputAmountContainer">
+                                    <Field name="childNumber" readOnly className="inputAmount" type="number"
+                                           component="input"/>
+                                    <div className="inputAmountTitle"> Çocuk</div>
+                                </div>
+                                {childNumber === 4 ? <div className="amountDisabled">+</div> :
+                                    <div className="amount" onClick={this.inc}>+</div>}
+                            </div>
                         </Col>
-                    <div className="dateLine">
-                    {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> :'' }
-                        {fields.map((child, index) => (
-                            <Col md={6} className="childagesfloat" key={index}>
-                                <h4>{index + 1}. Çocuk</h4>
-                                <Field
-                                    name={`${child}.birth`}
-                                    component={renderDate}
-                                    normalize={normalizedDate}
-                                    format={formattedDate}
+                        <div className="dateLine">
+                            {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> : ''}
+                            {fields.map((child, index) => (
+                                <Col md={6} className="childagesfloat" key={index}>
+                                    <h4>{index + 1}. Çocuk</h4>
+                                    <Field
+                                        name={`${child}.birth`}
+                                        component={renderDate}
+                                        normalize={normalizedDate}
+                                        format={formattedDate}
 
-                                />
-                            </Col>
-                        ))}
-                    </div>
+                                    />
+                                </Col>
+                            ))}
+                        </div>
                     </Row>
                 </div>
-
-
-
 
 
             </ul>
         )
     }
 }
-const mapDispatchToPropsR = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         // This will be passed as a property to this component
-        changeFieldValue: function(form,field, value) {
+        changeFieldValue: function (form, field, value) {
             dispatch(change(form, field, value))
         }
     }
 }
+
 
 renderChildBirthDates = connect(
     state => ({
@@ -384,63 +391,73 @@ renderChildBirthDates = connect(
         childNumber: selector(state, 'childNumber'),
         adultNumber: selector(state, 'adultNumber')
     }),
-    mapDispatchToPropsR,
+    mapDispatchToProps
     // bind account loading action creator
 )(renderChildBirthDates)
+
 class renderChildBirthDatesResponsive extends React.Component {
 
     incAdt = () => {
 
-        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber +1)
+        this.props.changeFieldValue('searchForm', 'adultNumber', this.props.adultNumber + 1)
 
     }
     decAdt = () => {
 
-        this.props.changeFieldValue('searchForm','adultNumber',this.props.adultNumber -1)
+        this.props.changeFieldValue('searchForm', 'adultNumber', this.props.adultNumber - 1)
 
     }
 
     inc = () => {
 
-        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber +1)
+        this.props.changeFieldValue('searchForm', 'childNumber', this.props.childNumber + 1)
         this.props.fields.push({})
     }
     dec = () => {
 
-        this.props.changeFieldValue('searchForm','childNumber',this.props.childNumber -1)
+        this.props.changeFieldValue('searchForm', 'childNumber', this.props.childNumber - 1)
         this.props.fields.pop()
     }
-    render(){
-        const {adultNumber,childNumber,fields} = this.props
+
+    render() {
+        const {adultNumber, childNumber, fields} = this.props
 
 
-        return(
+        return (
             <ul>
                 <div className="guestNumbers">
                     <Row>
                         <Col md={6}>
                             <h4>Yetişkin Sayısı</h4>
                             <div className="guestLine">
-                                {adultNumber === 1 ? <div className="amountDisabled" >-</div>  : <div className="amount" onClick={this.decAdt}>-</div> }
+                                {adultNumber === 1 ? <div className="amountDisabled">-</div> :
+                                    <div className="amount" onClick={this.decAdt}>-</div>}
                                 <div className="inputAmountContainer">
-                                    <Field name="adultNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Yetişkin</div>
+                                    <Field name="adultNumber" readOnly className="inputAmount" type="number"
+                                           component="input"/>
+                                    <div className="inputAmountTitle"> Yetişkin</div>
                                 </div>
-                                {adultNumber === 6 ? <div className="amountDisabled" >+</div> : <div className="amount" onClick={this.incAdt}>+</div> }
+                                {adultNumber === 6 ? <div className="amountDisabled">+</div> :
+                                    <div className="amount" onClick={this.incAdt}>+</div>}
                             </div>
                         </Col>
                         <Col md={6}>
                             <h4>Çocuk Sayısı</h4>
 
                             <div className="guestLine">
-                                {childNumber === 0 ? <div className="amountDisabled" >-</div> : <div className="amount" onClick={this.dec}>-</div> }
+                                {childNumber === 0 ? <div className="amountDisabled">-</div> :
+                                    <div className="amount" onClick={this.dec}>-</div>}
                                 <div className="inputAmountContainer">
-                                    <Field name="childNumber" readOnly className="inputAmount" type="number" component="input"/> <div className="inputAmountTitle"> Çocuk</div>
+                                    <Field name="childNumber" readOnly className="inputAmount" type="number"
+                                           component="input"/>
+                                    <div className="inputAmountTitle"> Çocuk</div>
                                 </div>
-                                {childNumber === 4 ? <div className="amountDisabled" >+</div> :                <div className="amount" onClick={this.inc}>+</div> }
+                                {childNumber === 4 ? <div className="amountDisabled">+</div> :
+                                    <div className="amount" onClick={this.inc}>+</div>}
                             </div>
                         </Col>
                         <div className="dateLine">
-                            {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> :'' }
+                            {childNumber > 0 ? <h4>Çocukların Doğum Tarihleri</h4> : ''}
                             {fields.map((child, index) => (
                                 <Col md={6} className="childagesfloat" key={index}>
                                     <h4>{index + 1}. Çocuk</h4>
@@ -458,21 +475,12 @@ class renderChildBirthDatesResponsive extends React.Component {
                 </div>
 
 
-
-
-
             </ul>
         )
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // This will be passed as a property to this component
-        changeFieldValue: function(form,field, value) {
-            dispatch(change(form, field, value))
-        }
-    }
-}
+
+
 
 renderChildBirthDatesResponsive = connect(
     state => ({
@@ -480,7 +488,7 @@ renderChildBirthDatesResponsive = connect(
         childNumber: selector(state, 'childNumber'),
         adultNumber: selector(state, 'adultNumber')
     }),
-mapDispatchToProps,
+    mapDispatchToProps,
     // bind account loading action creator
 )(renderChildBirthDatesResponsive)
 const formattedDate = (value) => {
@@ -489,7 +497,6 @@ const formattedDate = (value) => {
 const normalizedDate = (value) => {
     return value.value.format('YYYY-MM-DD');
 };
-
 
 
 class SearchForm extends React.Component {
@@ -501,7 +508,8 @@ class SearchForm extends React.Component {
             loading: false,
             searchResults: null,
             popupVisible: false,
-            open:false,
+            open: false,
+            openText: false,
         }
 
     }
@@ -513,7 +521,6 @@ class SearchForm extends React.Component {
     componentDidUpdate() {
         this.props.load(data)
     }
-
 
 
     handlesClick() {
@@ -538,12 +545,21 @@ class SearchForm extends React.Component {
 
         this.handlesClick();
     }
+
     handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({open: true});
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false});
+    };
+
+    handleClickOpenText = () => {
+        this.setState({openText: true});
+    };
+
+    handleCloseText = () => {
+        this.setState({openText: false});
     };
 
     renderDates = fields => (
@@ -587,84 +603,112 @@ class SearchForm extends React.Component {
         return (
             <div>
 
-            <form className="form-desktop" onSubmit={handleSubmit}>
-
-                <div className="search-form">
-
-                    <TypeAheadField placeholder="Otel Adı" name="hotelName" label="Otel Adı" items={items}/>
-
-                    <Fields
-                        names={['start', 'end']}
-                        component={this.renderDates}
-                        normalize={this.normalizeDates}
-                        format={this.formatDates}
-                    />
-                    <Popup
-                        trigger={   <Field name="numbers" className="search-form-main" readOnly component="input"
-                                           type="text" placeholder={placeholders}/>}
-                        position="bottom center"
-                        closeOnDocumentClick
-                    >
-                        <div>
-
-                                        <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
-                        </div>
-                    </Popup>
-
-
-                    {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit" type="submit">Bekleyin</button> :
-                        <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>}
-
-                </div>
-
-            </form>
-                <Grid className="form-mobile" fluid>
-                    <Row>
-                        <Col xs={12} sm={12}>
-                <form  onSubmit={handleSubmit}>
+                <form className="form-desktop" onSubmit={handleSubmit}>
 
                     <div className="search-form">
-                        <Col xs={12} sm={12}>
+
                         <TypeAheadField placeholder="Otel Adı" name="hotelName" label="Otel Adı" items={items}/>
-                        </Col>
-                        <Col xs={12} sm={12}>
+
                         <Fields
                             names={['start', 'end']}
-                            component={this.renderDatesResponsive}
+                            component={this.renderDates}
                             normalize={this.normalizeDates}
                             format={this.formatDates}
                         />
-                        </Col>
-                        <Col xs={12} sm={12}>
+                        <Popup
+                            trigger={<Field name="numbers" className="search-form-main" readOnly component="input"
+                                            type="text" placeholder={placeholders}/>}
+                            position="bottom center"
+                            closeOnDocumentClick
+                        >
                             <div>
-                                <Field name="numbers" className="search-form-main" readOnly component="input"
-                                       onClick={this.handleClickOpen} type="text" placeholder={placeholders}/>
-                                <Dialog
-                                    fullScreen
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
-                                    TransitionComponent={Transition}
-                                >
 
-                                    <div>
-
-                                        <FieldArray name="childBirthDates" component={renderChildBirthDatesResponsive}/>
-                                        <button onClick={this.handleClose} className="search-form-button" type="submit">Tamam</button>
-                                    </div>
-                                </Dialog>
+                                <FieldArray name="childBirthDates" component={renderChildBirthDates}/>
                             </div>
+                        </Popup>
 
-                        </Col>
-                        <Col xs={12} sm={12}>
-                        {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit" type="submit">Bekleyin</button> :
+
+                        {this.props.loading ?
+                            <button onClick={this.noSubmit} className=" no-submit" type="submit">Bekleyin</button> :
                             <button onClick={this.submit} className="search-form-button" type="submit">Ara</button>}
-                        </Col>
+
                     </div>
 
                 </form>
-                        </Col>
+                <div className="form-mobile">
+                    <Row>
+
+                            <form onSubmit={handleSubmit}>
+
+                                <div className="search-form">
+                                    <div>
+                                        <Field name="hotelName" className="search-form-main" readOnly
+                                               component="input"
+                                               onClick={this.handleClickOpenText} type="text"
+                                               placeholder="Otel Adı" />
+                                        <Dialog
+                                            fullScreen
+                                            open={this.state.openText}
+                                            onClose={this.handleCloseText}
+                                            TransitionComponent={Transition}
+                                        >
+
+                                            <div>
+
+                                                <TypeAheadField placeholder="Otel Adı" name="hotelName" label="Otel Adı"
+                                                                items={items}/>
+                                                <button onClick={this.handleCloseText} className="search-form-button"
+                                                        type="submit">Tamam
+                                                </button>
+                                            </div>
+                                        </Dialog>
+                                    </div>
+
+
+
+                                        <Fields
+                                            names={['start', 'end']}
+                                            component={this.renderDatesResponsive}
+                                            normalize={this.normalizeDates}
+                                            format={this.formatDates}
+                                        />
+
+
+                                        <div>
+                                            <Field name="numbers" className="search-form-main" readOnly
+                                                   component="input"
+                                                   onClick={this.handleClickOpen} type="text"
+                                                   placeholder={placeholders}/>
+                                            <Dialog
+                                                fullScreen
+                                                open={this.state.open}
+                                                onClose={this.handleClose}
+                                                TransitionComponent={Transition}
+                                            >
+
+                                                <div>
+
+                                                    <FieldArray name="childBirthDates"
+                                                                component={renderChildBirthDatesResponsive}/>
+                                                    <button onClick={this.handleClose} className="search-form-button"
+                                                            type="submit">Tamam
+                                                    </button>
+                                                </div>
+                                            </Dialog>
+                                        </div>
+
+
+                                        {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit"
+                                                                      type="submit">Bekleyin</button> :
+                                            <button onClick={this.submit} className="search-form-button"
+                                                    type="submit">Ara</button>}
+
+                                </div>
+
+                            </form>
+
                     </Row>
-                </Grid>
+                </div>
             </div>
         )
     }
@@ -682,7 +726,7 @@ SearchForm = connect(
         initialValues: state.reducerData.data,
         childNumber: selector(state, 'childNumber'),
         adultNumber: selector(state, 'adultNumber'),
-        loading:state.availHotel.loading// pull initial values from account reducer
+        loading: state.availHotel.loading// pull initial values from account reducer
     }),
 
     {load: loadAccount}
