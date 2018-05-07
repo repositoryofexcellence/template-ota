@@ -92,21 +92,24 @@ class Home extends Component {
                     <MainSlider className="slider-main-mobile-inner">
                         <div  className="main-mobile">
 
-                            <Row>
+                            <Row className="main-mobile-row">
 
 
-                                    <h2 className="banner-texts">Demiroğlu Reisen. Güvenin adresi</h2>
+                                    <div className="banner-texts">Demiroğlu Reisen. Güvenin adresi
+
+                                        {this.props.loading ?
+                                            <SearchForm onSubmit={this.noSubmit} className="search-form"/>
+                                            : <SearchForm onSubmit={this.submit} className="search-form"/>}</div>
+                            </Row>
                                     <div className="search-component">
 
-                                                    {this.props.loading ?
-                                                        <SearchForm onSubmit={this.noSubmit} className="search-form"/>
-                                                        : <SearchForm onSubmit={this.submit} className="search-form"/>}
+
 
 
                                     </div>
 
 
-                            </Row>
+
                         </div>
                     </MainSlider>
                 </div>

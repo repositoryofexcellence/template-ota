@@ -635,10 +635,10 @@ class SearchForm extends React.Component {
                     </div>
 
                 </form>
-                <div className="form-mobile">
-                    <Row>
+                <div  className="form-mobile">
 
-                            <form onSubmit={handleSubmit}>
+
+                            <form  onSubmit={handleSubmit}>
 
                                 <div className="search-form">
                                     <div>
@@ -698,7 +698,7 @@ class SearchForm extends React.Component {
                                         </div>
 
 
-                                        {this.props.loading ? <button onClick={this.noSubmit} className=" no-submit"
+                                        {this.props.loading ? <button onClick={this.noSubmit} className="no-submit"
                                                                       type="submit">Bekleyin</button> :
                                             <button onClick={this.submit} className="search-form-button"
                                                     type="submit">Ara</button>}
@@ -707,7 +707,7 @@ class SearchForm extends React.Component {
 
                             </form>
 
-                    </Row>
+
                 </div>
             </div>
         )
