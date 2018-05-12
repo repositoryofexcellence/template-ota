@@ -25,7 +25,7 @@ class HotelCarousel extends Component {
     render() {
         const {hotels, hotelSearchResult} = this.state
         let allHotelsList = ''
-        if (this.props.availHotel !== null) {
+        if (this.props.availHotel !== null && this.props.hotels !== null) {
             if (hotelSearchResult.length > 1 && hotels != null) {
                 var uniqueArray = hotelSearchResult.concat(hotels)
                 var allHotels = removeDuplicates(uniqueArray, 'Description');

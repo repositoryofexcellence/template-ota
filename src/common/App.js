@@ -27,13 +27,14 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            hotels: hotelListTR.Hotels,
+            hotels: this.props.hotels,
             availhotel: this.props.availHotel,
 
         }
     }
 
     componentWillMount(){
+        this.props.fetchHotels()
         this.props.availHotels(startDate,endDate,adultNum,childNum,location)
     }
 
