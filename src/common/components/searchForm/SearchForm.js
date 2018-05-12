@@ -127,6 +127,7 @@ class DateRangePickerWrapperResponsive extends React.Component {
         }
     }
 
+
     render() {
         const startDate = this.props[this.props.startDateFieldName].input.value || null;
         const endDate = this.props[this.props.endDateFieldName].input.value || null;
@@ -527,6 +528,14 @@ class SearchForm extends React.Component {
         this.props.load(data)
     }
 
+    transition(props) {
+        return <Slide direction="up" {...props} />;
+    }
+
+    transitionNumber(props) {
+        return <Slide direction="up" {...props} />;
+    }
+
 
     handlesClick() {
         if (!this.state.popupVisible) {
@@ -655,7 +664,7 @@ class SearchForm extends React.Component {
                                             fullScreen
                                             open={this.state.openText}
                                             onClose={this.handleCloseText}
-                                            TransitionComponent={Transition}
+                                            TransitionComponent={this.transition}
                                         >
 
                                             <div>
@@ -688,7 +697,7 @@ class SearchForm extends React.Component {
                                                 fullScreen
                                                 open={this.state.open}
                                                 onClose={this.handleClose}
-                                                TransitionComponent={TransitionNumber}
+                                                TransitionComponent={this.transitionNumber}
                                             >
 
                                                 <div>
