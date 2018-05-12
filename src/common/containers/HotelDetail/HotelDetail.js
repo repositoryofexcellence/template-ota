@@ -126,10 +126,23 @@ class HotelDetail extends Component {
     render() {
         var unique = []
         var all = []
+        var uniqueNot =[]
         if (this.state.allRoom !== null) {
 
-            unique = this.state.allRoom.concat(this.props.hotel.RoomTypes.apiHotelRoomTypeInfo);
-            all = removeDuplicates(unique, 'Name')
+            if(Array.isArray(this.state.allRoom))
+            {
+                unique = this.state.allRoom.concat(this.props.hotel.RoomTypes.apiHotelRoomTypeInfo);
+                all = removeDuplicates(unique, 'Name')
+            }
+            else if (!Array.isArray(this.state.allRoom)) {
+                uniqueNot = [
+                    this.state.allRoom
+                ]
+                unique = uniqueNot.concat(this.props.hotel.RoomTypes.apiHotelRoomTypeInfo);
+                all = removeDuplicates(unique, 'Name')
+            }
+
+
             console.log(all)
         }
         const {Description, Region, DistanceToAirport, DistanceToCenter, RoomTypes, ImageURL, CheckInTime, CheckOutTime, HotelInformations, Place, Latitude, Longitude, PensionTypes, Rating, HotelFacilities} = this.props.hotel
@@ -338,10 +351,10 @@ class HotelDetail extends Component {
 
                                 <Row>
 
-                                    {all !== null ? all.map(room => {
+                                    {all !== null ? all.map((room,i) => {
                                         if (!room.Pricings && room.Pricings === null) {
                                             return (
-                                                <Col xs={12}  sm={12} md={3}>
+                                                <Col xs={12} key={i} sm={12} md={3}>
                                                     <div className="hotel-card unavailHotel">
                                                         <div className="hotel-card-media"
 
@@ -369,7 +382,7 @@ class HotelDetail extends Component {
                                         else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates !== null) {
                                             return (
 
-                                                <Col xs={12}  sm={12} md={3}>
+                                                <Col xs={12} key={i} sm={12} md={3}>
                                                     <div className="hotel-card unavailHotel">
                                                         <div className="hotel-card-media"
 
@@ -395,7 +408,7 @@ class HotelDetail extends Component {
                                         }
                                         else if (room.Pricings && room.Pricings !== null ) {
                                             return (
-                                                <Col xs={12} sm={12} md={3}>
+                                                <Col xs={12} key={i} sm={12} md={3}>
                                                     <HotelCard
                                                         hotelImage={Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"] + '.jpg'
                                                             : !Array.isArray(room.ImageURL) && room.ImageURL !== null ? room.ImageURL["string"][0] + '.jpg'
