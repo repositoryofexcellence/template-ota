@@ -32,6 +32,11 @@ function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
 
+function TransitionNumber(props) {
+    return <Slide direction="up" {...props} />;
+}
+
+
 
 const data = {
     // used to populate "account" reducer when "Load" is clicked
@@ -683,7 +688,7 @@ class SearchForm extends React.Component {
                                                 fullScreen
                                                 open={this.state.open}
                                                 onClose={this.handleClose}
-                                                TransitionComponent={Transition}
+                                                TransitionComponent={TransitionNumber}
                                             >
 
                                                 <div>
