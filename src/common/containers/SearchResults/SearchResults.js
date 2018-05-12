@@ -80,54 +80,103 @@ class SearchResults extends Component {
 
                             <h2>Arama Sonuçları</h2>
 
-                            { this.props.availHotel !== null  ? <div>{this.props.availHotel.length > 0 && this.props.availHotel !== null && this.props.loading === false && availables ? availables.map(avail => {
-                                let i = 0;
-                                var ratings = []
-                                for (i; i < avail.Rating; i++) {
-                                    ratings.push(<Star/>)
-                                }
-                                if (avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null) {
-                                    return (
-                                        <Col className="hotelcard" md={4}>
-                                            <Link to={`hotels/${avail.Description}`}>
-                                                <HotelCard
-                                                    hotelImage={avail.ImageURL["string"][0] + '.jpg'}
-                                                    hotelName={avail.Description}
-                                                    hotelRating={ratings}
-                                                    hotelPlace={avail.Place}
-                                                    minPrice={Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
-                                                        : !Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
-                                                />
-                                            </Link>
-                                        </Col>
-                                    )
-                                } else if (avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates !== null) {
-                                    return ("")
-                                }
+                            {this.props.availHotel !== null ?
+                                <div>{this.props.availHotel.length > 0 && this.props.availHotel !== null && this.props.loading === false && availables ? availables.map(avail => {
+                                    let i = 0;
+                                    var ratings = []
+                                    for (i; i < avail.Rating; i++) {
+                                        ratings.push(<Star/>)
+                                    }
+                                    if (Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) && avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null) {
+                                        return (
+                                            <Col className="hotelcard" md={4}>
+                                                <Link to={`hotels/${avail.Description}`}>
+                                                    <HotelCard
+                                                        hotelImage={avail.ImageURL["string"][0] + '.jpg'}
+                                                        hotelName={avail.Description}
+                                                        hotelRating={ratings}
+                                                        hotelPlace={avail.Place}
+                                                        minPrice={Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
+                                                            : !Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) ? avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
+                                                    />
+                                                </Link>
+                                            </Col>
+                                        )
+                                    } else if (!Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) && avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.StopDates === null)
+                                    {
+                                        return(
+                                            <Col className="hotelcard" md={4}>
+                                                <Link to={`hotels/${avail.Description}`}>
+                                                    <HotelCard
+                                                        hotelImage={avail.ImageURL["string"][0] + '.jpg'}
+                                                        hotelName={avail.Description}
+                                                        hotelRating={ratings}
+                                                        hotelPlace={avail.Place}
+                                                        minPrice={avail.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                                    />
+                                                </Link>
+                                            </Col>
+                                        )
+                                    }
+
+                                    else if (Array.isArray(avail.RoomTypes.apiHotelRoomTypeInfo) && avail.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates !== null) {
+                                        return ("")
+                                    }
 
 
-                            }) : this.props.availHotel !== null && this.props.availHotel.Description && !Array.isArray(availables) ?
-                                <div>{this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null ?
-                                    <Col className="hotelcard" md={4}>
-                                        <Link to={`hotels/${this.props.availHotel.Description}`}>
-                                            <HotelCard
-                                                hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
-                                                hotelName={this.props.availHotel.Description}
-                                                hotelRating={ratingsa}
-                                                hotelPlace={this.props.availHotel.Place}
-                                                minPrice={Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
-                                                    : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
-                                            />
-                                        </Link>
-                                    </Col>
-                                    : <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>}</div>
-                                : this.props.loading === true && !this.props.availHotel.length > 0 || !availables.Description ?
-                                    <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
-                                        <Col md={4}><MyLoader/></Col></Row>
-                                    : this.props.loading === false && !this.props.availHotel.length > 0 || !availables.Description ?
-                                        <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div> :
-                                        <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
-                            }</div> :<div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>}
+                                })
+                                    : this.props.availHotel !== null && this.props.availHotel.Description && !Array.isArray(availables) ?
+
+                                    <div>
+                                        {Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo)?
+
+                                            this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.StopDates === null ?
+
+                                            <Col className="hotelcard" md={4}>
+                                                <Link to={`hotels/${this.props.availHotel.Description}`}>
+                                                    <HotelCard
+                                                        hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
+                                                        hotelName={this.props.availHotel.Description}
+                                                        hotelRating={ratingsa}
+                                                        hotelPlace={this.props.availHotel.Place}
+                                                        minPrice={Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo[0].Pricings.apiHotelPricingInfo.TotalPrice.Net
+                                                            : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo) ? this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net : ''}
+                                                    />
+                                                </Link>
+                                            </Col> :<div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
+
+
+
+                                            : !Array.isArray(this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo)?
+                                                this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.StopDates === null ?
+                                                <Col className="hotelcard" md={4}>
+                                                    <Link to={`hotels/${this.props.availHotel.Description}`}>
+                                                        <HotelCard
+                                                            hotelImage={this.props.availHotel.ImageURL["string"][0] + '.jpg'}
+                                                            hotelName={this.props.availHotel.Description}
+                                                            hotelRating={ratingsa}
+                                                            hotelPlace={this.props.availHotel.Place}
+                                                            minPrice={this.props.availHotel.RoomTypes.apiHotelRoomTypeInfo.Pricings.apiHotelPricingInfo.TotalPrice.Net}
+                                                        />
+                                                    </Link>
+                                                </Col>
+
+                                                :<div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
+
+                                                :
+
+                                                <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
+
+
+                                    }
+                                        </div>
+                                    : this.props.loading === true && !this.props.availHotel.length > 0 || !availables.Description ?
+                                        <Row><Col md={4}><MyLoader/></Col><Col md={4}><MyLoader/></Col>
+                                            <Col md={4}><MyLoader/></Col></Row>
+                                        : this.props.loading === false && !this.props.availHotel.length > 0 || !availables.Description ?
+                                            <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div> :
+                                            <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>
+                                }</div> : <div>Seçtiğiniz tarih aralıklarında uygun otelimiz bulunmamaktadır</div>}
 
 
                         </Col>

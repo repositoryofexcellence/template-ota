@@ -393,7 +393,7 @@ class HotelDetail extends Component {
                                                     </div>
                                                    </Col>)
                                         }
-                                        else if (room.Pricings && room.Pricings !== null && room.Pricings.apiHotelPricingInfo.StopDates === null) {
+                                        else if (room.Pricings && room.Pricings !== null ) {
                                             return (
                                                 <Col xs={12} sm={12} md={3}>
                                                     <HotelCard
